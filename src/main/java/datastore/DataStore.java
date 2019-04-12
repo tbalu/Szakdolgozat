@@ -1,8 +1,9 @@
 package datastore;
 
-import entities.Gepjarmu;
-import entities.Szereles;
-import entities.Tulajdonos;
+import entities.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.pmw.tinylog.Logger;
 
 import java.time.LocalDate;
@@ -12,11 +13,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataStore {
-        public static List<Tulajdonos> Tulajdonosok = new ArrayList<Tulajdonos>();
+        /*public static List<Tulajdonos> Tulajdonosok = new ArrayList<Tulajdonos>();
         public static List<Gepjarmu> Gepjarmuvek = new ArrayList<Gepjarmu>();
         public static List<Szereles> Szerelesek = new ArrayList<Szereles>();
+        */
+        public static ObservableList<Tulajdonos> Tulajdonosok = FXCollections.observableArrayList();
+        public static ObservableList<Gepjarmu> Gepjarmuvek = FXCollections.observableArrayList();
+        public static ObservableList<Szereles> Szerelesek = FXCollections.observableArrayList();
+        public static ObservableList<BefejezendoSzereles> BefejezendoSzerelesek = FXCollections.observableArrayList();
+        public static ObservableList<Szereles2> Szerelesek2 = FXCollections.observableArrayList();
 
-        public static void loadTulajdonosok(){
+    public static void loadTulajdonosok(){
             /* TODO */
             Tulajdonosok.add(new Tulajdonos("Tóth Balázs","Debrecen, Nagycsere tanya HRSZ.:02147/5","123"));
             Logger.info(Tulajdonosok.toString());
@@ -28,8 +35,16 @@ public class DataStore {
         }
         public static void loadSzerelesek(){
         /* TODO */
-            Szerelesek.add(new Szereles(LocalDate.of(2019, Month.APRIL,5),"ABC-123"));
+            Szerelesek.add(new Szereles("ABC-123",LocalDate.of(2019, Month.APRIL,5)));
             Logger.info(Szerelesek.toString());
+        }
+        public static void loadSzerelesek2(){
+        /* TODO */
+        Szerelesek2.add(new Szereles2(new SimpleStringProperty("ABC-123"),  LocalDate.of(2019, Month.APRIL,5)));
+        Logger.info(Szerelesek2.toString());
+        }
+        public static void loadBefejezendoSzerelesek(){
+            BefejezendoSzerelesek.add(new BefejezendoSzereles("ABC-123",LocalDate.of(2019,Month.APRIL,4)));
         }
 
     public static List<Tulajdonos> getTulajdonosok() {

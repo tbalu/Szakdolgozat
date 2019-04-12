@@ -3,8 +3,8 @@ package entities;
 import java.time.LocalDate;
 
 public interface SzerelesElkezdese {
-    void setSzerelesMegkezdese(LocalDate szerelesMegkezdese);
-    LocalDate getSzerelesMegkezdese();
+    void setSzerelesKezdete(LocalDate szerelesMegkezdese);
+    LocalDate getSzerelesKezdete();
     void setRendszam(String gepjarmuRendszama);
     String getRendszam();
     void setProblema(String problema);

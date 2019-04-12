@@ -19,7 +19,7 @@ public class SzerelesManager {
         ListIterator<Szereles> listIterator = DataStore.getSzerelesek().listIterator();
         while(listIterator.hasNext()){
             Szereles szereles = listIterator.next();
-            if(szereles.getRendszam().equals(Rendszam)&&szereles.getSzerelesMegkezdese().equals(LocalDate.now())){
+            if(szereles.getRendszam().equals(Rendszam)&&szereles.getSzerelesKezdete().equals(LocalDate.now())){
                 Logger.info("Már van ilyen szerelesunk");
                 return;
             }
@@ -31,7 +31,7 @@ public class SzerelesManager {
     public Szereles createSzereles(String Rendszam){
         Szereles szereles = new Szereles();
         szereles.setRendszam(Rendszam);
-        szereles.setSzerelesMegkezdese(LocalDate.now());
+        szereles.setSzerelesKezdete(LocalDate.now());
 
         Logger.info(szereles.toString());
         return szereles;

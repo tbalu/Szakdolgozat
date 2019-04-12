@@ -1,5 +1,7 @@
 package controllers;
 
+import datastore.DataStore;
+import entities.BefejezendoSzereles;
 import entities.Szereles;
 import guidemo.Person;
 import javafx.event.ActionEvent;
@@ -24,21 +26,22 @@ public class FolyamatbanLevoSzerelesekController implements Initializable {
     @FXML private TableView<Szereles> FolyamatbanLevoSzerelesekTablaNezet;
     @FXML private TableColumn<Szereles,String> AutoMarkajaOszlop;
     @FXML private TableColumn<Szereles,String> RendszamOszlop;
-    @FXML private TableColumn<Szereles, LocalDate> SzerelesKezdeteOszlop;
+    @FXML private TableColumn<Szereles, LocalDate> MunkavegzesKezdeteOszlop;
 
     @FXML private TextField MunkavegzesKoltsege;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        AutoMarkajaOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,String>("Auto markaja"));
+        //AutoMarkajaOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,String>("AutoMarkaja"));
         RendszamOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,String>("Rendszam"));
-        SzerelesKezdeteOszlop.setCellValueFactory(new PropertyValueFactory<Szereles, LocalDate>("Szereles kezdete"));
+        MunkavegzesKezdeteOszlop.setCellValueFactory(new PropertyValueFactory<Szereles, LocalDate>("SzerelesKezdete"));
 
-        tableView.setItems(getPeople());
+        FolyamatbanLevoSzerelesekTablaNezet.setItems(DataStore.Szerelesek);
 
-        tableView.setEditable(true);
-        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        FolyamatbanLevoSzerelesekTablaNezet.setEditable(true);
+        RendszamOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
+        //lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //MunkavegzesKezdeteOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
+        FolyamatbanLevoSzerelesekTablaNezet.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
     public void visszaazUjSzerelesekFelvetelehezPushed(ActionEvent event) throws IOException {
         URL url = Paths.get("./src/main/java/view/TulajdonosEsAutoAdatai.fxml").toUri().toURL();

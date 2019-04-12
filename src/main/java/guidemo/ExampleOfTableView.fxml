@@ -24,7 +24,7 @@
         <TableView fx:id="tableView" prefHeight="295.0" prefWidth="495.0">
           <columns>
             <TableColumn fx:id="firstNameColumn" maxWidth="5000.0" minWidth="10.0" onEditCommit="#changeFirstNameCellEvent" prefWidth="200.0" text="First Name" />
-            <TableColumn fx:id="lastNameColumn" maxWidth="5000.0" minWidth="10.0" onEditCommit="#changeLastNameCellEvent" prefWidth="200.0" text="Last Name" />
+                  <TableColumn fx:id="lastNameColumn" minWidth="200.0" prefWidth="75.0" text="Last Name" />
             <TableColumn fx:id="birthdayColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="200.0" text="Birthday" />
           </columns>
         </TableView>

@@ -24,7 +24,9 @@ public class Main extends Application {
     public static void loadMindent(){
         DataStore.loadTulajdonosok();
         DataStore.loadSzerelesek();
+        DataStore.loadSzerelesek2();
         DataStore.loadGepjarmuvek();
+        DataStore.loadBefejezendoSzerelesek();
     }
     public static void main(String[] args){
         Tulajdonos t = new Tulajdonos("Balu","12341","Debrecen");

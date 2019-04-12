@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 public class Szereles implements SzerelesElkezdese, SzerelesBefejezese{
+    private String Rendszam;
     private LocalDate SzerelesKezdete;
     private LocalDate SzerelesBefejezese;
     private Integer MunkavegzesKoltsege;
-    private String Rendszam;
+
     private String Problema;
     //private String Jogositvanyszam;
 
     public Szereles(){}
 
-    public Szereles(LocalDate szerelesKezdete, String rendszam) {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public Szereles(String rendszam,LocalDate szerelesKezdete ) {
         SzerelesKezdete = szerelesKezdete;
         Rendszam = rendszam;
         //Jogositvanyszam = jogositvanyszam;
@@ -42,12 +44,12 @@ public class Szereles implements SzerelesElkezdese, SzerelesBefejezese{
     }
 
     @Override
-    public void setSzerelesMegkezdese(LocalDate szerelesMegkezdese) {
+    public void setSzerelesKezdete(LocalDate szerelesMegkezdese) {
         this.SzerelesKezdete = szerelesMegkezdese;
     }
 
     @Override
-    public LocalDate getSzerelesMegkezdese() {
+    public LocalDate getSzerelesKezdete() {
         return this.SzerelesKezdete;
     }
 

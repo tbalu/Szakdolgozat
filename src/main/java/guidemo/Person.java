@@ -6,14 +6,34 @@ import java.time.LocalDate;
 
 public class Person {
 
-    private SimpleStringProperty firstName,lastName;
+    private SimpleStringProperty firstName,lastName, location;
     private LocalDate birthday;
 
+    public String getLocation() {
+        return location.get();
+    }
+
+    public SimpleStringProperty locationProperty() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location.set(location);
+    }
+
+    public Person(SimpleStringProperty firstName, SimpleStringProperty lastName, SimpleStringProperty location, LocalDate birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.location = location;
+        this.birthday = birthday;
+    }
     public Person(String firstName, String lastName, LocalDate birthday) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.birthday = birthday;
     }
+
+
 
     public String getFirstName() {
         return firstName.get();
