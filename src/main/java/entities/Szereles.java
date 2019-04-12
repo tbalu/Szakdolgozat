@@ -9,9 +9,17 @@ public class Szereles implements SzerelesElkezdese, SzerelesBefejezese{
     private LocalDate SzerelesBefejezese;
     private Integer MunkavegzesKoltsege;
     private String Rendszam;
-    private String Jogositvanyszam;
+    private String Problema;
+    //private String Jogositvanyszam;
 
     public Szereles(){}
+
+    public Szereles(LocalDate szerelesKezdete, String rendszam) {
+        SzerelesKezdete = szerelesKezdete;
+        Rendszam = rendszam;
+        //Jogositvanyszam = jogositvanyszam;
+    }
+
     @Override
     public void setBefejezesIdeje(LocalDate BefejezesIdeje) {
         this.SzerelesBefejezese = BefejezesIdeje;
@@ -54,12 +62,23 @@ public class Szereles implements SzerelesElkezdese, SzerelesBefejezese{
     }
 
     @Override
-    public void setJogositvanyszam(String Jogositvanyszam) {
-
+    public void setProblema(String problema) {
+        this.Problema = problema;
     }
 
     @Override
-    public String getJogositvanyszam() {
-        return this.Jogositvanyszam;
+    public String getProblema() {
+        return this.Problema;
+    }
+
+    @Override
+    public String toString() {
+        return "Szereles{" +
+                "SzerelesKezdete=" + SzerelesKezdete +
+                ", SzerelesBefejezese=" + SzerelesBefejezese +
+                ", MunkavegzesKoltsege=" + MunkavegzesKoltsege +
+                ", Rendszam='" + Rendszam + '\'' +
+                ", Problema='" + Problema + '\'' +
+                '}';
     }
 }

@@ -7,7 +7,7 @@ public interface SzerelesElkezdese {
     LocalDate getSzerelesMegkezdese();
     void setRendszam(String gepjarmuRendszama);
     String getRendszam();
-    void setJogositvanyszam(String Jogositvanyszam);
-    String getJogositvanyszam();
+    void setProblema(String problema);
+    String getProblema();
 
 }

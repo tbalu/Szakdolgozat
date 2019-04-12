@@ -3,8 +3,10 @@ package entitymanager;
 import datastore.DataStore;
 import entities.Szereles;
 import entities.SzerelesBefejezese;
+import org.pmw.tinylog.Logger;
 
 import java.time.LocalDate;
+import java.util.ListIterator;
 
 public class SzerelesManager {
     private static SzerelesManager instance = new SzerelesManager();
@@ -12,12 +14,26 @@ public class SzerelesManager {
     public static SzerelesManager getInstance(){
         return instance;
     }
-    public Szereles createSzereles(LocalDate SzerelesKezdete,LocalDate SzerelesBefejezese,
-                                   String Rendszam, String Jogositvanyszam){
+
+    public void addSzerelesekhez(String Rendszam,String Jogositvanyszam){
+        ListIterator<Szereles> listIterator = DataStore.getSzerelesek().listIterator();
+        while(listIterator.hasNext()){
+            Szereles szereles = listIterator.next();
+            if(szereles.getRendszam().equals(Rendszam)&&szereles.getSzerelesMegkezdese().equals(LocalDate.now())){
+                Logger.info("Már van ilyen szerelesunk");
+                return;
+            }
+        }
+        DataStore.getSzerelesek().add(this.createSzereles(Rendszam));
+        Logger.info(DataStore.getSzerelesek().toString());
+    }
+
+    public Szereles createSzereles(String Rendszam){
         Szereles szereles = new Szereles();
         szereles.setRendszam(Rendszam);
         szereles.setSzerelesMegkezdese(LocalDate.now());
-        szereles.setJogositvanyszam(Jogositvanyszam);
+
+        Logger.info(szereles.toString());
         return szereles;
     }
 
