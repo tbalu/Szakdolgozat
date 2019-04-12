@@ -60,9 +60,9 @@ public class DataStore {
     }
 
     //Teszt
-    public static List<Szereles> getBefejezetlenSzerelesek(){
-            return DataStore.getSzerelesek().stream().filter(c->c.getBefejezesIdeje()==null)
-                    .collect(Collectors.toList());
+    public static ObservableList<Szereles> getBefejezetlenSzerelesek(){
+            return FXCollections.observableArrayList(DataStore.getSzerelesek().stream().filter(c->c.getBefejezesIdeje()==null)
+                    .collect(Collectors.toList()));
     }
     public static List<Szereles> getBefejezettSzerelesek(){
         return DataStore.getSzerelesek().stream().filter(c->c.getBefejezesIdeje()!=null)

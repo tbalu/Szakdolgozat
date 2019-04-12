@@ -33,5 +33,8 @@ public class Main extends Application {
         System.out.println(t.toString());
         loadMindent();
         launch(args);
+        Logger.info(DataStore.getSzerelesek());
+        Logger.info(DataStore.getTulajdonosok());
+        Logger.info(DataStore.getGepjarmuvek());
     }
 }

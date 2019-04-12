@@ -3,7 +3,9 @@ package controllers;
 import datastore.DataStore;
 import entities.BefejezendoSzereles;
 import entities.Szereles;
+import entitymanager.SzerelesManager;
 import guidemo.Person;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import org.pmw.tinylog.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,13 +38,13 @@ public class FolyamatbanLevoSzerelesekController implements Initializable {
         RendszamOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,String>("Rendszam"));
         MunkavegzesKezdeteOszlop.setCellValueFactory(new PropertyValueFactory<Szereles, LocalDate>("SzerelesKezdete"));
 
-        FolyamatbanLevoSzerelesekTablaNezet.setItems(DataStore.Szerelesek);
+        FolyamatbanLevoSzerelesekTablaNezet.setItems(DataStore.getBefejezetlenSzerelesek());
 
         FolyamatbanLevoSzerelesekTablaNezet.setEditable(true);
         RendszamOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
         //lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         //MunkavegzesKezdeteOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
-        FolyamatbanLevoSzerelesekTablaNezet.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        FolyamatbanLevoSzerelesekTablaNezet.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
     public void visszaazUjSzerelesekFelvetelehezPushed(ActionEvent event) throws IOException {
         URL url = Paths.get("./src/main/java/view/TulajdonosEsAutoAdatai.fxml").toUri().toURL();
@@ -52,5 +55,17 @@ public class FolyamatbanLevoSzerelesekController implements Initializable {
 
         window.setScene(tableViewScene);
         window.show();
+    }
+    public void szerelesVegePushed(){
+        //SzerelesManager.getInstance().szerelesBefejezese()
+        ObservableList<Szereles>  FolyamatbanLevoSzerelesek;
+        Szereles KivalasztottSor;
+        FolyamatbanLevoSzerelesek = FolyamatbanLevoSzerelesekTablaNezet.getItems();
+
+        KivalasztottSor = FolyamatbanLevoSzerelesekTablaNezet.getSelectionModel().getSelectedItem();
+        Logger.info(KivalasztottSor);
+        SzerelesManager.getInstance().szerelesBefejezese(KivalasztottSor,Integer.valueOf(MunkavegzesKoltsege.getText()));
+        FolyamatbanLevoSzerelesek.remove(KivalasztottSor);
+        Logger.info(DataStore.getSzerelesek());
     }
 }

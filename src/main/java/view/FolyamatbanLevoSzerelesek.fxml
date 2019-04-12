@@ -21,7 +21,7 @@
                 <HBox prefHeight="40.0" prefWidth="600.0" spacing="10.0">
                     <children>
                         <TextField fx:id="MunkavegzesKoltsege" promptText="Munkavégzés költsége" />
-                        <Button mnemonicParsing="false" text="Szerelés vége" />
+                        <Button mnemonicParsing="false" onAction="#szerelesVegePushed" text="Szerelés vége" />
                     </children>
                 </HBox>
             <Button mnemonicParsing="false" onAction="#visszaazUjSzerelesekFelvetelehezPushed" text="Vissza az új szereles felvételéhez" />
