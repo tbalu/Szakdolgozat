@@ -28,9 +28,9 @@
                   <Label text="Mai bevétel" />
                   <Label text="Ehavi bevétel" GridPane.rowIndex="1" />
                   <Label text="Ezévi bevétel" GridPane.rowIndex="2" />
-                  <Label fx:id="MaiBevetel" text="Label" GridPane.columnIndex="1" />
-                  <Label fx:id="EhaviBevetel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="EzEviBevetel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="MaiBevetel" text="0" GridPane.columnIndex="1" />
+                  <Label fx:id="EHaviBevetel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="EzEviBevetel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

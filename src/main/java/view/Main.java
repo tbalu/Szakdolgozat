@@ -2,6 +2,7 @@ package view;
 
 import datastore.DataStore;
 import entities.Tulajdonos;
+import entitymanager.StatisztikaManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,9 +30,13 @@ public class Main extends Application {
         DataStore.loadBefejezendoSzerelesek();
     }
     public static void main(String[] args){
+
+
         Tulajdonos t = new Tulajdonos("Balu","12341","Debrecen");
         System.out.println(t.toString());
         loadMindent();
+        Logger.info(StatisztikaManager.getInstance().eHaviBevetel());
+        Logger.info(StatisztikaManager.getInstance().ezEviBevetel());
         launch(args);
         Logger.info(DataStore.getSzerelesek());
         Logger.info(DataStore.getTulajdonosok());
