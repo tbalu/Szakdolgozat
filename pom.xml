@@ -12,6 +12,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <description>Ebben a programban autoszerelesekrol (tulajdonos, szereles, autok) tarolhatunk el informaciokat.</description>
+    <developers>
+        <developer>
+            <name>Tóth Balázs</name>
+            <email>toth.balazs.e.pub@gmail.com</email>
+        </developer>
+    </developers>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -75,7 +82,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
+            <version>6.0.6</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
@@ -84,7 +91,18 @@
             <version>5.4.2.Final</version>
         </dependency>
     </dependencies>
-
+<repositories>
+    <repository>
+        <id>maven.oracle.com</id>
+        <url>https://maven.oracle.com/</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository>
+</repositories>
     <build>
         <plugins>
             <plugin>

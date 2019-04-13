@@ -23,12 +23,12 @@ public class Szereles implements SzerelesElkezdese, SzerelesBefejezese{
     }
 
     @Override
-    public void setBefejezesIdeje(LocalDate BefejezesIdeje) {
+    public void setSzerelesBefejezese(LocalDate BefejezesIdeje) {
         this.SzerelesBefejezese = BefejezesIdeje;
     }
 
     @Override
-    public LocalDate getBefejezesIdeje() {
+    public LocalDate getSzerelesBefejezese() {
         return this.SzerelesBefejezese;
     }
 

@@ -48,4 +48,14 @@ public class TulajdonosEsAutoAdataiController {
         window.setScene(tableViewScene);
         window.show();
     }
+    public void statisztikaPushed(ActionEvent event) throws IOException {
+        URL url = Paths.get("./src/main/java/view/BefejezettSzerelesek.fxml").toUri().toURL();
+        Parent tableViewParent = FXMLLoader.load(url);
+        Scene tableViewScene = new Scene(tableViewParent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(tableViewScene);
+        window.show();
+    }
 }

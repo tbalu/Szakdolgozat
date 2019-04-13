@@ -34,6 +34,7 @@
             <TextArea fx:id="Problema" prefHeight="200.0" prefWidth="200.0" promptText="Probléma" />
             <Button mnemonicParsing="false" onAction="#szerelesFelvetelePushed" text="Szerelés felvétele" />
             <Button mnemonicParsing="false" onAction="#folyamatbanLevoSzerelesekPushed" text="Folyamatban lévő szerelések" />
+            <Button fx:id="Statisztika" mnemonicParsing="false" onAction="#statisztikaPushed" text="Statisztika" />
          </children>
       </VBox>
    </children>

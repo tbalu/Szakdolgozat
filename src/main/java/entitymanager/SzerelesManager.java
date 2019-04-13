@@ -3,10 +3,13 @@ package entitymanager;
 import datastore.DataStore;
 import entities.Szereles;
 import entities.SzerelesBefejezese;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.pmw.tinylog.Logger;
 
 import java.time.LocalDate;
 import java.util.ListIterator;
+import java.util.stream.Collectors;
 
 public class SzerelesManager {
     private static SzerelesManager instance = new SzerelesManager();
@@ -27,7 +30,7 @@ public class SzerelesManager {
         DataStore.getSzerelesek().add(this.createSzereles(Rendszam));
         Logger.info(DataStore.getSzerelesek().toString());
     }
-
+    //Teszt
     public Szereles createSzereles(String Rendszam){
         Szereles szereles = new Szereles();
         szereles.setRendszam(Rendszam);
@@ -40,9 +43,14 @@ public class SzerelesManager {
         //Teszt
     public Szereles szerelesBefejezese(SzerelesBefejezese szereles, Integer MunkavegzesKoltsege) {
         int index = DataStore.getSzerelesek().indexOf(szereles);
-        szereles.setBefejezesIdeje(LocalDate.now());
+        szereles.setSzerelesBefejezese(LocalDate.now());
         szereles.setMunkavegzesKoltsege(MunkavegzesKoltsege);
         DataStore.getSzerelesek().set(index, (Szereles) szereles);
         return (Szereles) szereles;
+    }
+    //Teszt
+    public ObservableList<Szereles> getBefejezettSzerelesek(){
+        return FXCollections.observableArrayList(DataStore.Szerelesek.stream()
+                                .filter(c->c.getSzerelesBefejezese()!=null).collect(Collectors.toList()));
     }
 }

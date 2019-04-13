@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface SzerelesBefejezese {
-    void setBefejezesIdeje(LocalDate BefejezesIdeje);
-    LocalDate getBefejezesIdeje();
+    void setSzerelesBefejezese(LocalDate BefejezesIdeje);
+    LocalDate getSzerelesBefejezese();
     void setMunkavegzesKoltsege(Integer MunkavegzesKoltsege);
     Integer getMunkavegzesKoltsege();
     /*void addAlkatreszek(List<Map<Alkatresz,Integer>> felhasznaltAlkatresz);
