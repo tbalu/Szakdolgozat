@@ -13,6 +13,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -37,21 +38,31 @@ public class BefejezettSzerelesekController implements Initializable {
         BefejezettSzerelesekTablaNezet.setEditable(true);
         RendszamOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
 
-
+        /*
         Optional<Integer> ehavibevetel = StatisztikaManager.getInstance().eHaviBevetel();
         Optional<Integer> ezevibevetel = StatisztikaManager.getInstance().ezEviBevetel();
         Optional<Integer> maibevetel = StatisztikaManager.getInstance().maiBevetel();
         ehavibevetel.ifPresent(c->EHaviBevetel.setText(c.toString()));
         ezevibevetel.ifPresent(c->EzEviBevetel.setText(c.toString()));
+        maibevetel.ifPresent(c->MaiBevetel.setText(c.toString()));*/
+
+        LocalDate most = LocalDate.now();
+        Optional<Integer> ehavibevetel = StatisztikaManager.getInstance()
+                .bevetelEkkor(LocalDate.of(most.getYear(),most.getMonth(),1).minusDays(1),
+                        LocalDate.of(most.getYear(),most.getMonth().getValue(),most.lengthOfMonth()));
+        Optional<Integer> ezevibevetel = StatisztikaManager.getInstance()
+                .bevetelEkkor(LocalDate.of(most.getYear()-1,12,31)
+                        ,LocalDate.of(most.getYear()+1, 1,1));
+        //Optional<Integer> ezevibevetel = StatisztikaManager.getInstance().ezEviBevetel();
+        //Optional<Integer> maibevetel = StatisztikaManager.getInstance().maiBevetel();
+        Optional<Integer> maibevetel = StatisztikaManager.getInstance()
+                .bevetelEkkor(LocalDate.now().minusDays(1),LocalDate.now().plusDays(1));
+        ehavibevetel.ifPresent(c->EHaviBevetel.setText(c.toString()));
+        ezevibevetel.ifPresent(c->EzEviBevetel.setText(c.toString()));
         maibevetel.ifPresent(c->MaiBevetel.setText(c.toString()));
 
 
-        /*
-        EHaviBevetel.setText(StatisztikaManager.getInstance().eHaviBevetel().toString());
-        EzEviBevetel.setText(StatisztikaManager.getInstance().ezEviBevetel().toString());
-        MaiBevetel.setText(StatisztikaManager.getInstance().maiBevetel().toString());*/
-        //lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        //tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 
     }
 }

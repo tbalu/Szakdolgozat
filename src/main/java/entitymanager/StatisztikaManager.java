@@ -3,14 +3,9 @@ package entitymanager;
 import datastore.DataStore;
 import entities.Szereles;
 import org.pmw.tinylog.Logger;
-
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Year;
-import java.time.chrono.ChronoLocalDate;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class StatisztikaManager {
     private static StatisztikaManager instance = new StatisztikaManager();
@@ -43,5 +38,10 @@ public class StatisztikaManager {
                 .filter(c->c.getSzerelesBefejezese().getYear()==LocalDate.now().getYear()
                 && c.getSzerelesBefejezese().getDayOfYear()==LocalDate.now().getDayOfYear())
                 .map(Szereles::getMunkavegzesKoltsege).reduce((a,b) ->a+b);
+    }
+    public Optional<Integer> bevetelEkkor(LocalDate Ettol, LocalDate Eddig){
+        return DataStore.getSzerelesek().stream().filter(c->c.getSzerelesBefejezese()!=null)
+            .filter(c->c.getSzerelesBefejezese().isAfter(Ettol)&&c.getSzerelesBefejezese().isBefore(Eddig))
+            .map(Szereles::getMunkavegzesKoltsege).reduce((a,b) ->a+b);
     }
 }
