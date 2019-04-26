@@ -1,10 +1,9 @@
 package entities;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
+import entities.*;
 
-public class Szereles implements SzerelesElkezdese, SzerelesBefejezese{
+public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese {
     private String Rendszam;
     private LocalDate SzerelesKezdete;
     private LocalDate SzerelesBefejezese;

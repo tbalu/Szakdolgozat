@@ -64,7 +64,10 @@ public class FolyamatbanLevoSzerelesekController implements Initializable {
 
         KivalasztottSor = FolyamatbanLevoSzerelesekTablaNezet.getSelectionModel().getSelectedItem();
         Logger.info(KivalasztottSor);
+
+        if(KivalasztottSor!=null)
         SzerelesManager.getInstance().szerelesBefejezese(KivalasztottSor,Integer.valueOf(MunkavegzesKoltsege.getText()));
+
         FolyamatbanLevoSzerelesek.remove(KivalasztottSor);
         Logger.info(DataStore.getSzerelesek());
     }

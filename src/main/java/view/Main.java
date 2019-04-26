@@ -35,8 +35,8 @@ public class Main extends Application {
         Tulajdonos t = new Tulajdonos("Balu","12341","Debrecen");
         System.out.println(t.toString());
         loadMindent();
-        Logger.info(StatisztikaManager.getInstance().eHaviBevetel());
-        Logger.info(StatisztikaManager.getInstance().ezEviBevetel());
+//        Logger.info(StatisztikaManager.getInstance().eHaviBevetel());
+  //      Logger.info(StatisztikaManager.getInstance().ezEviBevetel());
         launch(args);
         Logger.info(DataStore.getSzerelesek());
         Logger.info(DataStore.getTulajdonosok());

@@ -10,8 +10,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compailer.target>11</maven.compailer.target>
-        <maven.compailer.source>11</maven.compailer.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
     </properties>
 
