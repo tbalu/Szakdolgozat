@@ -5,6 +5,9 @@ import entities.Gepjarmu;
 import entities.Szereles;
 import entities.Tulajdonos;
 import jpa.GenericJpaDao;
+import org.pmw.tinylog.Logger;
+
+import javax.persistence.RollbackException;
 
 public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
 
@@ -12,20 +15,20 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
     public TulajdonosDao(){
         super(Tulajdonos.class);
     }
-    @Transactional
-    public void addGepjarmuvekhez(String Marka, String Rendszam, String TulajdonosJogositvanyszama,Tulajdonos tulajdonos){
-        this.find(TulajdonosJogositvanyszama).ifPresent(c->c.getGepjarmuvek().add(new Gepjarmu(Marka,Rendszam,null,c)));
-        //Tulajdonos t = this.find(TulajdonosJogositvanyszama).get();
 
-
-        //valtozas tortent
-
-
-        //Gepjarmu a = new Gepjarmu(Rendszam,Marka,null,TulajdonosJogositvanyszama);
-        //tulajdonos.getGepjarmuvek().add(a);
-        //a.setMarka(Marka);
+    public void addGepjarmuvekhez(String Marka, String Rendszam, String TulajdonosJogositvanyszama) {
+        try {
+        this.addGepjarmuvekhezSeged(Marka,Rendszam,TulajdonosJogositvanyszama);
+    }catch (RollbackException r){
+        Logger.info("Már van ilyen autó");
+        }
     }
+    @Transactional
+    private void addGepjarmuvekhezSeged(String Marka, String Rendszam, String TulajdonosJogositvanyszama) throws RollbackException{
 
+            this.find(TulajdonosJogositvanyszama).ifPresent(c -> c.getGepjarmuvek().add(new Gepjarmu(Rendszam, Marka, null, c)));
+
+    }
     @Transactional
     public void addSzerelesekhez(String Rendszam, String Jogositvanyszam){
         Szereles sz = new Szereles(Rendszam);

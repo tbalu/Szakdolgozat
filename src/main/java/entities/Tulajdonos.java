@@ -2,7 +2,9 @@ package entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Tulajdonos {
@@ -16,10 +18,11 @@ public class Tulajdonos {
 
     @Column(name = "lakcim")
     private String Lakcim;
-
+/*
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
-    private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();
-
+    private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();*/
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
+    private Set<Gepjarmu> Gepjarmuvek = new HashSet<>();
 
     @Override
     public String toString() {
@@ -37,18 +40,18 @@ public class Tulajdonos {
 
     }
 
-    public Tulajdonos(String jogositvanyszam, String nev, String lakcim, List<Gepjarmu> gepjarmuvek) {
+    public Tulajdonos(String jogositvanyszam, String nev, String lakcim, Set<Gepjarmu> gepjarmuvek) {
         Jogositvanyszam = jogositvanyszam;
         Nev = nev;
         Lakcim = lakcim;
         Gepjarmuvek = gepjarmuvek;
     }
     public Tulajdonos(){}
-    public List<Gepjarmu> getGepjarmuvek() {
+    public Set<Gepjarmu> getGepjarmuvek() {
         return Gepjarmuvek;
     }
 
-    public void setGepjarmuvek(List<Gepjarmu> gepjarmuvek) {
+    public void setGepjarmuvek(Set<Gepjarmu> gepjarmuvek) {
         Gepjarmuvek = gepjarmuvek;
     }
 

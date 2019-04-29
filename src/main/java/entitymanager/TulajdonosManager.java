@@ -5,6 +5,7 @@ import entities.Tulajdonos;
 import org.pmw.tinylog.Logger;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ListIterator;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class TulajdonosManager {
         Optional<Tulajdonos> t =
         DataStore.getTulajdonosok().stream().filter(c->c.getJogositvanyszam()==jogositvanyszam).findFirst();
         if(t.isPresent()){
-            DataStore.getTulajdonosok().add(new Tulajdonos(jogositvanyszam,nev, lakcim, new ArrayList<Gepjarmu>()));
+            DataStore.getTulajdonosok().add(new Tulajdonos(jogositvanyszam,nev, lakcim, new HashSet<Gepjarmu>()));
         }
 
 
