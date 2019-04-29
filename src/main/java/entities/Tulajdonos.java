@@ -1,10 +1,25 @@
 package entities;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Tulajdonos {
+
+    @Id
+    @Column(name = "jogositvanyszam")
+    private String Jogositvanyszam;
+
+    @Column(name = "nev")
     private String Nev;
 
+    @Column(name = "lakcim")
     private String Lakcim;
-    private String Jogositvanyszam;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
+    private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();
+
 
     @Override
     public String toString() {
@@ -19,6 +34,22 @@ public class Tulajdonos {
         Nev = nev;
         Lakcim = lakcim;
         Jogositvanyszam = jogositvanyszam;
+
+    }
+
+    public Tulajdonos(String jogositvanyszam, String nev, String lakcim, List<Gepjarmu> gepjarmuvek) {
+        Jogositvanyszam = jogositvanyszam;
+        Nev = nev;
+        Lakcim = lakcim;
+        Gepjarmuvek = gepjarmuvek;
+    }
+    public Tulajdonos(){}
+    public List<Gepjarmu> getGepjarmuvek() {
+        return Gepjarmuvek;
+    }
+
+    public void setGepjarmuvek(List<Gepjarmu> gepjarmuvek) {
+        Gepjarmuvek = gepjarmuvek;
     }
 
     public String getNev() {

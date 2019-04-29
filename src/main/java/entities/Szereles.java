@@ -1,12 +1,31 @@
 package entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import entities.*;
 
-public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "szereles")
+public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Serializable {
+
+    @Id
+    @Column(nullable = false)
     private String Rendszam;
+
+    @Id
+    @Column(nullable = false)
     private LocalDate SzerelesKezdete;
+
+    @Column
     private LocalDate SzerelesBefejezese;
+
+    @Column
     private Integer MunkavegzesKoltsege;
 
     private String Problema;
@@ -19,6 +38,10 @@ public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese {
         SzerelesKezdete = szerelesKezdete;
         Rendszam = rendszam;
         //Jogositvanyszam = jogositvanyszam;
+    }
+    public Szereles(String rendszam){
+        this.Rendszam = rendszam;
+        this.SzerelesKezdete = LocalDate.now();
     }
 
     public Szereles(String rendszam, LocalDate szerelesKezdete, LocalDate szerelesBefejezese, Integer munkavegzesKoltsege, String problema) {

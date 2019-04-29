@@ -30,7 +30,7 @@ public class DataStore {
         }
         public static void loadGepjarmuvek(){
         /* TODO */
-            Gepjarmuvek.add(new Gepjarmu("Tesla Model S","ABC-123","123"));
+            //Gepjarmuvek.add(new Gepjarmu("Tesla Model S","ABC-123","123"));
             Logger.info(Gepjarmuvek.toString());
         }
         public static void loadSzerelesek(){
@@ -54,11 +54,11 @@ public class DataStore {
     }
 
     public static List<Gepjarmu> getGepjarmuvek() {
-        return Gepjarmuvek;
+        return getTulajdonosok().stream().flatMap(c->c.getGepjarmuvek().stream()).collect(Collectors.toList());
     }
 
     public static List<Szereles> getSzerelesek() {
-        return Szerelesek;
+        return getGepjarmuvek().stream().flatMap(c->c.getSzerelesek().stream()).collect(Collectors.toList());
     }
 
     //Teszt

@@ -1,5 +1,6 @@
 package view;
 
+import datastore.DataStore;
 import entitymanager.GepjarmuManager;
 import entitymanager.SzerelesManager;
 import entitymanager.TulajdonosManager;
@@ -30,9 +31,10 @@ public class TulajdonosEsAutoAdataiController {
     public void szerelesFelvetelePushed(){
         String jogositvanyszamText = Jogositvanyszam.getText();
         TulajdonosManager.getInstance().addTulajdonosokhoz(Nev.getText(),Lakcim.getText(),jogositvanyszamText);
-        Logger.info(jogositvanyszamText);
-        SzerelesManager.getInstance().addSzerelesekhez(Rendszam.getText(),jogositvanyszamText);
+        Logger.info(DataStore.getTulajdonosok());
         GepjarmuManager.getInstance().addGepjarmuvekhez(Automarka.getText(),Rendszam.getText(),jogositvanyszamText);
+        SzerelesManager.getInstance().addSzerelesekhez(Rendszam.getText(),jogositvanyszamText);
+
         Nev.clear();
         Jogositvanyszam.clear();
         Lakcim.clear();

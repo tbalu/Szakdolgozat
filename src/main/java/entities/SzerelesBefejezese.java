@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-public interface SzerelesBefejezese {
+public interface SzerelesBefejezese extends SzerelesElkezdese{
     void setSzerelesBefejezese(LocalDate BefejezesIdeje);
     LocalDate getSzerelesBefejezese();
     void setMunkavegzesKoltsege(Integer MunkavegzesKoltsege);
