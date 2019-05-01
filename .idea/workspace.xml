@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ad894c1c-9da5-401d-8efd-79d881b26d34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/daos/GepjarmuDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/guice/JpaInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/guice/PersistenceModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jpa/GenericJpaDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jpa/YearConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+    <list default="true" id="ad894c1c-9da5-401d-8efd-79d881b26d34" name="Default Changelist" comment="Felfedeztem a hibernate exception-okat. Mostmar el tud menteni tulajdonosokat, gepjarmuveket es ha valamibol mar van egy az nem jelent problemat.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/datastore/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datastore/DataStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/Gepjarmu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Gepjarmu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entities/Szereles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Szereles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entities/SzerelesBefejezese.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/SzerelesBefejezese.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entities/SzerelesElkezdese.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/SzerelesElkezdese.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entities/Tulajdonos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entities/Tulajdonos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entitymanager/GepjarmuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entitymanager/GepjarmuManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entitymanager/SzerelesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entitymanager/SzerelesManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entitymanager/TulajdonosManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entitymanager/TulajdonosManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/TulajdonosEsAutoAdataiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/TulajdonosEsAutoAdataiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jpa/GenericJpaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jpa/GenericJpaDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/datastore/DataStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/datastore/DataStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/Gepjarmu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Gepjarmu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/Szereles.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Szereles.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/SzerelesBefejezese.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/SzerelesBefejezese.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/entities/Tulajdonos.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/Tulajdonos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entitymanager/GepjarmuManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entitymanager/GepjarmuManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/entitymanager/SzerelesManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entitymanager/SzerelesManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/entitymanager/TulajdonosManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entitymanager/TulajdonosManager.class" afterDir="false" />
     </list>
@@ -45,17 +31,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="68" lean-forward="true" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="78" />
+            <state relative-caret-position="136">
+              <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Gepjarmu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="115">
+              <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,11 +49,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Tulajdonos.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+            <state relative-caret-position="8">
+              <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1044">
+              <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+            <state relative-caret-position="45">
+              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -103,17 +101,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/guice/PersistenceModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="90">
               <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/daos/GepjarmuDao.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/datastore/DataStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+            <state relative-caret-position="200">
+              <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/entitymanager/SzerelesManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,37 +134,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/entities/Szereles.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+            <state relative-caret-position="170">
+              <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entitymanager/GepjarmuManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/jpa/GenericJpaDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
-              <folding>
-                <element signature="e#1277#1278#0" expanded="true" />
-                <element signature="e#1321#1322#0" expanded="true" />
-                <element signature="e#1376#1377#0" expanded="true" />
-                <element signature="e#1419#1420#0" expanded="true" />
+                <element signature="e#738#1403#0" />
+                <element signature="e#1482#1483#0" expanded="true" />
+                <element signature="e#1538#1539#0" expanded="true" />
+                <element signature="e#1600#1601#0" expanded="true" />
+                <element signature="e#1646#1647#0" expanded="true" />
+                <element signature="e#1731#1732#0" expanded="true" />
+                <element signature="e#1793#1794#0" expanded="true" />
+                <element signature="e#1855#1856#0" expanded="true" />
+                <element signature="e#1902#1903#0" expanded="true" />
+                <element signature="e#1984#1985#0" expanded="true" />
+                <element signature="e#2041#2042#0" expanded="true" />
+                <element signature="e#2100#2101#0" expanded="true" />
+                <element signature="e#2143#2144#0" expanded="true" />
+                <element signature="e#2200#2201#0" expanded="true" />
+                <element signature="e#2233#2234#0" expanded="true" />
+                <element signature="e#2284#2285#0" expanded="true" />
+                <element signature="e#2320#2321#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -194,7 +194,6 @@
         <option value="$PROJECT_DIR$/src/main/java/guidemo/Person.java" />
         <option value="$PROJECT_DIR$/src/main/java/guidemo/ExampleOfTableView.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Szereles2.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/SzerelesElkezdese.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/FolyamatbanLevoSzerelesek.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/guidemo/Client.java" />
         <option value="$PROJECT_DIR$/src/main/java/guidemo/HibernateUtil.java" />
@@ -213,21 +212,23 @@
         <option value="$PROJECT_DIR$/src/main/java/controllers/FolyamatbanLevoSzerelesekController.java" />
         <option value="$PROJECT_DIR$/src/main/java/jpa/YearConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/entities/SzerelesBefejezese.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entitymanager/SzerelesManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entitymanager/TulajdonosManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/TulajdonosEsAutoAdataiController.java" />
         <option value="$PROJECT_DIR$/src/main/java/guice/PersistenceModule.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/daos/GepjarmuDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Szereles.java" />
-        <option value="$PROJECT_DIR$/src/main/java/datastore/DataStore.java" />
         <option value="$PROJECT_DIR$/src/main/java/entitymanager/GepjarmuManager.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/daos/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entitymanager/TulajdonosManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/jpa/GenericJpaDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/guidemo/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entities/Gepjarmu.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/SzerelesElkezdese.java" />
+        <option value="$PROJECT_DIR$/src/main/java/datastore/DataStore.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entitymanager/SzerelesManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Szereles.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/entities/Tulajdonos.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entities/Gepjarmu.java" />
       </list>
     </option>
   </component>
@@ -265,7 +266,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -396,6 +396,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -460,6 +461,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="daos.Main" />
+      <module name="Gepjarmuszerelo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="daos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="view.Main" />
       <module name="Gepjarmuszerelo" />
@@ -471,6 +485,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.Main (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -513,7 +528,21 @@
       <option name="project" value="LOCAL" />
       <updated>1556273039626</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="A perzisztens adattarolas alapjait kiprobaltam es mukodik.">
+      <created>1556532031595</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1556532031595</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Ha ujra ugyanazt az autot probaljuk meg hozzaadni az adatbazishoz akkor elkapja a kivetelt a TulajdonosDao osztalyba.">
+      <created>1556535098939</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1556535098939</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -529,7 +558,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22751679" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16778524" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -539,13 +568,13 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18838526" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.6643059" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3101983" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.07223796" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3286119" />
@@ -615,19 +644,12 @@
     <MESSAGE value="Statisztika: mai, ehavi, ezevi bevetel megvalositasa" />
     <MESSAGE value="Egy fuggveny hatarozza meg az eves, havi, napi bevetelt." />
     <MESSAGE value="Minden mukodik de nincs perzisztens adattarolas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minden mukodik de nincs perzisztens adattarolas." />
+    <MESSAGE value="A perzisztens adattarolas alapjait kiprobaltam es mukodik." />
+    <MESSAGE value="Ha ujra ugyanazt az autot probaljuk meg hozzaadni az adatbazishoz akkor elkapja a kivetelt." />
+    <MESSAGE value="Ha ujra ugyanazt az autot probaljuk meg hozzaadni az adatbazishoz akkor elkapja a kivetelt a TulajdonosDao osztalyba." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ha ujra ugyanazt az autot probaljuk meg hozzaadni az adatbazishoz akkor elkapja a kivetelt a TulajdonosDao osztalyba." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/GUIDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="17" column="89" lean-forward="true" selection-start-line="17" selection-start-column="89" selection-end-line="17" selection-end-column="89" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/Person.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -649,12 +671,12 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/hibernate.cfg.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/DAO.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/view/FolyamatbanLevoSzerelesek.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/11/javafx-fxml-11-win.jar!/javafx/fxml/Initializable.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -665,12 +687,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/Client.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/view/TulajdonosEsAutoAdatai.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="94">
           <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/ExampleOfTableView.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -693,12 +715,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/BefejezettSzerelesek.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11/javafx-graphics-11-win.jar!/com/sun/javafx/application/ParametersImpl.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -767,13 +789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/SzerelesElkezdese.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controllers/BefejezettSzerelesekController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -812,16 +827,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/SzerelesBefejezese.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/log4j2.xml" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/inject/guice/4.2.2/guice-4.2.2.jar!/com/google/inject/internal/SingletonScope.class">
       <provider selected="true" editor-type-id="text-editor" />
@@ -833,16 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entitymanager/TulajdonosManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/jpa/YearConverter.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -850,36 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5678">
           <caret line="334" column="20" selection-start-line="334" selection-start-column="20" selection-end-line="334" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entitymanager/SzerelesManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="34" column="72" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/datastore/DataStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -913,33 +878,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/jpa/GenericJpaDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/entitymanager/TulajdonosManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="e#1277#1278#0" expanded="true" />
-            <element signature="e#1321#1322#0" expanded="true" />
-            <element signature="e#1376#1377#0" expanded="true" />
-            <element signature="e#1419#1420#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="68" lean-forward="true" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Szereles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        <state relative-caret-position="289">
+          <caret line="49" column="97" lean-forward="true" selection-start-line="49" selection-start-column="97" selection-end-line="49" selection-end-column="97" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/daos/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/jpa/GenericJpaDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#909#910#0" expanded="true" />
+            <element signature="e#954#955#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/SzerelesBefejezese.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/SzerelesElkezdese.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/datastore/DataStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="40" column="49" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entitymanager/SzerelesManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/guice/PersistenceModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -954,27 +965,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/guice/PersistenceModule.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Szereles.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+        <state relative-caret-position="170">
+          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#738#1403#0" />
+            <element signature="e#1482#1483#0" expanded="true" />
+            <element signature="e#1538#1539#0" expanded="true" />
+            <element signature="e#1600#1601#0" expanded="true" />
+            <element signature="e#1646#1647#0" expanded="true" />
+            <element signature="e#1731#1732#0" expanded="true" />
+            <element signature="e#1793#1794#0" expanded="true" />
+            <element signature="e#1855#1856#0" expanded="true" />
+            <element signature="e#1902#1903#0" expanded="true" />
+            <element signature="e#1984#1985#0" expanded="true" />
+            <element signature="e#2041#2042#0" expanded="true" />
+            <element signature="e#2100#2101#0" expanded="true" />
+            <element signature="e#2143#2144#0" expanded="true" />
+            <element signature="e#2200#2201#0" expanded="true" />
+            <element signature="e#2233#2234#0" expanded="true" />
+            <element signature="e#2284#2285#0" expanded="true" />
+            <element signature="e#2320#2321#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Gepjarmu.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="136">
+          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/daos/TulajdonosDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1044">
+          <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -983,8 +1011,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entities/Tulajdonos.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+        <state relative-caret-position="8">
+          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/guidemo/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entities/Gepjarmu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

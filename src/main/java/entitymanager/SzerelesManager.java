@@ -33,20 +33,21 @@ public class SzerelesManager {
         Logger.info(DataStore.getSzerelesek().toString());
     }*/
     public void addSzerelesekhez(String Rendszam, String Jogositvanyszam){
-        DataStore.getTulajdonosok().stream().filter(c->c.getJogositvanyszam()==Jogositvanyszam)
+       /* DataStore.getTulajdonosok().stream().filter(c->c.getJogositvanyszam()==Jogositvanyszam)
                 .findFirst().ifPresent(c->c.getGepjarmuvek().stream()
                 .filter(g->g.getRendszam()==Rendszam).findFirst().ifPresent(a->a.getSzerelesek()
                         .add(new Szereles(Rendszam,LocalDate.now()))));
-        Logger.info("uj szereles" + new Szereles(Rendszam,LocalDate.now()));
+        Logger.info("uj szereles" + new Szereles(Rendszam,LocalDate.now()));*/
     }
     //Teszt
     public Szereles createSzereles(String Rendszam){
-        Szereles szereles = new Szereles();
+        /*Szereles szereles = new Szereles();
         szereles.setRendszam(Rendszam);
         szereles.setSzerelesKezdete(LocalDate.now());
 
         Logger.info(szereles.toString());
-        return szereles;
+        return szereles;*/
+        return null;
     }
 
         //Teszt
@@ -59,10 +60,10 @@ public class SzerelesManager {
     }*/
     //valtozott a visszateritesi ertek
     public void szerelesBefejezese(SzerelesBefejezese szereles, Integer MunkavegzesKoltsege){
-        DataStore.getTulajdonosok().stream().flatMap(c->c.getGepjarmuvek().stream())
+        /*DataStore.getTulajdonosok().stream().flatMap(c->c.getGepjarmuvek().stream())
                 .flatMap(a->a.getSzerelesek().stream())
                 .filter(x->x.getSzerelesBefejezese() == null && x.getRendszam()==szereles.getRendszam())
-                .findFirst().ifPresent(x->{x.setSzerelesBefejezese(LocalDate.now() );  x.setMunkavegzesKoltsege(MunkavegzesKoltsege);});
+                .findFirst().ifPresent(x->{x.setSzerelesBefejezese(LocalDate.now() );  x.setMunkavegzesKoltsege(MunkavegzesKoltsege);});*/
     }
     //Teszt
     /*public ObservableList<Szereles> getBefejezettSzerelesek(){
@@ -70,7 +71,8 @@ public class SzerelesManager {
                                 .filter(c->c.getSzerelesBefejezese()!=null).collect(Collectors.toList()));
     }*/
     public ObservableList<Szereles> getBefejezettSzerelesek(){
-        return FXCollections.observableArrayList(DataStore.getTulajdonosok().stream().flatMap(t->t.getGepjarmuvek().stream().flatMap(g->g.getSzerelesek().stream()))
-                 .filter(c->c.getSzerelesBefejezese()==null).collect(Collectors.toList()));
+      /*  return FXCollections.observableArrayList(DataStore.getTulajdonosok().stream().flatMap(t->t.getGepjarmuvek().stream().flatMap(g->g.getSzerelesek().stream()))
+                 .filter(c->c.getSzerelesBefejezese()==null).collect(Collectors.toList()));*/
+      return null;
     }
 }

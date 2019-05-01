@@ -35,10 +35,10 @@ public class DataStore {
         }
         public static void loadSzerelesek(){
         /* TODO */
-            Szerelesek.add(new Szereles("ABC-123",LocalDate.of(2019, Month.APRIL,5)));
+         /*   Szerelesek.add(new Szereles("ABC-123",LocalDate.of(2019, Month.APRIL,5)));
             Szerelesek.add(new Szereles("ABC-123",LocalDate.of(2019, Month.APRIL,6)
                     ,LocalDate.of(2019, Month.APRIL,6),11,null));
-            Logger.info(Szerelesek.toString());
+            Logger.info(Szerelesek.toString());*/
         }
         public static void loadSzerelesek2(){
         /* TODO */
