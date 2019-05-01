@@ -1,5 +1,7 @@
 package entities;
 
+import org.pmw.tinylog.Logger;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -46,7 +48,9 @@ public class Tulajdonos {
         Lakcim = lakcim;
         Gepjarmuvek = gepjarmuvek;
     }
-    public Tulajdonos(){}
+    public Tulajdonos(){
+        Logger.info("Noarg Tu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
     public Set<Gepjarmu> getGepjarmuvek() {
         return Gepjarmuvek;
     }

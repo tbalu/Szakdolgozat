@@ -1,9 +1,9 @@
 package entities;
 
-
+import org.pmw.tinylog.Logger;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Gepjarmu {
@@ -22,11 +22,13 @@ public class Gepjarmu {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "gepjarmu")
-    private List<Szereles> Szerelesek;
+    private Set<Szereles> Szerelesek;
 
 
 
-    public Gepjarmu(){}
+    public Gepjarmu(){
+        Logger.info("Noarg gepjarmu");
+    }
     public Gepjarmu(String marka, String rendszam, Tulajdonos tulajdonos) {
         Marka = marka;
         Rendszam = rendszam;
@@ -34,18 +36,18 @@ public class Gepjarmu {
 
     }
 
-    public Gepjarmu(String rendszam, String marka, List<Szereles> szerelesek, Tulajdonos tulajdonos) {
+    public Gepjarmu(String rendszam, String marka, Set<Szereles> szerelesek, Tulajdonos tulajdonos) {
         Rendszam = rendszam;
         Marka = marka;
-        Szerelesek = new ArrayList<Szereles>();
+        Szerelesek = new HashSet<>();
         this.tulajdonos = tulajdonos;
     }
 
-    public List<Szereles> getSzerelesek() {
+    public Set<Szereles> getSzerelesek() {
         return Szerelesek;
     }
 
-    public void setSzerelesek(List<Szereles> szerelesek) {
+    public void setSzerelesek(Set<Szereles> szerelesek) {
         Szerelesek = szerelesek;
     }
 

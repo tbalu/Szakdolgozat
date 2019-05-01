@@ -11,6 +11,7 @@ import org.pmw.tinylog.Logger;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.RollbackException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
@@ -99,7 +100,8 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
         tulajdonos.getGepjarmuvek().add(gepjarmu);
         this.entityManager.getTransaction().begin();
         try{
-        this.entityManager.persist(tulajdonos);}
+        this.entityManager.persist(tulajdonos);
+        }
         catch (EntityExistsException e){
             Logger.info("Ilyen entitas mar letezik");
         }
@@ -115,6 +117,28 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
 
     }
     public void ujSzereles(Tulajdonos tulajdonos, Gepjarmu gepjarmu){
-
+        Szereles szereles = new Szereles();
+        szereles.setSzerelesKezdete(LocalDate.now());
+        szereles.setMunkavegzesKoltsege(34);
+        gepjarmu.getSzerelesek().add(szereles);
+        tulajdonos.getGepjarmuvek().add(gepjarmu);
+        this.entityManager.getTransaction().begin();
+        try{
+            this.entityManager.persist(tulajdonos);
+            this.entityManager.persist(gepjarmu);
+        this.entityManager.persist(szereles);
+        }
+        catch (EntityExistsException e){
+            Logger.info("Ilyen entitas mar letezik");
+        }
+        //this.addGepjarmuvekhez(gepjarmu.getMarka(),gepjarmu.getRendszam(),tulajdonos.getJogositvanyszam());
+        try{
+            this.entityManager.getTransaction().commit();
+        }catch (RollbackException r){
+            Logger.info("Valamibol mar van");
+        }
+        catch (ConstraintViolationException c){
+            Logger.info("Valamibol mar van");
+        }
     }
 }

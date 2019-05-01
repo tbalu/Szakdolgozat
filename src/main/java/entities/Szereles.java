@@ -3,17 +3,17 @@ package entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import entities.*;
+import org.pmw.tinylog.Logger;
 
 import javax.persistence.*;
 
 
 @Entity
-@Table(name = "szereles")
 public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Serializable {
 
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rendszam")
+    @JoinColumn(name = "gepjarmu_rendszam", nullable = false)
     private Gepjarmu gepjarmu;
 
     @Id
@@ -23,13 +23,15 @@ public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Seriali
     @Column(name = "szereles_befejezese")
     private LocalDate SzerelesBefejezese;
 
-    @Column(name = "munkaveges_koltsege")
+    @Column(name = "munkavegzes_koltsege")
     private Integer MunkavegzesKoltsege;
 
    // private String Problema;
     //private String Jogositvanyszam;
 
-    public Szereles(){}
+    public Szereles(){
+        Logger.info("NoargC szereles meghivva");
+    }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   /*  public Szereles(String rendszam,LocalDate szerelesKezdete ) {
