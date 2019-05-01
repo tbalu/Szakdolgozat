@@ -21,7 +21,7 @@ public class Gepjarmu {
     private Tulajdonos tulajdonos;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gepjarmu")
     private List<Szereles> Szerelesek;
 
 

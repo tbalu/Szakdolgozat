@@ -114,4 +114,7 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
         }
 
     }
+    public void ujSzereles(Tulajdonos tulajdonos, Gepjarmu gepjarmu){
+
+    }
 }

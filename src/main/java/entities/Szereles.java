@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import entities.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -15,26 +12,27 @@ import javax.persistence.Table;
 public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Serializable {
 
     @Id
-    @Column(nullable = false)
-    private String Rendszam;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rendszam")
+    private Gepjarmu gepjarmu;
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, name = "szereles_kezdete")
     private LocalDate SzerelesKezdete;
 
-    @Column
+    @Column(name = "szereles_befejezese")
     private LocalDate SzerelesBefejezese;
 
-    @Column
+    @Column(name = "munkaveges_koltsege")
     private Integer MunkavegzesKoltsege;
 
-    private String Problema;
+   // private String Problema;
     //private String Jogositvanyszam;
 
     public Szereles(){}
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public Szereles(String rendszam,LocalDate szerelesKezdete ) {
+  /*  public Szereles(String rendszam,LocalDate szerelesKezdete ) {
         SzerelesKezdete = szerelesKezdete;
         Rendszam = rendszam;
         //Jogositvanyszam = jogositvanyszam;
@@ -43,13 +41,13 @@ public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Seriali
         this.Rendszam = rendszam;
         this.SzerelesKezdete = LocalDate.now();
     }
-
-    public Szereles(String rendszam, LocalDate szerelesKezdete, LocalDate szerelesBefejezese, Integer munkavegzesKoltsege, String problema) {
-        Rendszam = rendszam;
+*/
+    public Szereles(Gepjarmu gepjarmu, LocalDate szerelesKezdete, LocalDate szerelesBefejezese, Integer munkavegzesKoltsege) {
+        gepjarmu = gepjarmu;
         SzerelesKezdete = szerelesKezdete;
         SzerelesBefejezese = szerelesBefejezese;
         MunkavegzesKoltsege = munkavegzesKoltsege;
-        Problema = problema;
+
     }
 
     @Override
@@ -84,24 +82,15 @@ public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Seriali
     }
 
     @Override
-    public void setRendszam(String Rendszam) {
-        this.Rendszam = Rendszam;
+    public void setGepjarmu(Gepjarmu gepjarmu) {
+        this.gepjarmu = gepjarmu;
     }
 
     @Override
-    public String getRendszam() {
-        return this.Rendszam;
+    public Gepjarmu getGepjarmu() {
+        return this.gepjarmu;
     }
 
-    @Override
-    public void setProblema(String problema) {
-        this.Problema = problema;
-    }
-
-    @Override
-    public String getProblema() {
-        return this.Problema;
-    }
 
     @Override
     public String toString() {
@@ -109,8 +98,8 @@ public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Seriali
                 "SzerelesKezdete=" + SzerelesKezdete +
                 ", SzerelesBefejezese=" + SzerelesBefejezese +
                 ", MunkavegzesKoltsege=" + MunkavegzesKoltsege +
-                ", Rendszam='" + Rendszam + '\'' +
-                ", Problema='" + Problema + '\'' +
+                ", Rendszam='" + gepjarmu.getRendszam() + '\'' +
+
                 '}';
     }
 }
