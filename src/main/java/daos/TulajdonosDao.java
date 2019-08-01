@@ -17,7 +17,7 @@ import javax.persistence.RollbackException;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
+public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
 
     public TulajdonosDao(){
@@ -29,52 +29,21 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
 
     }
 
-
-    public void addGepjarmuvekhez(Gepjarmu gepjarmu, Tulajdonos tulajdonos) {
-        try {
-            this.addGepjarmuvekhezSeged(gepjarmu.getMarka(),gepjarmu.getRendszam(), tulajdonos.getJogositvanyszam());
-        }catch (ConstraintViolationException r){
-            Logger.info("Már van ilyen autó");
-            System.out.println("-----------------------------------------------------------------------------------");
+    public void ment(Tulajdonos tulajdonos){
+        Tulajdonos lekerdezettTulajdonos = this.getByJogositvanyszam(tulajdonos.getJogositvanyszam());
+        Logger.info(lekerdezettTulajdonos);
+        if(lekerdezettTulajdonos==null){
+            Logger.info("ifben");
+            this.persist(tulajdonos);
         }
-        catch(RollbackException r){
-            Logger.info("Mar van ilyen auto");
-        }
-    }
-        //valtoztatok
-    public void addGepjarmuvekhez(String Marka, String Rendszam, String TulajdonosJogositvanyszama) {
-        try {
-        this.addGepjarmuvekhezSeged(Marka,Rendszam,TulajdonosJogositvanyszama);
-    }catch (ConstraintViolationException r){
-        Logger.info("Már van ilyen autó");
-        System.out.println("-----------------------------------------------------------------------------------");
-        }
-        catch(RollbackException r){
-            Logger.info("Mar van ilyen auto");
+        else{
+            Logger.info("elseben");
+            this.entityManager.getTransaction().begin();
+            tulajdonos.setId(lekerdezettTulajdonos.getId());
+            this.entityManager.merge(tulajdonos);
+            this.entityManager.getTransaction().commit();
         }
     }
-    @Transactional
-    private void addGepjarmuvekhezSeged(String Marka, String Rendszam, String TulajdonosJogositvanyszama) throws ConstraintViolationException {
-
-            this.find(TulajdonosJogositvanyszama).ifPresent(c -> c.getGepjarmuvek().add(new Gepjarmu(Rendszam, Marka, null, c)));
-
-    }
-    @Transactional
-    public void addGepjarmuvekhezRossz(String Marka, String Rendszam, String TulajdonosJogositvanyszama){
-
-        this.find(TulajdonosJogositvanyszama).ifPresent(c -> c.getGepjarmuvek().add(new Gepjarmu(Rendszam, Marka, null, c)));
-
-    }/*
-    @Transactional
-    public void save(Tulajdonos t){
-        try{
-        super.persist(t);
-        }catch (ConstraintViolationException c){
-            Logger.info("Mar van ilyen kulcsu elem");
-        }catch (RollbackException r){
-            Logger.info("Mar van ilyen kulcsu elem");
-        }
-    }*/
 
     Tulajdonos getByJogositvanyszam(String jogositvanyszam){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);

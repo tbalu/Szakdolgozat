@@ -34,7 +34,7 @@ public class Tulajdonos {
 /*
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
     private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();*/
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
+    @OneToMany(/*cascade = CascadeType.ALL,*/ mappedBy = "tulajdonos")
     @ElementCollection
     private Set<Gepjarmu> Gepjarmuvek = new HashSet<>();
 

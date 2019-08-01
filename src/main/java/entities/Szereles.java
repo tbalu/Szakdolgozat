@@ -23,7 +23,7 @@ public class Szereles implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne //(cascade = CascadeType.ALL)
     @JoinColumn(name = "gepjarmu_id")
     private Gepjarmu gepjarmu;
 

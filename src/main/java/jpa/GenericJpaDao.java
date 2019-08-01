@@ -44,9 +44,11 @@ public abstract class GenericJpaDao<T> {
         }
     }
 
-    @Transactional
+
     private void persistSeged(T entity) throws RollbackException {
+        entityManager.getTransaction().begin();
         entityManager.persist(entity);
+        entityManager.getTransaction().commit();
     }
 
     @Transactional
