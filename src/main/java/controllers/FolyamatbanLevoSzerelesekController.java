@@ -66,7 +66,7 @@ public class FolyamatbanLevoSzerelesekController implements Initializable {
         Logger.info(KivalasztottSor);
 
         if(KivalasztottSor!=null)
-        SzerelesManager.getInstance().szerelesBefejezese(KivalasztottSor,Integer.valueOf(MunkavegzesKoltsege.getText()));
+        //SzerelesManager.getInstance().szerelesBefejezese(KivalasztottSor,Integer.valueOf(MunkavegzesKoltsege.getText()));
 
         FolyamatbanLevoSzerelesek.remove(KivalasztottSor);
         Logger.info(DataStore.getSzerelesek());

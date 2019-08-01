@@ -1,15 +1,18 @@
 package daos;
 
 import com.google.inject.persist.Transactional;
+import com.querydsl.core.Query;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import entities.Gepjarmu;
+import entities.QTulajdonos;
 import entities.Szereles;
 import entities.Tulajdonos;
 import jpa.GenericJpaDao;
 import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.query.criteria.internal.path.ListAttributeJoin;
 import org.pmw.tinylog.Logger;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,6 +22,11 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
 
     public TulajdonosDao(){
         super(Tulajdonos.class);
+    }
+    public TulajdonosDao(EntityManager entityManager){
+        super(Tulajdonos.class);
+        this.entityManager =entityManager;
+
     }
 
 
@@ -56,7 +64,7 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
 
         this.find(TulajdonosJogositvanyszama).ifPresent(c -> c.getGepjarmuvek().add(new Gepjarmu(Rendszam, Marka, null, c)));
 
-    }
+    }/*
     @Transactional
     public void save(Tulajdonos t){
         try{
@@ -66,7 +74,17 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
         }catch (RollbackException r){
             Logger.info("Mar van ilyen kulcsu elem");
         }
+    }*/
+
+    Tulajdonos getByJogositvanyszam(String jogositvanyszam){
+        JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);
+        QTulajdonos qTulajdonos = QTulajdonos.tulajdonos;
+        Tulajdonos tnev = queryFactory.selectFrom(qTulajdonos)
+                .where(qTulajdonos.Jogositvanyszam.eq(jogositvanyszam))
+                .fetchFirst();
+    return tnev;
     }
+
 
     public Optional<Tulajdonos> ffind(String kulcs){
         entityManager.getTransaction().begin();
@@ -122,11 +140,12 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
         szereles.setMunkavegzesKoltsege(34);
         gepjarmu.getSzerelesek().add(szereles);
         tulajdonos.getGepjarmuvek().add(gepjarmu);
+
         this.entityManager.getTransaction().begin();
         try{
             this.entityManager.persist(tulajdonos);
-            this.entityManager.persist(gepjarmu);
-        this.entityManager.persist(szereles);
+           /* this.entityManager.persist(gepjarmu);
+        this.entityManager.persist(szereles);*/
         }
         catch (EntityExistsException e){
             Logger.info("Ilyen entitas mar letezik");
@@ -140,5 +159,20 @@ public class TulajdonosDao extends GenericJpaDao<Tulajdonos> {
         catch (ConstraintViolationException c){
             Logger.info("Valamibol mar van");
         }
+
+    }
+    public void ujSzerelesPerfekt(Tulajdonos tulajdonos, Gepjarmu gepjarmu){
+        Optional<Tulajdonos> ujTulaj = this.ffind(tulajdonos.getJogositvanyszam());
+        if(!ujTulaj.isPresent()){
+            this.ujSzereles(tulajdonos,gepjarmu);
+        }
+        else{
+
+            gepjarmu.getSzerelesek().add(new Szereles(gepjarmu,LocalDate.now(),null,null));
+            ujTulaj.get().getGepjarmuvek().add(gepjarmu);
+            this.entityManager.getTransaction().begin();
+            this.entityManager.getTransaction().commit();
+        }
+
     }
 }

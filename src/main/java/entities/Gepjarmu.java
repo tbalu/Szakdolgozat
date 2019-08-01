@@ -9,6 +9,17 @@ import java.util.Set;
 public class Gepjarmu {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Column(name = "rendszam")
     private String Rendszam;
 
@@ -17,11 +28,12 @@ public class Gepjarmu {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tulajdonos_jogositvanyszama")
+    @JoinColumn(name = "tulajdonos_id")
     private Tulajdonos tulajdonos;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "gepjarmu")
+    @ElementCollection
     private Set<Szereles> Szerelesek;
 
 

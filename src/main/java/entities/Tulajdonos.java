@@ -12,6 +12,17 @@ import java.util.Set;
 public class Tulajdonos {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Column(name = "jogositvanyszam")
     private String Jogositvanyszam;
 
@@ -24,6 +35,7 @@ public class Tulajdonos {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
     private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();*/
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
+    @ElementCollection
     private Set<Gepjarmu> Gepjarmuvek = new HashSet<>();
 
     @Override

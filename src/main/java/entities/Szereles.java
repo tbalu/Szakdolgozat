@@ -9,14 +9,25 @@ import javax.persistence.*;
 
 
 @Entity
-public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Serializable {
+public class Szereles implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "gepjarmu_rendszam", nullable = false)
+    @JoinColumn(name = "gepjarmu_id")
     private Gepjarmu gepjarmu;
 
-    @Id
+
     @Column(nullable = false, name = "szereles_kezdete")
     private LocalDate SzerelesKezdete;
 
@@ -52,43 +63,43 @@ public class Szereles  implements SzerelesElkezdese, SzerelesBefejezese, Seriali
 
     }
 
-    @Override
+
     public void setSzerelesBefejezese(LocalDate BefejezesIdeje) {
         this.SzerelesBefejezese = BefejezesIdeje;
     }
 
-    @Override
+
     public LocalDate getSzerelesBefejezese() {
         return this.SzerelesBefejezese;
     }
 
-    @Override
+
     public void setMunkavegzesKoltsege(Integer MunkavegzesKoltsege) {
         this.MunkavegzesKoltsege = MunkavegzesKoltsege;
     }
 
 
-    @Override
+
     public Integer getMunkavegzesKoltsege() {
         return this.MunkavegzesKoltsege;
     }
 
-    @Override
+
     public void setSzerelesKezdete(LocalDate szerelesMegkezdese) {
         this.SzerelesKezdete = szerelesMegkezdese;
     }
 
-    @Override
+
     public LocalDate getSzerelesKezdete() {
         return this.SzerelesKezdete;
     }
 
-    @Override
+
     public void setGepjarmu(Gepjarmu gepjarmu) {
         this.gepjarmu = gepjarmu;
     }
 
-    @Override
+
     public Gepjarmu getGepjarmu() {
         return this.gepjarmu;
     }
