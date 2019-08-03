@@ -21,14 +21,18 @@ public abstract class BasicDao<T> {
         entityManager.getTransaction().commit();
     }
 
-    @Transactional
+
     public void remove(T entity) {
+        this.entityManager.getTransaction().begin();
         entityManager.remove(entity);
+        this.entityManager.getTransaction().commit();
     }
 
-    @Transactional
+
     public void update(T entity) {
+        this.entityManager.getTransaction().begin();
         entityManager.merge(entity);
+        this.entityManager.getTransaction().commit();
     }
 
 }

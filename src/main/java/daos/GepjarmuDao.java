@@ -14,10 +14,10 @@ public class GepjarmuDao extends BasicDao<Gepjarmu> {
         super(Gepjarmu.class);
         this.entityManager = entityManager;
     }
-    @Transactional
+    /*@Transactional
     public void addSzerelesekhez(Gepjarmu g, Szereles sz){
         g.getSzerelesek().add(sz);
-    }
+    }*/
 
     Gepjarmu getByRendszam(String rendszam){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);
@@ -27,6 +27,7 @@ public class GepjarmuDao extends BasicDao<Gepjarmu> {
                 .fetchFirst();
         return gnev;
     }
+
 
 }
 
