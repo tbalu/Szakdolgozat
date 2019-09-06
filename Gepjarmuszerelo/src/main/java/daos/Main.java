@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -62,12 +63,24 @@ public class Main {
 
     }
 
-    public static void addSzereles(GepjarmuDao gepjarmuDao){
-        Gepjarmu gepjarmu1 = gepjarmuDao.getByRendszam("ABC-123");
-        Gepjarmu gepjarmu2 = gepjarmuDao.getByRendszam("ABC-124");
+    public static void addSzereles(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao, SzerelesDao szerelesDao){
+        Gepjarmu gepjarmu = gepjarmuDao.getByRendszam("ABC-123");
+
+        Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
+        Szereles szereles = new Szereles(new Timestamp(10000)
+                ,new Timestamp(System.currentTimeMillis()),gepjarmu,tulajdonos,100000,32);
+
+        szerelesDao.persist(szereles);
 
         //Szereles szereles = new Szereles(LocalDate.now(),LocalDate.now());
 
+
+    }
+
+    public static void addAlkatresz(SzerelesDao szerelesDao, AlkatreszDao alkatreszDao){
+       // Szereles szereles = szerelesDao.
+
+       // Alkatresz alkatresz = new Alkatresz("Fluxus kondenzátor", "1234", 100000, )
 
     }
     public static void main(String[] args) throws SQLIntegrityConstraintViolationException {
@@ -77,8 +90,18 @@ public class Main {
 
         TulajdonosDao tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
         GepjarmuDao gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
+        SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
 
-        addLetezoGepjarmu(tulajdonosDao, gepjarmuDao);
+        addSzereles(tulajdonosDao, gepjarmuDao, szerelesDao);
+
+
+
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        Logger.info(timestamp);
+
+        //addLetezoGepjarmu(tulajdonosDao, gepjarmuDao);
 
         //addTulajdonosok(tulajdonosDao);
 
@@ -118,7 +141,7 @@ public class Main {
 
         tulajdonosDao.ment(t);
     }
-
+/*
     public static void elso(){
         // EntityManager létrehozása
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
@@ -161,7 +184,9 @@ public class Main {
 
     }
 
+*/
 
+/*
     public static void szerelesekLetrehozasa(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
         em = emf.createEntityManager();
@@ -183,7 +208,7 @@ public class Main {
         em.getTransaction().commit();
 
     }
-
+*/
 
 
 }

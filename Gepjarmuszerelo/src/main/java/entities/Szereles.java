@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import entities.*;
 import org.pmw.tinylog.Logger;
@@ -13,106 +14,83 @@ public class Szereles implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private Integer id;
 
-    public int getId() {
-        return id;
-    }
+    @Column(nullable = false, name = "szereles_kezdete")
+    private Timestamp szerelesKezdete;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(name = "szereles_vege")
+    private Timestamp szerelesVege;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "gepjarmu_id")
     private Gepjarmu gepjarmu;
 
-
-    @Column(nullable = false, name = "szereles_kezdete")
-    private LocalDate SzerelesKezdete;
-
-    @Column(name = "szereles_befejezese")
-    private LocalDate SzerelesBefejezese;
+    @OneToOne
+    @JoinColumn(name = "tulajdonos_id")
+    private Tulajdonos tulajdonos;
 
     @Column(name = "munkavegzes_koltsege")
-    private Integer MunkavegzesKoltsege;
+    private Integer munkavegzesKoltsege;
 
-   // private String Problema;
-    //private String Jogositvanyszam;
+    @Column(name = "munkaorak_szama")
+    private Integer munkaorakSzama;
 
-    public Szereles(){
-        Logger.info("NoargC szereles meghivva");
-    }
-
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  /*  public Szereles(String rendszam,LocalDate szerelesKezdete ) {
-        SzerelesKezdete = szerelesKezdete;
-        Rendszam = rendszam;
-        //Jogositvanyszam = jogositvanyszam;
-    }
-    public Szereles(String rendszam){
-        this.Rendszam = rendszam;
-        this.SzerelesKezdete = LocalDate.now();
-    }
-*/
-    public Szereles(Gepjarmu gepjarmu, LocalDate szerelesKezdete, LocalDate szerelesBefejezese, Integer munkavegzesKoltsege) {
+    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Tulajdonos tulajdonos,
+                    Integer munkavegzesKoltsege, Integer munkaorakSzama) {
+        this.szerelesKezdete = szerelesKezdete;
+        this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
-        SzerelesKezdete = szerelesKezdete;
-        SzerelesBefejezese = szerelesBefejezese;
-        MunkavegzesKoltsege = munkavegzesKoltsege;
-
+        this.tulajdonos = tulajdonos;
+        this.munkavegzesKoltsege = munkavegzesKoltsege;
+        this.munkaorakSzama = munkaorakSzama;
     }
 
-
-    public void setSzerelesBefejezese(LocalDate BefejezesIdeje) {
-        this.SzerelesBefejezese = BefejezesIdeje;
+    public Integer getId() {
+        return id;
     }
 
-
-    public LocalDate getSzerelesBefejezese() {
-        return this.SzerelesBefejezese;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-
-    public void setMunkavegzesKoltsege(Integer MunkavegzesKoltsege) {
-        this.MunkavegzesKoltsege = MunkavegzesKoltsege;
+    public Timestamp getSzerelesKezdete() {
+        return szerelesKezdete;
     }
 
-
-
-    public Integer getMunkavegzesKoltsege() {
-        return this.MunkavegzesKoltsege;
+    public void setSzerelesKezdete(Timestamp szerelesKezdete) {
+        this.szerelesKezdete = szerelesKezdete;
     }
 
-
-    public void setSzerelesKezdete(LocalDate szerelesMegkezdese) {
-        this.SzerelesKezdete = szerelesMegkezdese;
+    public Timestamp getSzerelesVege() {
+        return szerelesVege;
     }
 
-
-    public LocalDate getSzerelesKezdete() {
-        return this.SzerelesKezdete;
+    public void setSzerelesVege(Timestamp szerelesVege) {
+        this.szerelesVege = szerelesVege;
     }
 
+    public Gepjarmu getGepjarmu() {
+        return gepjarmu;
+    }
 
     public void setGepjarmu(Gepjarmu gepjarmu) {
         this.gepjarmu = gepjarmu;
     }
 
-
-    public Gepjarmu getGepjarmu() {
-        return this.gepjarmu;
+    public Tulajdonos getTulajdonos() {
+        return tulajdonos;
     }
 
+    public void setTulajdonos(Tulajdonos tulajdonos) {
+        this.tulajdonos = tulajdonos;
+    }
 
-    @Override
-    public String toString() {
-        return "Szereles{" +
-                "SzerelesKezdete=" + SzerelesKezdete +
-                ", SzerelesBefejezese=" + SzerelesBefejezese +
-                ", MunkavegzesKoltsege=" + MunkavegzesKoltsege +
-                ", Rendszam='" + gepjarmu.getRendszam() + '\'' +
+    public Integer getMunkavegzesKoltsege() {
+        return munkavegzesKoltsege;
+    }
 
-                '}';
+    public void setMunkavegzesKoltsege(Integer munkavegzesKoltsege) {
+        this.munkavegzesKoltsege = munkavegzesKoltsege;
     }
 }

@@ -1,10 +1,6 @@
 package controllers;
 
-import datastore.DataStore;
-import entities.BefejezendoSzereles;
 import entities.Szereles;
-import entitymanager.SzerelesManager;
-import guidemo.Person;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +34,7 @@ public class FolyamatbanLevoSzerelesekController implements Initializable {
         RendszamOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,String>("Rendszam"));
         MunkavegzesKezdeteOszlop.setCellValueFactory(new PropertyValueFactory<Szereles, LocalDate>("SzerelesKezdete"));
 
-        FolyamatbanLevoSzerelesekTablaNezet.setItems(DataStore.getBefejezetlenSzerelesek());
+        //FolyamatbanLevoSzerelesekTablaNezet.setItems(DataStore.getBefejezetlenSzerelesek());
 
         FolyamatbanLevoSzerelesekTablaNezet.setEditable(true);
         RendszamOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -69,6 +65,6 @@ public class FolyamatbanLevoSzerelesekController implements Initializable {
         //SzerelesManager.getInstance().szerelesBefejezese(KivalasztottSor,Integer.valueOf(MunkavegzesKoltsege.getText()));
 
         FolyamatbanLevoSzerelesek.remove(KivalasztottSor);
-        Logger.info(DataStore.getSzerelesek());
+        //Logger.info(DataStore.getSzerelesek());
     }
 }

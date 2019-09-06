@@ -32,7 +32,7 @@ public class Gepjarmu {
     private Tulajdonos tulajdonos;
 
 
-    @OneToMany(/*cascade = CascadeType.ALL,*/ mappedBy = "gepjarmu")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gepjarmu")
     @ElementCollection
     private Set<Szereles> Szerelesek;
 

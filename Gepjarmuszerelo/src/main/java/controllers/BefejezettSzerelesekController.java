@@ -1,10 +1,6 @@
 package controllers;
 
-import datastore.DataStore;
 import entities.Szereles;
-import entitymanager.StatisztikaManager;
-import entitymanager.SzerelesManager;
-import guidemo.Person;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,7 +9,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -33,7 +28,7 @@ public class BefejezettSzerelesekController implements Initializable {
         SzerelesVegeOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,LocalDate>("SzerelesBefejezese"));
         ArOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,Integer>("MunkavegzesKoltsege"));
 
-        BefejezettSzerelesekTablaNezet.setItems(SzerelesManager.getInstance().getBefejezettSzerelesek());
+        //BefejezettSzerelesekTablaNezet.setItems(SzerelesManager.getInstance().getBefejezettSzerelesek());
 
         BefejezettSzerelesekTablaNezet.setEditable(true);
         RendszamOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -47,19 +42,19 @@ public class BefejezettSzerelesekController implements Initializable {
         maibevetel.ifPresent(c->MaiBevetel.setText(c.toString()));*/
 
         LocalDate most = LocalDate.now();
+        /*
         Optional<Integer> ehavibevetel = StatisztikaManager.getInstance()
                 .bevetelEkkor(LocalDate.of(most.getYear(),most.getMonth(),1).minusDays(1),
                         LocalDate.of(most.getYear(),most.getMonth().getValue(),most.lengthOfMonth()));
         Optional<Integer> ezevibevetel = StatisztikaManager.getInstance()
                 .bevetelEkkor(LocalDate.of(most.getYear()-1,12,31)
                         ,LocalDate.of(most.getYear()+1, 1,1));
-        //Optional<Integer> ezevibevetel = StatisztikaManager.getInstance().ezEviBevetel();
-        //Optional<Integer> maibevetel = StatisztikaManager.getInstance().maiBevetel();
+
         Optional<Integer> maibevetel = StatisztikaManager.getInstance()
                 .bevetelEkkor(LocalDate.now().minusDays(1),LocalDate.now().plusDays(1));
         ehavibevetel.ifPresent(c->EHaviBevetel.setText(c.toString()));
         ezevibevetel.ifPresent(c->EzEviBevetel.setText(c.toString()));
-        maibevetel.ifPresent(c->MaiBevetel.setText(c.toString()));
+        maibevetel.ifPresent(c->MaiBevetel.setText(c.toString()));*/
 
 
 

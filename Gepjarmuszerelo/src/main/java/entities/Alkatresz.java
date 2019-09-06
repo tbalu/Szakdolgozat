@@ -3,25 +3,28 @@ package entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "alkatresz")
 public class Alkatresz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, name = "nev")
+    @Column(name = "nev")
     private String nev;
-    @Column(nullable = false, name = "ar")
+
+    @Column(name = "vonalkod")
+    private String vonalkod;
+
+    @Column(name = "ar")
     private Integer ar;
 
-    public Alkatresz(){
+    private Szereles szereles;
 
-    }
-
-    public Alkatresz(String nev, Integer ar) {
+    public Alkatresz(String nev, String vonalkod, Integer ar, Szereles szereles) {
         this.nev = nev;
+        this.vonalkod = vonalkod;
         this.ar = ar;
+        this.szereles = szereles;
     }
 
     public Integer getId() {
@@ -40,11 +43,27 @@ public class Alkatresz {
         this.nev = nev;
     }
 
+    public String getVonalkod() {
+        return vonalkod;
+    }
+
+    public void setVonalkod(String vonalkod) {
+        this.vonalkod = vonalkod;
+    }
+
     public Integer getAr() {
         return ar;
     }
 
     public void setAr(Integer ar) {
         this.ar = ar;
+    }
+
+    public Szereles getGepjarmu() {
+        return szereles;
+    }
+
+    public void setGepjarmu(Szereles szereles) {
+        this.szereles = szereles;
     }
 }
