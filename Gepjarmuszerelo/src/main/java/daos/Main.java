@@ -61,6 +61,15 @@ public class Main {
         }
 
     }
+
+    public static void addSzereles(GepjarmuDao gepjarmuDao){
+        Gepjarmu gepjarmu1 = gepjarmuDao.getByRendszam("ABC-123");
+        Gepjarmu gepjarmu2 = gepjarmuDao.getByRendszam("ABC-124");
+
+        //Szereles szereles = new Szereles(LocalDate.now(),LocalDate.now());
+
+
+    }
     public static void main(String[] args) throws SQLIntegrityConstraintViolationException {
 
 
