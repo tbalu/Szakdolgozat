@@ -17,6 +17,7 @@ import javax.persistence.RollbackException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
@@ -52,7 +53,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);
         QTulajdonos qTulajdonos = QTulajdonos.tulajdonos;
         Tulajdonos tnev = queryFactory.selectFrom(qTulajdonos)
-                .where(qTulajdonos.Jogositvanyszam.eq(jogositvanyszam))
+                .where(qTulajdonos.jogositvanyszam.eq(jogositvanyszam))
                 .fetchFirst();
     return tnev;
     }
@@ -64,7 +65,13 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
     }
 
+    public List<String> getAllJogositvanyszam(){
 
+        return this.getAll().stream().map(Tulajdonos::getJogositvanyszam).collect(Collectors.toList());
+
+    }
+
+    /*
     public Optional<Tulajdonos> ffind(String kulcs){
         entityManager.getTransaction().begin();
         Optional<Tulajdonos> t  = Optional.ofNullable(entityManager.find(Tulajdonos.class,kulcs));
@@ -72,7 +79,8 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
         Logger.info(t);
         return t;
     }
-
+        */
+    /*
     public void tulajdonostMent(Tulajdonos tulajdonos){
         if(this.entityManager.getTransaction().isActive()){
         this.entityManager.getTransaction().begin();}
@@ -92,7 +100,8 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
             Logger.info("Mar van ilyen kulcsu objektum");
         }
     }
-
+*/
+    /*
     public void ujTulajEsGepjarmu(Tulajdonos tulajdonos, Gepjarmu gepjarmu ){
         tulajdonos.getGepjarmuvek().add(gepjarmu);
         this.entityManager.getTransaction().begin();
@@ -112,7 +121,8 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
             Logger.info("Valamibol mar van");
         }
 
-    }
+    }*/
+    /*
     public void ujSzereles(Tulajdonos tulajdonos, Gepjarmu gepjarmu){
         Szereles szereles = new Szereles();
         szereles.setSzerelesKezdete(LocalDate.now());
@@ -123,8 +133,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
         this.entityManager.getTransaction().begin();
         try{
             this.entityManager.persist(tulajdonos);
-           /* this.entityManager.persist(gepjarmu);
-        this.entityManager.persist(szereles);*/
+
         }
         catch (EntityExistsException e){
             Logger.info("Ilyen entitas mar letezik");
@@ -140,6 +149,9 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
         }
 
     }
+
+     */
+    /*
     public void ujSzerelesPerfekt(Tulajdonos tulajdonos, Gepjarmu gepjarmu){
         Optional<Tulajdonos> ujTulaj = this.ffind(tulajdonos.getJogositvanyszam());
         if(!ujTulaj.isPresent()){
@@ -153,5 +165,5 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
             this.entityManager.getTransaction().commit();
         }
 
-    }
+    }*/
 }

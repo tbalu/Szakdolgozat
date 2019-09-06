@@ -21,13 +21,13 @@ public class Gepjarmu {
     }
 
     @Column(name = "rendszam")
-    private String Rendszam;
+    private String rendszam;
 
     @Column(name = "marka")
-    private String Marka;
+    private String marka;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "tulajdonos_id")
     private Tulajdonos tulajdonos;
 
@@ -42,15 +42,15 @@ public class Gepjarmu {
         Logger.info("Noarg gepjarmu");
     }
     public Gepjarmu(String marka, String rendszam, Tulajdonos tulajdonos) {
-        Marka = marka;
-        Rendszam = rendszam;
+        this.marka = marka;
+        this.rendszam = rendszam;
         this.tulajdonos = tulajdonos;
 
     }
 
     public Gepjarmu(String rendszam, String marka, Set<Szereles> szerelesek, Tulajdonos tulajdonos) {
-        Rendszam = rendszam;
-        Marka = marka;
+        this.rendszam = rendszam;
+        this.marka = marka;
         Szerelesek = new HashSet<>();
         this.tulajdonos = tulajdonos;
     }
@@ -72,26 +72,26 @@ public class Gepjarmu {
     }
 
     public String getMarka() {
-        return Marka;
+        return marka;
     }
 
     public void setMarka(String marka) {
-        Marka = marka;
+        this.marka = marka;
     }
 
     public String getRendszam() {
-        return Rendszam;
+        return rendszam;
     }
 
     public void setRendszam(String rendszam) {
-        Rendszam = rendszam;
+        this.rendszam = rendszam;
     }
 
     @Override
     public String toString() {
         return "Gepjarmu{" +
-                "Marka='" + Marka + '\'' +
-                ", Rendszam='" + Rendszam + '\'' +
+                "marka='" + marka + '\'' +
+                ", rendszam='" + rendszam + '\'' +
                 ", Tulajdonos='" + tulajdonos.getNev() + '\'' +
                 '}';
     }

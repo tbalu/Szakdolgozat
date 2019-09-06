@@ -1,23 +1,85 @@
 package daos;
 
 import entities.*;
+import org.pmw.tinylog.Logger;
+import view.MainAppClass;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Main {
     private static EntityManager em;
 
+    private static void setUp(){
+        EntityManagerCreator.emf = Persistence.createEntityManagerFactory("test");
+
+    }
+
+    public static void autoComplete(TulajdonosDao tulajdonosDao){
+        List<String> jogositvanyszamok = tulajdonosDao.getAllJogositvanyszam();
+        Logger.info(jogositvanyszamok.toString());
+    }
+
+    public static void addTulajdonosok(TulajdonosDao tulajdonosDao){
+        Tulajdonos tulajdonos1 = new Tulajdonos("1235","Tóth János","Debrecen", null);
+        Tulajdonos tulajdonos2 = new Tulajdonos("1236","Szathmári Edit","Debrecen", null);
+
+        tulajdonosDao.ment(tulajdonos1);
+        tulajdonosDao.ment(tulajdonos2);
+
+    }
+
+    public static void addGepjarmuvek(TulajdonosDao tulajdonosDao){
+        Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
+        Gepjarmu gepjarmu = new Gepjarmu("Tesla", "ABC-123", tulajdonos);
+        tulajdonos.getGepjarmuvek().add(gepjarmu);
+        tulajdonosDao.ment(tulajdonos);
+    }
+
+    public static void addGepjarmu(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao){
+        Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
+        Gepjarmu gepjarmu = new Gepjarmu("BMW", "ABC-124", tulajdonos);
+        gepjarmuDao.persist(gepjarmu);
+
+
+    }
+
+    public static void addLetezoGepjarmu(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao){
+        Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
+        Gepjarmu gepjarmu = new Gepjarmu("Audi", "ABC-124", tulajdonos);
+        if(gepjarmuDao.isExist(gepjarmu)){
+            Integer id  =  gepjarmuDao.getByRendszam(gepjarmu.getRendszam()).getId();
+            gepjarmu.setId(id);
+            gepjarmuDao.update(gepjarmu);
+        }
+
+    }
     public static void main(String[] args) throws SQLIntegrityConstraintViolationException {
 
+
+        setUp();
+
+        TulajdonosDao tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
+        GepjarmuDao gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
+
+        addLetezoGepjarmu(tulajdonosDao, gepjarmuDao);
+
+        //addTulajdonosok(tulajdonosDao);
+
+        //addGepjarmu(tulajdonosDao, gepjarmuDao);
+
+        //addGepjarmuvek(tulajdonosDao);
+        //autoComplete(tulajdonosDao);
         //elso();
         //szerelesekLetrehozasa();
-        tulajdonosGepjarmuvek();
+        //tulajdonosGepjarmuvek();
 
 
 

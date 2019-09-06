@@ -19,13 +19,21 @@ public class GepjarmuDao extends BasicDao<Gepjarmu> {
         g.getSzerelesek().add(sz);
     }*/
 
-    Gepjarmu getByRendszam(String rendszam){
+    public Gepjarmu getByRendszam(String rendszam){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);
         QGepjarmu qGepjarmu = QGepjarmu.gepjarmu;
         Gepjarmu gnev = queryFactory.selectFrom(qGepjarmu)
-                .where(qGepjarmu.Rendszam.eq(rendszam))
+                .where(qGepjarmu.rendszam.eq(rendszam))
                 .fetchFirst();
         return gnev;
+    }
+
+    public boolean isExist(Gepjarmu gepjarmu){
+        if(getByRendszam(gepjarmu.getRendszam()) != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
