@@ -18,6 +18,8 @@ public class Alkatresz {
     @Column(name = "ar")
     private Integer ar;
 
+    @ManyToOne
+    @JoinColumn(name = "szereles_id")
     private Szereles szereles;
 
     public Alkatresz(String nev, String vonalkod, Integer ar, Szereles szereles) {

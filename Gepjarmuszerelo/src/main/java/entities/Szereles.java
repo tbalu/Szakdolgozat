@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Set;
+
 import entities.*;
 import org.pmw.tinylog.Logger;
 
@@ -36,14 +38,19 @@ public class Szereles implements Serializable {
     @Column(name = "munkaorak_szama")
     private Integer munkaorakSzama;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles")
+    @ElementCollection
+    private Set<Alkatresz> alkatreszek;
+
     public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Tulajdonos tulajdonos,
-                    Integer munkavegzesKoltsege, Integer munkaorakSzama) {
+                    Integer munkavegzesKoltsege, Integer munkaorakSzama, Set<Alkatresz> alkatreszek) {
         this.szerelesKezdete = szerelesKezdete;
         this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
         this.tulajdonos = tulajdonos;
         this.munkavegzesKoltsege = munkavegzesKoltsege;
         this.munkaorakSzama = munkaorakSzama;
+        this.alkatreszek = alkatreszek;
     }
 
     public Integer getId() {
@@ -92,5 +99,21 @@ public class Szereles implements Serializable {
 
     public void setMunkavegzesKoltsege(Integer munkavegzesKoltsege) {
         this.munkavegzesKoltsege = munkavegzesKoltsege;
+    }
+
+    public Integer getMunkaorakSzama() {
+        return munkaorakSzama;
+    }
+
+    public void setMunkaorakSzama(Integer munkaorakSzama) {
+        this.munkaorakSzama = munkaorakSzama;
+    }
+
+    public Set<Alkatresz> getAlkatreszek() {
+        return alkatreszek;
+    }
+
+    public void setAlkatreszek(Set<Alkatresz> alkatreszek) {
+        this.alkatreszek = alkatreszek;
     }
 }

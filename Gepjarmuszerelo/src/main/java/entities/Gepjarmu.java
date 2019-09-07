@@ -27,7 +27,7 @@ public class Gepjarmu {
     private String marka;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tulajdonos_id")
     private Tulajdonos tulajdonos;
 

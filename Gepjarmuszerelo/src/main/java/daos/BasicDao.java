@@ -35,4 +35,9 @@ public abstract class BasicDao<T> {
         this.entityManager.getTransaction().commit();
     }
 
+    public T getById(Object id){
+
+        return this.entityManager.find(entityClass,id);
+
+    }
 }

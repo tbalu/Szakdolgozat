@@ -7,13 +7,12 @@ import view.MainAppClass;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.io.Serializable;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Main {
     private static EntityManager em;
@@ -54,7 +53,7 @@ public class Main {
 
     public static void addLetezoGepjarmu(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao){
         Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
-        Gepjarmu gepjarmu = new Gepjarmu("Audi", "ABC-124", tulajdonos);
+        Gepjarmu gepjarmu = new Gepjarmu("Aston Martin", "ABC-124", tulajdonos);
         if(gepjarmuDao.isExist(gepjarmu)){
             Integer id  =  gepjarmuDao.getByRendszam(gepjarmu.getRendszam()).getId();
             gepjarmu.setId(id);
@@ -68,7 +67,7 @@ public class Main {
 
         Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
         Szereles szereles = new Szereles(new Timestamp(10000)
-                ,new Timestamp(System.currentTimeMillis()),gepjarmu,tulajdonos,100000,32);
+                ,new Timestamp(System.currentTimeMillis()),gepjarmu,tulajdonos,100000,32, null);
 
         szerelesDao.persist(szereles);
 
@@ -82,7 +81,41 @@ public class Main {
 
        // Alkatresz alkatresz = new Alkatresz("Fluxus kondenzátor", "1234", 100000, )
 
+
+
     }
+
+    public static void localDateTimeExp(){
+
+        LocalDateTime now = LocalDateTime.now();
+        Logger.info(now);
+
+    }
+
+    public static void szerelesAlkatreszekel(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao,SzerelesDao szerelesDao, AlkatreszDao alkatreszDao){
+
+        Gepjarmu gepjarmu = gepjarmuDao.getByRendszam("ABC-123");
+
+        Szereles szereles = new Szereles(new Timestamp(100000), new Timestamp(System.currentTimeMillis()),gepjarmu, gepjarmu.getTulajdonos()
+                ,1000000,32, null);
+
+
+        Alkatresz alkatresz1 = new Alkatresz("Fluxus kondenzátor", "1234", 25000,szereles);
+        Alkatresz alkatresz2 = new Alkatresz("Teligumi szett", "1234", 25000,szereles);
+
+        Set<Alkatresz> alkatreszek = new HashSet<>();
+        alkatreszek.add(alkatresz1);
+        alkatreszek.add(alkatresz2);
+
+
+        szereles.setAlkatreszek(alkatreszek);
+
+        szerelesDao.persist(szereles);
+
+
+    }
+
+
     public static void main(String[] args) throws SQLIntegrityConstraintViolationException {
 
 
@@ -91,11 +124,20 @@ public class Main {
         TulajdonosDao tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
         GepjarmuDao gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
         SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
+        AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
 
-        addSzereles(tulajdonosDao, gepjarmuDao, szerelesDao);
+        Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
+        Iterator iterator = tulajdonos.getGepjarmuvek().iterator();
+        Gepjarmu gepjarmu = (Gepjarmu) iterator.next();
+        Gepjarmu gepjarmu2 = (Gepjarmu) iterator.next();
+        Logger.info(gepjarmu2.getMarka());
 
 
+        //addLetezoGepjarmu(tulajdonosDao, gepjarmuDao);
+        //addSzereles(tulajdonosDao, gepjarmuDao, szerelesDao);
+        //szerelesAlkatreszekel(tulajdonosDao,gepjarmuDao,szerelesDao,alkatreszDao);
 
+        localDateTimeExp();
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
