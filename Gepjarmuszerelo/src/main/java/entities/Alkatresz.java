@@ -18,7 +18,7 @@ public class Alkatresz {
     @Column(name = "ar")
     private Integer ar;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "szereles_id")
     private Szereles szereles;
 
@@ -28,6 +28,8 @@ public class Alkatresz {
         this.ar = ar;
         this.szereles = szereles;
     }
+
+    public Alkatresz(){}
 
     public Integer getId() {
         return id;

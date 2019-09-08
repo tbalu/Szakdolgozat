@@ -32,7 +32,7 @@ public class Tulajdonos {
 /*
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
     private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();*/
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tulajdonos", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "tulajdonos", fetch = FetchType.LAZY)
     private Set<Gepjarmu> Gepjarmuvek = new HashSet<>();
 
     @Override

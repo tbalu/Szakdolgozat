@@ -1,22 +1,14 @@
 package daos;
 
-import com.google.inject.persist.Transactional;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import entities.Gepjarmu;
 import entities.QTulajdonos;
-import entities.Szereles;
 import entities.Tulajdonos;
-import jpa.GenericJpaDao;
-import org.hibernate.exception.ConstraintViolationException;
 import org.pmw.tinylog.Logger;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
-import java.time.LocalDate;
+import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TulajdonosDao extends BasicDao<Tulajdonos> {
@@ -27,7 +19,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
     }
     public TulajdonosDao(EntityManager entityManager){
         super(Tulajdonos.class);
-        this.entityManager =entityManager;
+        this.em =entityManager;
 
     }
 
@@ -42,15 +34,15 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
         }
         else{
             Logger.info("elseben");
-            this.entityManager.getTransaction().begin();
+            this.em.getTransaction().begin();
             tulajdonos.setId(lekerdezettTulajdonos.getId());
-            this.entityManager.merge(tulajdonos);
-            this.entityManager.getTransaction().commit();
+            this.em.merge(tulajdonos);
+            this.em.getTransaction().commit();
         }
     }
 
     Tulajdonos getByJogositvanyszam(String jogositvanyszam){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);
+        JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
         QTulajdonos qTulajdonos = QTulajdonos.tulajdonos;
         Tulajdonos tnev = queryFactory.selectFrom(qTulajdonos)
                 .where(qTulajdonos.jogositvanyszam.eq(jogositvanyszam))
@@ -60,16 +52,39 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
     public List<Tulajdonos> getAll(){
 
-        Query query = this.entityManager.createQuery("from Tulajdonos T");
+        Query query = this.em.createQuery("from Tulajdonos T");
         return query.getResultList();
 
     }
 
     public List<String> getAllJogositvanyszam(){
 
-        return this.getAll().stream().map(Tulajdonos::getJogositvanyszam).collect(Collectors.toList());
+        //return this.getAll().stream().map(Tulajdonos::getJogositvanyszam).collect(Collectors.toList());
+
+        Query query = em.createQuery(
+                "select i.jogositvanyszam from Tulajdonos i");
+        return query.getResultList();
+    }
+
+    public List<String> getAllNev(){
+
+        //return this.getAll().stream().map(Tulajdonos::getJogositvanyszam).collect(Collectors.toList());
+
+        Query query = em.createQuery(
+                "select i.nev from Tulajdonos i");
+        return query.getResultList();
+    }
+
+    public List<Tulajdonos> getByNev(String nev){
+
+        Query query = em.createQuery(
+                "select t from Tulajdonos t where t.nev = :nev"
+        ).setParameter("nev", nev);
+
+        return query.getResultList();
 
     }
+
 
     /* TODO  teszt*/
 

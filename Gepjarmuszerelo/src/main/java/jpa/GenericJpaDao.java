@@ -37,7 +37,7 @@ public abstract class GenericJpaDao<T> {
 
     public void persistUj(T entity) {
         try{
-        //entityManager.persist(entity);
+        //em.persist(entity);
         persistSeged(entity);
         }catch (RollbackException c){
             System.out.println("Már van ilyen kulcsú objektum");

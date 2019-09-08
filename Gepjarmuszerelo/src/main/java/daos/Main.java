@@ -2,15 +2,13 @@ package daos;
 
 import entities.*;
 import org.pmw.tinylog.Logger;
-import view.MainAppClass;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.io.Serializable;
+import javax.persistence.PersistenceUtil;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -116,6 +114,22 @@ public class Main {
     }
 
 
+    public static void lazyIniitEx(TulajdonosDao tulajdonosDao){
+
+        Tulajdonos tulajdonos = tulajdonosDao.getById(7);
+
+        tulajdonosDao.em.detach(tulajdonos);
+        PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
+        Logger.info("Betoltotte? " + persistenceUtil.isLoaded(tulajdonos, "gepjarmuvek"));
+
+        Gepjarmu gepjarmu = tulajdonos.getGepjarmuvek().stream().findFirst().get();
+
+
+
+
+        Logger.info(gepjarmu.getMarka());
+    }
+
     public static void main(String[] args) throws SQLIntegrityConstraintViolationException {
 
 
@@ -126,37 +140,17 @@ public class Main {
         SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
         AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
 
-        Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
-        Iterator iterator = tulajdonos.getGepjarmuvek().iterator();
-        Gepjarmu gepjarmu = (Gepjarmu) iterator.next();
-        Gepjarmu gepjarmu2 = (Gepjarmu) iterator.next();
-        Logger.info(gepjarmu2.getMarka());
 
 
-        //addLetezoGepjarmu(tulajdonosDao, gepjarmuDao);
-        //addSzereles(tulajdonosDao, gepjarmuDao, szerelesDao);
-        //szerelesAlkatreszekel(tulajdonosDao,gepjarmuDao,szerelesDao,alkatreszDao);
+        Logger.info(tulajdonosDao.getAllJogositvanyszam());
+        Logger.info(tulajdonosDao.getAllNev());
 
-        localDateTimeExp();
+        tulajdonosDao.persist(
+                new Tulajdonos("1237", "Tóth Balázs","Debrecen",null));
 
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-        Logger.info(timestamp);
-
-        //addLetezoGepjarmu(tulajdonosDao, gepjarmuDao);
-
-        //addTulajdonosok(tulajdonosDao);
-
-        //addGepjarmu(tulajdonosDao, gepjarmuDao);
-
-        //addGepjarmuvek(tulajdonosDao);
-        //autoComplete(tulajdonosDao);
-        //elso();
-        //szerelesekLetrehozasa();
-        //tulajdonosGepjarmuvek();
-
-
-
+        PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
+        Logger.info("Betoltotte? " + persistenceUtil
+                .isLoaded(tulajdonosDao.getByNev("Tóth Balázs").get(0), "gepjarmuvek"));
 
 
     }

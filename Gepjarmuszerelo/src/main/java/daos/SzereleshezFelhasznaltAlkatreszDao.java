@@ -11,7 +11,7 @@ public class SzereleshezFelhasznaltAlkatreszDao extends BasicDao<SzereleshezHasz
 
     public SzereleshezFelhasznaltAlkatreszDao(EntityManager em){
         super(SzereleshezHasznaltAlkatresz.class);
-        this.entityManager = em;
+        this.em = em;
     }
 /*
     public SzereleshezHasznaltAlkatresz update(SzereleshezHasznaltAlkatresz szereleshezHasznaltAlkatresz){
@@ -19,7 +19,7 @@ public class SzereleshezFelhasznaltAlkatreszDao extends BasicDao<SzereleshezHasz
     }*/
 
     public boolean isLetezik(SzereleshezHasznaltAlkatresz szereleshezHasznaltAlkatresz){
-        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(this.entityManager);
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(this.em);
         QSzereleshezHasznaltAlkatresz qSzereleshezHasznaltAlkatresz = QSzereleshezHasznaltAlkatresz.szereleshezHasznaltAlkatresz;
         List<SzereleshezHasznaltAlkatresz> res = jpaQueryFactory.selectFrom(qSzereleshezHasznaltAlkatresz).
                 where(qSzereleshezHasznaltAlkatresz.szereles.eq(szereleshezHasznaltAlkatresz.getSzereles()).and(

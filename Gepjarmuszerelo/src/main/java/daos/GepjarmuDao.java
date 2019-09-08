@@ -1,18 +1,18 @@
 package daos;
 
-import com.google.inject.persist.Transactional;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import entities.*;
 import entities.QGepjarmu;
-import jpa.GenericJpaDao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 public class GepjarmuDao extends BasicDao<Gepjarmu> {
 
     public GepjarmuDao(EntityManager entityManager){
         super(Gepjarmu.class);
-        this.entityManager = entityManager;
+        this.em = entityManager;
     }
     /*@Transactional
     public void addSzerelesekhez(Gepjarmu g, Szereles sz){
@@ -20,7 +20,7 @@ public class GepjarmuDao extends BasicDao<Gepjarmu> {
     }*/
 
     public Gepjarmu getByRendszam(String rendszam){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);
+        JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
         QGepjarmu qGepjarmu = QGepjarmu.gepjarmu;
         Gepjarmu gnev = queryFactory.selectFrom(qGepjarmu)
                 .where(qGepjarmu.rendszam.eq(rendszam))
@@ -36,6 +36,11 @@ public class GepjarmuDao extends BasicDao<Gepjarmu> {
         }
     }
 
+    /*
+    public List<Gepjarmu> getByTulajdonosId(Integer id){
+        Query query = this.em.createQuery("select g from Gepjarmu where g.tulajdonos = id").setParameter("id", id);
+        return query.getResultList();
+    }*/
 
 }
 

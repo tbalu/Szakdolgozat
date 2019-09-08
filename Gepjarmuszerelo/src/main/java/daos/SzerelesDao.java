@@ -1,7 +1,6 @@
 package daos;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import entities.QGepjarmu;
 import entities.QSzereles;
 import entities.Szereles;
 
@@ -12,11 +11,11 @@ public class SzerelesDao extends BasicDao<Szereles> {
 
         SzerelesDao(EntityManager em){
             super(Szereles.class);
-            this.entityManager = em;
+            this.em = em;
         }
 
         public List<Szereles> befejezetlenSzerelesek(){
-            JPAQueryFactory queryFactory = new JPAQueryFactory(this.entityManager);
+            JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
             QSzereles qSzereles = QSzereles.szereles;
             return queryFactory.selectFrom(qSzereles).where(qSzereles.szerelesVege.isNull()).fetch();
     }

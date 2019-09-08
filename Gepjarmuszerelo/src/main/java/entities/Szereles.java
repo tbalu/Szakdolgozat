@@ -24,11 +24,11 @@ public class Szereles implements Serializable {
     @Column(name = "szereles_vege")
     private Timestamp szerelesVege;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gepjarmu_id")
     private Gepjarmu gepjarmu;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tulajdonos_id")
     private Tulajdonos tulajdonos;
 
@@ -38,9 +38,10 @@ public class Szereles implements Serializable {
     @Column(name = "munkaorak_szama")
     private Integer munkaorakSzama;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles")
-    @ElementCollection
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles", fetch = FetchType.LAZY)
     private Set<Alkatresz> alkatreszek;
+
+    public Szereles(){}
 
     public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Tulajdonos tulajdonos,
                     Integer munkavegzesKoltsege, Integer munkaorakSzama, Set<Alkatresz> alkatreszek) {
@@ -115,5 +116,19 @@ public class Szereles implements Serializable {
 
     public void setAlkatreszek(Set<Alkatresz> alkatreszek) {
         this.alkatreszek = alkatreszek;
+    }
+
+    @Override
+    public String toString() {
+        return "Szereles{" +
+                "id=" + id +
+                ", szerelesKezdete=" + szerelesKezdete +
+                ", szerelesVege=" + szerelesVege +
+                ", gepjarmu=" + gepjarmu +
+                ", tulajdonos=" + tulajdonos +
+                ", munkavegzesKoltsege=" + munkavegzesKoltsege +
+                ", munkaorakSzama=" + munkaorakSzama +
+                ", alkatreszek=" + alkatreszek +
+                '}';
     }
 }
