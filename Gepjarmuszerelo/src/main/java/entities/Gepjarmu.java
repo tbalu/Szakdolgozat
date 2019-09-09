@@ -2,7 +2,9 @@ package entities;
 
 import org.pmw.tinylog.Logger;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,7 +35,7 @@ public class Gepjarmu {
 
 
     @OneToMany(mappedBy = "gepjarmu", fetch = FetchType.LAZY)
-    private Set<Szereles> Szerelesek;
+    private List<Szereles> szerelesek;
 
 
 
@@ -50,16 +52,16 @@ public class Gepjarmu {
     public Gepjarmu(String rendszam, String marka, Set<Szereles> szerelesek, Tulajdonos tulajdonos) {
         this.rendszam = rendszam;
         this.marka = marka;
-        Szerelesek = new HashSet<>();
+        this.szerelesek = new ArrayList<>();
         this.tulajdonos = tulajdonos;
     }
 
-    public Set<Szereles> getSzerelesek() {
-        return Szerelesek;
+    public List<Szereles> getSzerelesek() {
+        return szerelesek;
     }
 
-    public void setSzerelesek(Set<Szereles> szerelesek) {
-        Szerelesek = szerelesek;
+    public void setSzerelesek(List<Szereles> szerelesek) {
+        this.szerelesek = szerelesek;
     }
 
     public entities.Tulajdonos getTulajdonos() {

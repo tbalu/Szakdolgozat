@@ -8,15 +8,15 @@ import entities.Tulajdonos;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.hibernate.Hibernate;
 import org.pmw.tinylog.Logger;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class TulajdonosGepjarmuveiController implements Initializable {
 
@@ -28,30 +28,62 @@ public class TulajdonosGepjarmuveiController implements Initializable {
     @FXML
     private Label tul;
 
-    private Integer tulajdonosId;
-    GepjarmuDao gepjarmuDao;
+    @FXML
+    private TextField markaTextField;
 
+    @FXML
+    private TextField rendszamTextField;
+
+    private Integer tulajdonosId;
+    private GepjarmuDao gepjarmuDao;
+    private TulajdonosDao tulajdonosDao;
+
+    private Tulajdonos tulajdonos;
+
+    private List<Gepjarmu> gepjarmuvek;
+
+    /*
     public void initData(Integer id){
         this.tulajdonosId = id;
         Logger.info("inticializálták az id-met");
         this.tul.setText(this.tulajdonosId.toString());
         this.gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
-        //Logger.info(gepjarmuDao.getByTulajdonosId(id));
+        this.tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
 
-    }
+        Tulajdonos tulajdonos = this.tulajdonosDao.getEm().getReference(Tulajdonos.class, id);
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        tulajdonos.getGepjarmuvek();
 
-        Logger.info("A kivalasztott tulajdonos id-ja: " + this.tulajdonosId);
+
+    }*/
+
+
+    public void initData(Tulajdonos tulajdonos){
+
+        this.tulajdonos = tulajdonos;
         markaOszlop.setCellValueFactory(new PropertyValueFactory<Gepjarmu, String>("marka"));
         rendszamOszlop.setCellValueFactory(new PropertyValueFactory<Gepjarmu, String>("rendszam"));
 
+        this.gepjarmuvek = tulajdonos.getGepjarmuvek();
+        gepjarmuTabla.setItems(FXCollections.observableArrayList(this.gepjarmuvek));
+        gepjarmuTabla.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
         this.gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
 
-        gepjarmuTabla.setItems(FXCollections.observableArrayList(gepjarmuDao.findAll()));
-        gepjarmuTabla.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
 
+    public void ujGepjarmuPushed(){
+
+
+        Gepjarmu gepjarmu = new Gepjarmu(this.markaTextField.getText(), this.rendszamTextField.getText(), this.tulajdonos);
+        Logger.info("mentés előtt: " + gepjarmu);
+        this.gepjarmuDao.persist(gepjarmu);
+        Logger.info("mentés után: " + gepjarmu);
+        this.gepjarmuvek.add(gepjarmu);
+        this.gepjarmuTabla.setItems(FXCollections.observableArrayList(this.gepjarmuvek));
     }
 }

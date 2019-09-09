@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import entities.*;
@@ -39,12 +40,12 @@ public class Szereles implements Serializable {
     private Integer munkaorakSzama;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles", fetch = FetchType.LAZY)
-    private Set<Alkatresz> alkatreszek;
+    private List<Alkatresz> alkatreszek;
 
     public Szereles(){}
 
     public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Tulajdonos tulajdonos,
-                    Integer munkavegzesKoltsege, Integer munkaorakSzama, Set<Alkatresz> alkatreszek) {
+                    Integer munkavegzesKoltsege, Integer munkaorakSzama, List<Alkatresz> alkatreszek) {
         this.szerelesKezdete = szerelesKezdete;
         this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
@@ -110,11 +111,11 @@ public class Szereles implements Serializable {
         this.munkaorakSzama = munkaorakSzama;
     }
 
-    public Set<Alkatresz> getAlkatreszek() {
+    public List<Alkatresz> getAlkatreszek() {
         return alkatreszek;
     }
 
-    public void setAlkatreszek(Set<Alkatresz> alkatreszek) {
+    public void setAlkatreszek(List<Alkatresz> alkatreszek) {
         this.alkatreszek = alkatreszek;
     }
 

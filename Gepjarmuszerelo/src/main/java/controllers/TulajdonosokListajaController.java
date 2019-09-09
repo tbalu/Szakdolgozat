@@ -1,7 +1,9 @@
 package controllers;
 
 import daos.EntityManagerCreator;
+import daos.GepjarmuDao;
 import daos.TulajdonosDao;
+import entities.Gepjarmu;
 import entities.Tulajdonos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -23,6 +25,8 @@ import org.pmw.tinylog.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TulajdonosokListajaController implements Initializable {
@@ -32,36 +36,76 @@ public class TulajdonosokListajaController implements Initializable {
     @FXML private TableColumn<Tulajdonos,String> nevOszlop;
     @FXML private TableColumn<Tulajdonos, String> lakcimOszlop;
 
-    @FXML private TextField nevTextField;
+    @FXML private TableView<Gepjarmu> gepjarmuTabla;
+    @FXML private TableColumn<Gepjarmu,String> markaOszlop;
+    @FXML private TableColumn<Gepjarmu,String> rendszamOszlop;
 
-    TulajdonosDao tulajdonosDao;
+    @FXML private TextField markaTextField;
+    @FXML private TextField rendszamTextField;
+
+    @FXML private TextField jogositvanyszamTextField;
+    @FXML private TextField nevTextField;
+    @FXML private TextField lakcimTextField;
+
+
+    @FXML private TextField keresettNevTextField;
+
+    private TulajdonosDao tulajdonosDao;
+    private GepjarmuDao gepjarmuDao;
+
+    private List<Tulajdonos> tulajdonosok;
+    private List<Gepjarmu> gepjarmuvek;
+
+    private Tulajdonos kivalasztottTulajdonos;
+    private Gepjarmu gepjarmu;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //AutoMarkajaOszlop.setCellValueFactory(new PropertyValueFactory<Szereles,String>("AutoMarkaja"));
-        jogositvanyOszlop.setCellValueFactory(new PropertyValueFactory<>("jogositvanyszam"));
-        nevOszlop.setCellValueFactory(new PropertyValueFactory<Tulajdonos, String>("nev"));
-        lakcimOszlop.setCellValueFactory(new PropertyValueFactory<Tulajdonos, String>("lakcim"));
 
 
-        this.tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
 
-        tulajdonosTabla.setItems(FXCollections.observableArrayList(tulajdonosDao.getAll()));
-        tulajdonosTabla.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        /*
-        FolyamatbanLevoSzerelesekTablaNezet.setEditable(true);
-        RendszamOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
-        */
-        //lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        //MunkavegzesKezdeteOszlop.setCellFactory(TextFieldTableCell.forTableColumn());
-    /*
-        FolyamatbanLevoSzerelesekTablaNezet.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-  */
+        markaOszlop.setCellValueFactory(new PropertyValueFactory<Gepjarmu, String>("marka"));
+        rendszamOszlop.setCellValueFactory(new PropertyValueFactory<Gepjarmu, String>("rendszam"));
+
+
+        this.setDaok();
+
+        this.setTulajdonosTablaOszlopai();
+        this.tulajdonosok = new ArrayList<>();
+
+        this.tulajdonosok = this.tulajdonosDao.findAll();
+        this.setTulajdonosTablaErtekei(this.tulajdonosok);
+
+        this.gepjarmuvek = new ArrayList<>();
+
+
+
+
     }
 
+
+    private void setTulajdonosTablaOszlopai(){
+
+        this.jogositvanyOszlop.setCellValueFactory(new PropertyValueFactory<Tulajdonos, String>("jogositvanyszam"));
+        this.nevOszlop.setCellValueFactory(new PropertyValueFactory<Tulajdonos, String>("nev"));
+        this.lakcimOszlop.setCellValueFactory(new PropertyValueFactory<Tulajdonos, String>("lakcim"));
+
+    }
+
+    private void setTulajdonosTablaErtekei(List<Tulajdonos> tulajdonosok){
+
+        this.tulajdonosTabla.setItems(FXCollections.observableArrayList(tulajdonosok));
+        this.tulajdonosTabla.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+    }
+    private void setDaok(){
+
+        this.tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
+        this.gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
+    }
     public void keresButtonPushed(){
 
-        String nev = this.nevTextField.getText();
+        String nev = this.keresettNevTextField.getText();
         Logger.info("Erre a névre keres rá a felhasználó: " +nev);
         if(nev.equals("")){
             Logger.info("Az összes tulajdonos lekérdezése.");
@@ -72,6 +116,35 @@ public class TulajdonosokListajaController implements Initializable {
         }
     }
 
+    private void scenetValt(){
+
+
+
+    }
+
+
+    private void setKivalasztottTulajdonos(){
+
+        this.kivalasztottTulajdonos = this.tulajdonosTabla.getSelectionModel().getSelectedItem();
+
+    }
+
+    public void gepjarmuveiButtonPushed(){
+        this.setKivalasztottTulajdonos();
+        this.setGepjarmuTabla();
+
+
+    }
+
+    private void setGepjarmuTabla(){
+
+        //List<Gepjarmu> gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
+        this.setGepjarmuvek();
+        if(this.gepjarmuvek != null) {
+            this.gepjarmuTabla.setItems(FXCollections.observableArrayList(this.gepjarmuvek));
+        }
+    }
+    /*
     public void gepjarmuveiButtonPushed(ActionEvent event) throws IOException{
 
         Tulajdonos kivalasztottTulajdonos = tulajdonosTabla.getSelectionModel().getSelectedItem();
@@ -81,20 +154,18 @@ public class TulajdonosokListajaController implements Initializable {
 
 
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("resources/TulajdonosGepjarmuvei.fxml"));
+                .getResource("TulajdonosGepjarmuvei.fxml"));
         loader.setLocation(FXMLLoader.getDefaultClassLoader()
                 .getResource("TulajdonosGepjarmuvei.fxml"));
         Parent root = loader.load();
         TulajdonosGepjarmuveiController controller = loader.getController();
 
-        controller.initData(kivalasztottTulajdonos.getId());
 
 
+        controller.initData(kivalasztottTulajdonos);
+        Logger.info("kivalasztott tulajdonost átadtam " + kivalasztottTulajdonos);
 
-        /*
-        URL url = FXMLLoader.getDefaultClassLoader()
-                .getResource("TulajdonosGepjarmuvei.fxml");
-        Parent tableViewParent = FXMLLoader.load(url);*/
+
         Scene tableViewScene = new Scene(root);
 
 
@@ -103,7 +174,7 @@ public class TulajdonosokListajaController implements Initializable {
         window.setScene(tableViewScene);
         window.show();
     }
-
+*/
     public void visszaazUjSzerelesekFelvetelehezPushed(ActionEvent event) throws IOException {
         //URL url = Paths.get("target/classes/TulajdonosEsAutoAdatai.fxml").toUri().toURL();
         URL url = FXMLLoader.getDefaultClassLoader().getResource("TulajdonosEsAutoAdatai.fxml");
@@ -114,5 +185,45 @@ public class TulajdonosokListajaController implements Initializable {
 
         window.setScene(tableViewScene);
         window.show();
+    }
+
+    public void ujGepjarmuPushed(){
+
+        this.kivalasztottTulajdonos = tulajdonosTabla.getSelectionModel().getSelectedItem();
+        Gepjarmu gepjarmu = new Gepjarmu(this.markaTextField.getText(), this.rendszamTextField.getText(), this.kivalasztottTulajdonos);
+        Logger.info("mentés előtt: " + gepjarmu);
+        this.gepjarmuDao.persist(gepjarmu);
+        Logger.info("mentés után: " + gepjarmu);
+        this.gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
+        this.gepjarmuvek.add(gepjarmu);
+        this.gepjarmuTabla.setItems(FXCollections.observableArrayList(this.gepjarmuvek));
+    }
+
+    private void setTulajdonosok(){
+
+
+
+
+    }
+
+    private Tulajdonos buildTulajdonos(){
+        return new Tulajdonos(this.jogositvanyszamTextField.getText(),this.nevTextField.getText(),
+                this.lakcimTextField.getText() ,null);
+    }
+
+    public void ujTulajdonosPushed(){
+
+        Tulajdonos tulajdonos = buildTulajdonos();
+        this.tulajdonosDao.persist(tulajdonos);
+        this.tulajdonosok.add(tulajdonos);
+        this.tulajdonosTabla.setItems(FXCollections.observableArrayList(this.tulajdonosok));
+
+    }
+
+    private void setGepjarmuvek(){
+
+        this.gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
+
+
     }
 }

@@ -3,7 +3,9 @@ package entities;
 import org.pmw.tinylog.Logger;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,7 +35,7 @@ public class Tulajdonos {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "tulajdonos")
     private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();*/
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "tulajdonos", fetch = FetchType.LAZY)
-    private Set<Gepjarmu> Gepjarmuvek = new HashSet<>();
+    private List<Gepjarmu> Gepjarmuvek = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -51,7 +53,7 @@ public class Tulajdonos {
 
     }
 
-    public Tulajdonos(String jogositvanyszam, String nev, String lakcim, Set<Gepjarmu> gepjarmuvek) {
+    public Tulajdonos(String jogositvanyszam, String nev, String lakcim, List<Gepjarmu> gepjarmuvek) {
         this.jogositvanyszam = jogositvanyszam;
         this.nev = nev;
         this.lakcim = lakcim;
@@ -60,11 +62,11 @@ public class Tulajdonos {
     public Tulajdonos(){
         Logger.info("Noarg Tu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
-    public Set<Gepjarmu> getGepjarmuvek() {
+    public List<Gepjarmu> getGepjarmuvek() {
         return Gepjarmuvek;
     }
 
-    public void setGepjarmuvek(Set<Gepjarmu> gepjarmuvek) {
+    public void setGepjarmuvek(List<Gepjarmu> gepjarmuvek) {
         Gepjarmuvek = gepjarmuvek;
     }
 

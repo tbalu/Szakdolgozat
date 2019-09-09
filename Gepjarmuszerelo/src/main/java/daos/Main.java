@@ -101,7 +101,7 @@ public class Main {
         Alkatresz alkatresz1 = new Alkatresz("Fluxus kondenzátor", "1234", 25000,szereles);
         Alkatresz alkatresz2 = new Alkatresz("Teligumi szett", "1234", 25000,szereles);
 
-        Set<Alkatresz> alkatreszek = new HashSet<>();
+        List<Alkatresz> alkatreszek = new ArrayList<>();
         alkatreszek.add(alkatresz1);
         alkatreszek.add(alkatresz2);
 
@@ -114,7 +114,7 @@ public class Main {
     }
 
 
-    public static void lazyIniitEx(TulajdonosDao tulajdonosDao){
+    public static void lazyInitEx(TulajdonosDao tulajdonosDao){
 
         Tulajdonos tulajdonos = tulajdonosDao.getById(7);
 
@@ -133,6 +133,15 @@ public class Main {
     public static void main(String[] args) throws SQLIntegrityConstraintViolationException {
 
 
+        Class<Tulajdonos> c = Tulajdonos.class;
+
+        Object o = new Object();
+
+        Tulajdonos tulajdonos = c.cast(o);
+
+        tulajdonos.setNev("Alma");
+        Logger.info("Tulajdonos" + tulajdonos);
+/*
         setUp();
 
         TulajdonosDao tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
@@ -145,12 +154,23 @@ public class Main {
         Logger.info(tulajdonosDao.getAllJogositvanyszam());
         Logger.info(tulajdonosDao.getAllNev());
 
+
+
+        Tulajdonos tulajdonos = tulajdonosDao.getById(7);
+        PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
+        Logger.info("Betoltotte? " + persistenceUtil
+                .isLoaded(tulajdonos, "gepjarmuvek"));
+
+
+        Logger.info(tulajdonos.getGepjarmuvek());
+*/
+        /*
         tulajdonosDao.persist(
                 new Tulajdonos("1237", "Tóth Balázs","Debrecen",null));
 
         PersistenceUtil persistenceUtil = Persistence.getPersistenceUtil();
         Logger.info("Betoltotte? " + persistenceUtil
-                .isLoaded(tulajdonosDao.getByNev("Tóth Balázs").get(0), "gepjarmuvek"));
+                .isLoaded(tulajdonosDao.getByNev("Tóth Balázs").get(0), "gepjarmuvek"));*/
 
 
     }
@@ -168,7 +188,7 @@ public class Main {
         Gepjarmu g3 = new Gepjarmu("3","Tesla",null,t);
 
         // gepjarmuSet feltoltese
-        Set<Gepjarmu> gepjarmuSet = new HashSet<Gepjarmu>();
+        List<Gepjarmu> gepjarmuSet = new ArrayList<>();
         gepjarmuSet.add(g1);
         gepjarmuSet.add(g2);
         gepjarmuSet.add(g3);

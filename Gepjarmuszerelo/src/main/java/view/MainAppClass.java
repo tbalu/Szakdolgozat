@@ -31,7 +31,7 @@ public class MainAppClass extends Application {
         //Parent root = FXMLLoader.load(url);
         //Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 1200, 900));
         primaryStage.show();
     }
 
