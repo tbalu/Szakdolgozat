@@ -244,6 +244,7 @@ public class TulajdonosokListajaController implements Initializable {
     public void ujTulajdonosPushed(){
 
         Tulajdonos tulajdonos = buildTulajdonos();
+        tulajdonos.setId(null);
         this.tulajdonosDao.persist(tulajdonos);
         this.tulajdonosok.add(tulajdonos);
         this.tulajdonosTabla.setItems(FXCollections.observableArrayList(this.tulajdonosok));
