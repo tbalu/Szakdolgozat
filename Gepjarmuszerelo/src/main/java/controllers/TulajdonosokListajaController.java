@@ -126,6 +126,7 @@ public class TulajdonosokListajaController implements Initializable {
     private void setKivalasztottTulajdonos(){
 
         this.kivalasztottTulajdonos = this.tulajdonosTabla.getSelectionModel().getSelectedItem();
+        Logger.info(this.kivalasztottTulajdonos);
 
     }
 
@@ -142,6 +143,9 @@ public class TulajdonosokListajaController implements Initializable {
         this.setGepjarmuvek();
         if(this.gepjarmuvek != null) {
             this.gepjarmuTabla.setItems(FXCollections.observableArrayList(this.gepjarmuvek));
+        }
+        else{
+            this.gepjarmuTabla.setItems(FXCollections.observableArrayList((new ArrayList<>())));
         }
     }
     /*
@@ -194,9 +198,35 @@ public class TulajdonosokListajaController implements Initializable {
         Logger.info("mentés előtt: " + gepjarmu);
         this.gepjarmuDao.persist(gepjarmu);
         Logger.info("mentés után: " + gepjarmu);
-        this.gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
-        this.gepjarmuvek.add(gepjarmu);
+
+
+        //this.gepjarmuTabla.setItems(FXCollections.observableArrayList(this.kivalasztottTulajdonos.getGepjarmuvek()));
+
+        if(this.kivalasztottTulajdonos.getGepjarmuvek()!=null) {
+            this.kivalasztottTulajdonos.getGepjarmuvek().add(gepjarmu);
+
+            Logger.info("Nem nulla a gepjarmu listaja");
+
+            this.gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
+           // this.gepjarmuvek.add(gepjarmu);
+        }
+        else {
+            Logger.info("nulla a gepjarmuvek listaja");
+            this.gepjarmuvek = new ArrayList<>();
+            this.kivalasztottTulajdonos.setGepjarmuvek(new ArrayList<>());
+            this.kivalasztottTulajdonos.getGepjarmuvek().add(gepjarmu);
+
+            this.gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
+
+        }
+
         this.gepjarmuTabla.setItems(FXCollections.observableArrayList(this.gepjarmuvek));
+
+
+        //this.kivalasztottTulajdonos.getGepjarmuvek().add(gepjarmu);
+
+
+       // this.tulajdonosDao.update(this.kivalasztottTulajdonos);
     }
 
     private void setTulajdonosok(){
@@ -222,8 +252,16 @@ public class TulajdonosokListajaController implements Initializable {
 
     private void setGepjarmuvek(){
 
-        this.gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
+        this.gepjarmuvek = new ArrayList<>();
+        if(this.kivalasztottTulajdonos.getGepjarmuvek()!=null) {
+            for(Gepjarmu gepjarmu: this.kivalasztottTulajdonos.getGepjarmuvek()) {
+                this.gepjarmuvek.add(gepjarmuDao.getById(gepjarmu.getId()));
 
-
+                //this.gepjarmuvek = this.kivalasztottTulajdonos.getGepjarmuvek();
+            }
+        }
+        else {
+            this.gepjarmuvek = new ArrayList<>();
+        }
     }
 }

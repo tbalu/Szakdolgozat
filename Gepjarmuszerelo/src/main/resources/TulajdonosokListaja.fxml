@@ -56,19 +56,19 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label" />
+                  <Label text="Név:" />
                   <TextField fx:id="nevTextField" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label" />
+                  <Label text="Jogositványszám:" />
                   <TextField fx:id="jogositvanyszamTextField" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label" />
+                  <Label text="Lakcím" />
                   <TextField fx:id="lakcimTextField" />
                </children>
             </HBox>
