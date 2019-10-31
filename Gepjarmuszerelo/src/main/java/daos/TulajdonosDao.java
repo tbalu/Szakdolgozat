@@ -86,6 +86,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
     }
 
 
+
     /* TODO  teszt*/
 
     //public List<>

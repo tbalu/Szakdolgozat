@@ -15,10 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.pmw.tinylog.Logger;
@@ -50,6 +47,8 @@ public class TulajdonosokListajaController implements Initializable {
 
     @FXML private TextField keresettNevTextField;
 
+    @FXML private ContextMenu tulajdonosTorleseGomb;
+
     private TulajdonosDao tulajdonosDao;
     private GepjarmuDao gepjarmuDao;
 
@@ -73,8 +72,11 @@ public class TulajdonosokListajaController implements Initializable {
         this.setTulajdonosTablaOszlopai();
         this.tulajdonosok = new ArrayList<>();
 
+        /*
         this.tulajdonosok = this.tulajdonosDao.findAll();
-        this.setTulajdonosTablaErtekei(this.tulajdonosok);
+        this.setTulajdonosTablaErtekei(this.tulajdonosok);*/
+
+        this.setTulajdonosTablaMindenTulajdonossal();
 
         this.gepjarmuvek = new ArrayList<>();
 
@@ -83,6 +85,10 @@ public class TulajdonosokListajaController implements Initializable {
 
     }
 
+    private void setTulajdonosTablaMindenTulajdonossal(){
+        this.tulajdonosok = this.tulajdonosDao.findAll();
+        this.setTulajdonosTablaErtekei(this.tulajdonosok);
+    }
 
     private void setTulajdonosTablaOszlopai(){
 
@@ -254,7 +260,7 @@ public class TulajdonosokListajaController implements Initializable {
     private void setGepjarmuvek(){
 
         this.gepjarmuvek = new ArrayList<>();
-        if(this.kivalasztottTulajdonos.getGepjarmuvek()!=null) {
+        if(this.kivalasztottTulajdonos!=null && this.kivalasztottTulajdonos.getGepjarmuvek()!=null) {
             for(Gepjarmu gepjarmu: this.kivalasztottTulajdonos.getGepjarmuvek()) {
                 this.gepjarmuvek.add(gepjarmuDao.getById(gepjarmu.getId()));
 
@@ -264,5 +270,20 @@ public class TulajdonosokListajaController implements Initializable {
         else {
             this.gepjarmuvek = new ArrayList<>();
         }
+    }
+
+    public void tulajdonosTorlesePushed(){
+
+        Tulajdonos tulajdonos = this.tulajdonosTabla.getSelectionModel().getSelectedItem();
+
+        for(Gepjarmu gepjarmu: tulajdonos.getGepjarmuvek()){
+            this.gepjarmuDao.remove(this.gepjarmuDao.getById(gepjarmu.getId()));
+        }
+
+        this.tulajdonosDao.remove(tulajdonos);
+
+        this.setGepjarmuTabla();
+        //this.setTulajdonosTablaOszlopai();
+        this.setTulajdonosTablaMindenTulajdonossal();
     }
 }
