@@ -59,7 +59,7 @@ public class Main {
         }
 
     }*/
-
+/*
     public static void addSzereles(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao, SzerelesDao szerelesDao){
         Gepjarmu gepjarmu = gepjarmuDao.getByRendszam("ABC-123");
 
@@ -72,7 +72,7 @@ public class Main {
         //Szereles szereles = new Szereles(LocalDate.now(),LocalDate.now());
 
 
-    }
+    }*/
 
     public static void addAlkatresz(SzerelesDao szerelesDao, AlkatreszDao alkatreszDao){
        // Szereles szereles = szerelesDao.
@@ -89,7 +89,7 @@ public class Main {
         Logger.info(now);
 
     }
-
+/*
     public static void szerelesAlkatreszekel(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao,SzerelesDao szerelesDao, AlkatreszDao alkatreszDao){
 
         Gepjarmu gepjarmu = gepjarmuDao.getByRendszam("ABC-123");
@@ -111,7 +111,7 @@ public class Main {
         szerelesDao.persist(szereles);
 
 
-    }
+    }*/
 
 
     public static void lazyInitEx(TulajdonosDao tulajdonosDao){

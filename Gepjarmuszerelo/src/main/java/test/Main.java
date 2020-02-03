@@ -1,10 +1,7 @@
 package test;
 
 import daos.*;
-import entities.GarancialisAlkatresz;
-import entities.GarancialisAlkatreszTipus;
-import entities.GarancialisJavitas;
-import entities.Javitas;
+import entities.*;
 
 import javax.persistence.Persistence;
 
@@ -18,14 +15,29 @@ public class Main {
     public static void main(String[] args){
 
     setUp();
-    javitasteszt2();
+    alkatreszteszt();
+    }
+
+    public static void alkatreszteszt(){
+
+        AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
+        JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
+        OsJavitas javitas = new Javitas("xyz",12000);
+        OsJavitas garancialisJavitas = new GarancialisJavitas("cba",200000,36);
+        OsAlkatresz alkatresz = new Alkatresz("fluxus kondenzátor",2234,200000,javitas);
+
+        javitasDao.persist(garancialisJavitas);
+        javitasDao.persist(javitas);
+        alkatreszDao.persist(alkatresz);
+
+
     }
 
     public static void javitasteszt2(){
 
         JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
-        Javitas javitas = new Javitas("xyz",12000);
-        GarancialisJavitas garancialisJavitas = new GarancialisJavitas("cba",200000,36);
+        OsJavitas javitas = new Javitas("xyz",12000);
+        OsJavitas garancialisJavitas = new GarancialisJavitas("cba",200000,36);
 
         javitasDao.persist(garancialisJavitas);
         javitasDao.persist(javitas);

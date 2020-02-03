@@ -47,8 +47,11 @@ public class Szereles implements Serializable {
 
     //private List<GarancialisJavitas> garancialisJavitasok;
 
+    /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles", fetch = FetchType.LAZY)
     private List<Alkatresz> alkatreszek;
+    */
+
 
    // private List<OsJavitas> javitasok;
 
@@ -56,14 +59,14 @@ public class Szereles implements Serializable {
     public Szereles(){}
 
     public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Tulajdonos tulajdonos,
-                    Integer munkavegzesKoltsege, Integer munkaorakSzama, List<Alkatresz> alkatreszek) {
+                    Integer munkavegzesKoltsege) {
         this.szerelesKezdete = szerelesKezdete;
         this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
         this.tulajdonos = tulajdonos;
         this.munkavegzesKoltsege = munkavegzesKoltsege;
         //this.munkaorakSzama = munkaorakSzama;
-        this.alkatreszek = alkatreszek;
+      //  this.alkatreszek = alkatreszek;
     }
 
     public Integer getId() {
@@ -123,13 +126,7 @@ public class Szereles implements Serializable {
         this.munkaorakSzama = munkaorakSzama;
     }*/
 
-    public List<Alkatresz> getAlkatreszek() {
-        return alkatreszek;
-    }
 
-    public void setAlkatreszek(List<Alkatresz> alkatreszek) {
-        this.alkatreszek = alkatreszek;
-    }
 
     @Override
     public String toString() {
@@ -141,7 +138,7 @@ public class Szereles implements Serializable {
                 ", tulajdonos=" + tulajdonos +
                 ", munkavegzesKoltsege=" + munkavegzesKoltsege +
                // ", munkaorakSzama=" + munkaorakSzama +
-                ", alkatreszek=" + alkatreszek +
+               // ", alkatreszek=" + alkatreszek +
                 '}';
     }
 }

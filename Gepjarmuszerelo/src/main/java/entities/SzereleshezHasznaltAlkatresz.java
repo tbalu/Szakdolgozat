@@ -4,9 +4,9 @@ import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.util.Set;
-
+/*
 @Entity
-@Table(name = "szerelesekhez_hasznalt_alkatresz")
+@Table(name = "szerelesekhez_hasznalt_alkatresz")*/
 public class SzereleshezHasznaltAlkatresz implements Serializable {
 
     @Id

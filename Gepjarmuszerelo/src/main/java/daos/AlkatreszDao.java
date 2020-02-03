@@ -1,13 +1,13 @@
 package daos;
 
-import entities.Alkatresz;
+import entities.OsAlkatresz;
 
 import javax.persistence.EntityManager;
 
-public class AlkatreszDao extends BasicDao<Alkatresz> {
+public  class AlkatreszDao extends BasicDao<OsAlkatresz> {
 
     public AlkatreszDao(EntityManager em) {
-        super(Alkatresz.class);
+        super(OsAlkatresz.class);
         this.em = em;
     }
 

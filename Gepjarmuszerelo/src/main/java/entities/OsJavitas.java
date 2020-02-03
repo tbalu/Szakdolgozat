@@ -20,6 +20,13 @@ public abstract class OsJavitas {
     private String leiras;
     @Column(name = "ar")
     private Integer ar;
+
+    //---------------
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "javitas", fetch = FetchType.LAZY)
+    private List<OsAlkatresz> alkatreszek;
+
+    //---------------
   /*
     private List<Alkatresz> alkatreszek;
     private List<GarancialisAlkatresz> garancialisAlkatreszek;
