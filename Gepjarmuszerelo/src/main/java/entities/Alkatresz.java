@@ -12,8 +12,8 @@ public class Alkatresz {
     @Column(name = "nev")
     private String nev;
 
-    @Column(name = "vonalkod")
-    private String vonalkod;
+    @Column(name = "cikk_szam")
+    private String cikkSzam;
 
     @Column(name = "ar")
     private Integer ar;
@@ -22,9 +22,9 @@ public class Alkatresz {
     @JoinColumn(name = "szereles_id")
     private Szereles szereles;
 
-    public Alkatresz(String nev, String vonalkod, Integer ar, Szereles szereles) {
+    public Alkatresz(String nev, String cikkSzam, Integer ar, Szereles szereles) {
         this.nev = nev;
-        this.vonalkod = vonalkod;
+        this.cikkSzam = cikkSzam;
         this.ar = ar;
         this.szereles = szereles;
     }
@@ -47,12 +47,12 @@ public class Alkatresz {
         this.nev = nev;
     }
 
-    public String getVonalkod() {
-        return vonalkod;
+    public String getCikkSzam() {
+        return cikkSzam;
     }
 
-    public void setVonalkod(String vonalkod) {
-        this.vonalkod = vonalkod;
+    public void setCikkSzam(String cikkSzam) {
+        this.cikkSzam = cikkSzam;
     }
 
     public Integer getAr() {

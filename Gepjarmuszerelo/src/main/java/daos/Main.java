@@ -48,7 +48,7 @@ public class Main {
 
 
     }
-
+/*
     public static void addLetezoGepjarmu(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao){
         Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
         Gepjarmu gepjarmu = new Gepjarmu("Aston Martin", "ABC-124", tulajdonos);
@@ -58,7 +58,7 @@ public class Main {
             gepjarmuDao.update(gepjarmu);
         }
 
-    }
+    }*/
 
     public static void addSzereles(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao, SzerelesDao szerelesDao){
         Gepjarmu gepjarmu = gepjarmuDao.getByRendszam("ABC-123");
@@ -127,7 +127,7 @@ public class Main {
 
 
 
-        Logger.info(gepjarmu.getMarka());
+        Logger.info(gepjarmu.getTipus());
     }
 
     public static void main(String[] args) throws SQLIntegrityConstraintViolationException {

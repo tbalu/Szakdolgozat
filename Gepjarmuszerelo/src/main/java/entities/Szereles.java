@@ -36,11 +36,22 @@ public class Szereles implements Serializable {
     @Column(name = "munkavegzes_koltsege")
     private Integer munkavegzesKoltsege;
 
+    /*
     @Column(name = "munkaorak_szama")
-    private Integer munkaorakSzama;
+    private Integer munkaorakSzama;*/
+/*
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles", fetch = FetchType.LAZY)
+    private List<Alkatresz> alkatreszek;
+*/
+    //private List<GarancialisAlkatresz> garancialisAlkatreszek;
+
+    //private List<GarancialisJavitas> garancialisJavitasok;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles", fetch = FetchType.LAZY)
     private List<Alkatresz> alkatreszek;
+
+   // private List<OsJavitas> javitasok;
+
 
     public Szereles(){}
 
@@ -51,7 +62,7 @@ public class Szereles implements Serializable {
         this.gepjarmu = gepjarmu;
         this.tulajdonos = tulajdonos;
         this.munkavegzesKoltsege = munkavegzesKoltsege;
-        this.munkaorakSzama = munkaorakSzama;
+        //this.munkaorakSzama = munkaorakSzama;
         this.alkatreszek = alkatreszek;
     }
 
@@ -103,13 +114,14 @@ public class Szereles implements Serializable {
         this.munkavegzesKoltsege = munkavegzesKoltsege;
     }
 
+    /*
     public Integer getMunkaorakSzama() {
         return munkaorakSzama;
     }
 
     public void setMunkaorakSzama(Integer munkaorakSzama) {
         this.munkaorakSzama = munkaorakSzama;
-    }
+    }*/
 
     public List<Alkatresz> getAlkatreszek() {
         return alkatreszek;
@@ -128,7 +140,7 @@ public class Szereles implements Serializable {
                 ", gepjarmu=" + gepjarmu +
                 ", tulajdonos=" + tulajdonos +
                 ", munkavegzesKoltsege=" + munkavegzesKoltsege +
-                ", munkaorakSzama=" + munkaorakSzama +
+               // ", munkaorakSzama=" + munkaorakSzama +
                 ", alkatreszek=" + alkatreszek +
                 '}';
     }

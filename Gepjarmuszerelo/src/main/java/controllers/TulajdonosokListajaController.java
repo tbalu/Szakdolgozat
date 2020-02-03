@@ -1,5 +1,6 @@
 package controllers;
 
+import com.sun.javafx.image.IntPixelGetter;
 import daos.EntityManagerCreator;
 import daos.GepjarmuDao;
 import daos.TulajdonosDao;
@@ -7,15 +8,24 @@ import entities.Gepjarmu;
 import entities.Tulajdonos;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.pmw.tinylog.Logger;
+/*
 import otletek.TableInjector;
 import otletek.TableManager;
+*/
+import utils.TableInjector;
+import utils.TableManager;
 
-
+import java.io.IOException;
 import java.net.URL;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,7 +49,13 @@ public class TulajdonosokListajaController implements Initializable {
     @FXML private TextField markaTextField;
     @FXML private TextField rendszamTextField;
 
-    @FXML private TextField jogositvanyszamTextField;
+    @FXML private TextField tipusTextField;
+    @FXML private TextField evjaratTextField;
+    @FXML private TextField teljesitmenyTextField;
+    @FXML private DatePicker vizsgaLejaratDatePicker;
+    @FXML private TextField motorTerfogatTextField;
+
+    @FXML private TextField telefonszamTextField;
     @FXML private TextField nevTextField;
     @FXML private TextField lakcimTextField;
 
@@ -106,7 +122,7 @@ public class TulajdonosokListajaController implements Initializable {
         Tulajdonos tulajdonos = this.tulajdonosokTablaManager.getSelectedEntity();
 
         if(tulajdonos != null
-                && tulajdonos.getGepjarmuvek()!=null) {
+                && tulajdonos.getGepjarmuvek() !=null) {
 
             List<Gepjarmu> gepjarmuvek = new ArrayList<>();
             for(Gepjarmu gepjarmu: tulajdonos.getGepjarmuvek()) {
@@ -168,7 +184,16 @@ public class TulajdonosokListajaController implements Initializable {
 
     // rendben van.
     private Gepjarmu buildGepjarmu(){
-        return new Gepjarmu(this.markaTextField.getText(), this.rendszamTextField.getText(), this.tulajdonosokTablaManager.getSelectedEntity());
+
+        return new Gepjarmu(this.tipusTextField.getText(),
+                new Integer(Integer.parseInt(this.motorTerfogatTextField.getText())),
+                new Integer(Integer.parseInt(this.teljesitmenyTextField.getText())),
+                this.vizsgaLejaratDatePicker.getValue(),
+                new Integer(Integer.parseInt(this.evjaratTextField.getText())),
+                this.tulajdonosokTablaManager.getSelectedEntity(),null);
+
+
+         //return new Gepjarmu(this.markaTextField.getText(), this.rendszamTextField.getText(), this.tulajdonosokTablaManager.getSelectedEntity());
     }
 
 
@@ -207,7 +232,7 @@ public class TulajdonosokListajaController implements Initializable {
     //rendben van.
     private Tulajdonos buildTulajdonos(){
 
-        return new Tulajdonos(this.jogositvanyszamTextField.getText(),this.nevTextField.getText(),
+        return new Tulajdonos(this.telefonszamTextField.getText(),this.nevTextField.getText(),
                 this.lakcimTextField.getText() ,null);
     }
 
@@ -229,19 +254,47 @@ public class TulajdonosokListajaController implements Initializable {
 
         Tulajdonos tulajdonos = this.tulajdonosokTablaManager.getSelectedEntity();
 
-        this.tulajdonosDao.tulajdonosGepjarmuinekTorlese(tulajdonos);
-        /*
+        //this.tulajdonosDao.tulajdonosGepjarmuinekTorlese(tulajdonos);
+
         if(tulajdonos.getGepjarmuvek()!=null) {
             for (Gepjarmu gepjarmu : tulajdonos.getGepjarmuvek()) {
 
                 this.gepjarmuDao.remove(this.gepjarmuDao.getById(gepjarmu.getId()));
             }
-        }*/
+        }
+
         this.tulajdonosDao.remove(tulajdonos);
 
         this.gepjarmuTablaManager.setEntities(new ArrayList<>());
 
         this.setTulajdonosTablaMindenTulajdonossal();
+    }
+
+    public void gepjarmuMegtekintesePushed(){
+
+    }
+
+    public void ujGarancialisAlkatreszTipusPushed(){
+        Stage secondaryStage = new Stage();
+
+        try {
+
+
+            Parent root = FXMLLoader.load(FXMLLoader.getDefaultClassLoader().getResource("UjGarancialisAlkatreszTipus.fxml"));
+            secondaryStage.setTitle("Új garanciális alkatrész létrhozása");
+            secondaryStage.setScene(new Scene(root, 1200, 900));
+            secondaryStage.show();
+        }catch (IOException e){
+
+        }
+        //URL url = Paths.get("src/main/java/view/TulajdonosokListaja.fxml").toUri().toURL();
+        //Parent root = FXMLLoader.load(url);
+        //Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+
+    }
+
+    public void ujGarancialisJavitasTipusPushed(){
+
     }
 
 }

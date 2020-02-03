@@ -4,9 +4,7 @@ import org.pmw.tinylog.Logger;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Tulajdonos {
@@ -23,8 +21,8 @@ public class Tulajdonos {
         this.id = id;
     }
 
-    @Column(name = "jogositvanyszam")
-    private String jogositvanyszam;
+    @Column(name = "telefonszam")
+    private String telefonszam;
 
     @Column(name = "nev")
     private String nev;
@@ -42,19 +40,19 @@ public class Tulajdonos {
         return "Tulajdonos{" +
                 "nev='" + nev + '\'' +
                 ", lakcim='" + lakcim + '\'' +
-                ", jogositvanyszam='" + jogositvanyszam + '\'' +
+                ", telefonszam='" + telefonszam + '\'' +
                 '}';
     }
 
-    public Tulajdonos(String nev, String lakcim, String jogositvanyszam) {
+    public Tulajdonos(String nev, String lakcim, String telefonszam) {
         this.nev = nev;
         this.lakcim = lakcim;
-        this.jogositvanyszam = jogositvanyszam;
+        this.telefonszam = telefonszam;
 
     }
 
-    public Tulajdonos(String jogositvanyszam, String nev, String lakcim, List<Gepjarmu> gepjarmuvek) {
-        this.jogositvanyszam = jogositvanyszam;
+    public Tulajdonos(String telefonszam, String nev, String lakcim, List<Gepjarmu> gepjarmuvek) {
+        this.telefonszam = telefonszam;
         this.nev = nev;
         this.lakcim = lakcim;
         Gepjarmuvek = gepjarmuvek;
@@ -78,12 +76,12 @@ public class Tulajdonos {
         this.nev = nev;
     }
 
-    public String getJogositvanyszam() {
-        return jogositvanyszam;
+    public String getTelefonszam() {
+        return telefonszam;
     }
 
-    public void setJogositvanyszam(String jogositvanyszam) {
-        this.jogositvanyszam = jogositvanyszam;
+    public void setTelefonszam(String telefonszam) {
+        this.telefonszam = telefonszam;
     }
 
     public String getLakcim() {

@@ -27,14 +27,14 @@ public class GepjarmuDao extends BasicDao<Gepjarmu> {
                 .fetchFirst();
         return gnev;
     }
-
+/*
     public boolean isExist(Gepjarmu gepjarmu){
         if(getByRendszam(gepjarmu.getRendszam()) != null){
             return true;
         }else{
             return false;
         }
-    }
+    }*/
 
     /*
     public List<Gepjarmu> getByTulajdonosId(Integer id){

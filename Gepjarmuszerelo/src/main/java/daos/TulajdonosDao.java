@@ -1,16 +1,13 @@
 package daos;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import entities.Gepjarmu;
 import entities.QTulajdonos;
 import entities.Tulajdonos;
 import org.pmw.tinylog.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
@@ -27,7 +24,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
 
     public void ment(Tulajdonos tulajdonos){
-        Tulajdonos lekerdezettTulajdonos = this.getByJogositvanyszam(tulajdonos.getJogositvanyszam());
+        Tulajdonos lekerdezettTulajdonos = this.getByJogositvanyszam(tulajdonos.getTelefonszam());
         Logger.info(lekerdezettTulajdonos);
         if(lekerdezettTulajdonos==null){
             Logger.info("ifben");
@@ -60,7 +57,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
     public List<String> getAllJogositvanyszam(){
 
-        //return this.getAll().stream().map(Tulajdonos::getJogositvanyszam).collect(Collectors.toList());
+        //return this.getAll().stream().map(Tulajdonos::getTelefonszam).collect(Collectors.toList());
 
         Query query = em.createQuery(
                 "select i.jogositvanyszam from Tulajdonos i");
@@ -69,7 +66,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
     public List<String> getAllNev(){
 
-        //return this.getAll().stream().map(Tulajdonos::getJogositvanyszam).collect(Collectors.toList());
+        //return this.getAll().stream().map(Tulajdonos::getTelefonszam).collect(Collectors.toList());
 
         Query query = em.createQuery(
                 "select i.nev from Tulajdonos i");
@@ -86,20 +83,22 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
     }
 
-    public void tulajdonosGepjarmuinekTorlese(Tulajdonos tulajdonos){
+    /*public void tulajdonosGepjarmuinekTorlese(Tulajdonos tulajdonos){
 
-        if(tulajdonos.getGepjarmuvek()!=null) {
+        if(tulajdonos.getGepjarmuvek().size() > 0) {
             for (Gepjarmu gepjarmu : tulajdonos.getGepjarmuvek()) {
 
                 this.remove(this.getById(gepjarmu.getId()));
             }
         }
 
-    }
+    }*/
 
 
     /* TODO  teszt*/
 
     //public List<>
+
+
 
 }
