@@ -62,5 +62,9 @@
          </children>
       </VBox>
       <Label layoutX="276.0" layoutY="33.0" text="Szerelés szerkesztése" />
+      <Label layoutX="433.0" layoutY="331.0" text="Munkaórák száma" />
+      <Label layoutX="608.0" layoutY="331.0" text="Label" />
+      <TextField layoutX="461.0" layoutY="366.0" />
+      <Button layoutX="98.0" layoutY="419.0" mnemonicParsing="false" text="Szerelés lezárása" />
    </children>
 </AnchorPane>

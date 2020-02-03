@@ -1,6 +1,7 @@
 package daos;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import entities.Gepjarmu;
 import entities.QTulajdonos;
 import entities.Tulajdonos;
 import org.pmw.tinylog.Logger;
@@ -85,6 +86,16 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
     }
 
+    public void tulajdonosGepjarmuinekTorlese(Tulajdonos tulajdonos){
+
+        if(tulajdonos.getGepjarmuvek()!=null) {
+            for (Gepjarmu gepjarmu : tulajdonos.getGepjarmuvek()) {
+
+                this.remove(this.getById(gepjarmu.getId()));
+            }
+        }
+
+    }
 
 
     /* TODO  teszt*/

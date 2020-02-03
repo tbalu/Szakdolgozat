@@ -15,7 +15,7 @@
    <children>
       <TableView fx:id="tulajdonosTabla" layoutX="100.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="450.0">
         <columns>
-          <TableColumn fx:id="jogositvanyOszlop" minWidth="150.0" prefWidth="75.0" text="Jogosítványszám" />
+          <TableColumn fx:id="jogositvanyszamOszlop" minWidth="150.0" prefWidth="75.0" text="Jogosítványszám" />
           <TableColumn fx:id="nevOszlop" minWidth="150.0" prefWidth="75.0" text="Név" />
             <TableColumn fx:id="lakcimOszlop" minWidth="150.0" prefWidth="75.0" text="Lakcím" />
         </columns>
