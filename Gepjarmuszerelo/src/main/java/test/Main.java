@@ -15,10 +15,31 @@ public class Main {
     public static void main(String[] args){
 
     setUp();
-    alkatreszteszt();
+    alkatreszteszt3();
     }
 
-    public static void alkatreszteszt(){
+    public static void alkatreszteszt3(){
+
+        AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
+        JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
+        GarancialisAlkatreszTipusDao garancialisAlkatreszTipusDao = new GarancialisAlkatreszTipusDao(EntityManagerCreator.getEntityManager());
+
+        OsJavitas javitas = new Javitas("xyz",12000);
+        OsJavitas garancialisJavitas = new GarancialisJavitas("cba",200000,36);
+
+        GarancialisAlkatreszTipus garancialisAlkatreszTipus = garancialisAlkatreszTipusDao.getById(1);
+        OsAlkatresz alkatresz = new GarancialisAlkatresz("fluxus kondenzátor",2234,200000,garancialisJavitas,garancialisAlkatreszTipus);
+
+
+        javitasDao.persist(garancialisJavitas);
+        javitasDao.persist(javitas);
+        alkatreszDao.persist(alkatresz);
+
+
+
+    }
+
+    public static void alkatreszteszt2(){
 
         AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
         JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
@@ -45,7 +66,7 @@ public class Main {
     }
 
 
-    public static void alkatresztesz() {
+    /*public static void alkatreszteszt1() {
 
         GarancialisAlkatreszDao garancialisAlkatreszDao = new GarancialisAlkatreszDao(EntityManagerCreator.emf.createEntityManager());
         GarancialisAlkatreszTipusDao garancialisAlkatreszTipusDao =
@@ -58,6 +79,6 @@ public class Main {
         garancialisAlkatreszTipusDao.persist(garancialisAlkatreszTipus);
         garancialisAlkatreszDao.persist(garancialisAlkatresz);
 
-    }
+    }*/
 
 }

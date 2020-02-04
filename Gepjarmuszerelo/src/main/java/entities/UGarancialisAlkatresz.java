@@ -2,9 +2,9 @@ package entities;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
+/*
 @Entity
-@DiscriminatorValue("GA")
+@DiscriminatorValue("GA")*/
 public class UGarancialisAlkatresz extends OsAlkatresz {
 
     private Integer garanciaIdotartama;
