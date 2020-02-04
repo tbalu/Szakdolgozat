@@ -112,7 +112,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#ujTulajdonosPushed" text="Új tulajdonos felvétele" />
+                  <Button mnemonicParsing="false" onAction="#ujTulajdonosPushed" text="Új ugyfel felvétele" />
                </children>
             </HBox>
          </children>

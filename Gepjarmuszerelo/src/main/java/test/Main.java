@@ -9,9 +9,38 @@ import java.util.ArrayList;
 public class Main {
 
     private static void setUp(){
+
         EntityManagerCreator.emf = Persistence.createEntityManagerFactory("test");
 
     }
+
+
+    public void teljesTeszt(){
+        //Dao-k
+        TulajdonosDao tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
+        GepjarmuDao gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
+        SzereloDao szereloDao = new SzereloDao(EntityManagerCreator.getEntityManager());
+        SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
+        AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
+        GarancialisAlkatreszTipusDao garancialisAlkatreszTipusDao = new GarancialisAlkatreszTipusDao(EntityManagerCreator.getEntityManager());
+        EladottAlkatreszDao eladottAlkatreszDao = new EladottAlkatreszDao(EntityManagerCreator.getEntityManager());
+        JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
+
+        //Entitasok létrehozása
+
+        Ugyfel ugyfel = new Ugyfel("+36 ...","Tóth Balázs","Debrecen");
+        Gepjarmu gepjarmu = new Gepjarmu("Tesla","")
+        OsJavitas javitas = new GarancialisJavitas("abc",12000,12);
+        OsAlkatresz alkatresz = new Alkatresz("fluxus kondenzátor", 200000);
+        EladottAlkatresz eladottAlkatresz = new EladottAlkatresz(1234,alkatresz,javitas);
+
+
+
+        //tulajdonos.getGepjarmuvek().add()
+
+
+    }
+
 
     public static void main(String[] args){
 
@@ -29,7 +58,7 @@ public class Main {
 
         OsJavitas javitas = new Javitas("xyz",12000);
 
-        OsAlkatresz alkatresz = new Alkatresz("fluxus kondenzátor",2234,new ArrayList<>());
+        OsAlkatresz alkatresz = new Alkatresz("fluxus kondenzátor",2234);
 
         EladottAlkatresz eladottAlkatresz = new EladottAlkatresz(1234,alkatresz,javitas);
 

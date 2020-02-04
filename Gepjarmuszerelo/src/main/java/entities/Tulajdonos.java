@@ -13,13 +13,7 @@ public class Tulajdonos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     @Column(name = "telefonszam")
     private String telefonszam;
@@ -59,6 +53,14 @@ public class Tulajdonos {
     }
     public Tulajdonos(){
         Logger.info("Noarg Tu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     public List<Gepjarmu> getGepjarmuvek() {
         return Gepjarmuvek;

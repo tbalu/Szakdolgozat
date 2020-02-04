@@ -2,12 +2,8 @@ package entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import entities.*;
-import org.pmw.tinylog.Logger;
 
 import javax.persistence.*;
 
@@ -30,11 +26,11 @@ public class Szereles implements Serializable {
     private Gepjarmu gepjarmu;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tulajdonos_id")
-    private Tulajdonos tulajdonos;
+    @JoinColumn(name = "ugyfel_id")
+    private Ugyfel ugyfel;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "tulajdonos", fetch = FetchType.LAZY)
-    private List<OsJavitas> javitasok;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "szereles", fetch = FetchType.LAZY)
+    private List<OsJavitas> javitasok = new ArrayList<>();
 
 
     @Column(name = "munkavegzes_koltsege")
@@ -43,12 +39,21 @@ public class Szereles implements Serializable {
 
     public Szereles(){}
 
-    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Tulajdonos tulajdonos,
+    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel, List<OsJavitas> javitasok, Integer munkavegzesKoltsege) {
+        this.szerelesKezdete = szerelesKezdete;
+        this.szerelesVege = szerelesVege;
+        this.gepjarmu = gepjarmu;
+        this.ugyfel = ugyfel;
+        this.javitasok = javitasok;
+        this.munkavegzesKoltsege = munkavegzesKoltsege;
+    }
+
+    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel,
                     Integer munkavegzesKoltsege) {
         this.szerelesKezdete = szerelesKezdete;
         this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
-        this.tulajdonos = tulajdonos;
+        this.ugyfel = ugyfel;
         this.munkavegzesKoltsege = munkavegzesKoltsege;
     }
 
@@ -84,12 +89,12 @@ public class Szereles implements Serializable {
         this.gepjarmu = gepjarmu;
     }
 
-    public Tulajdonos getTulajdonos() {
-        return tulajdonos;
+    public Ugyfel getUgyfel() {
+        return ugyfel;
     }
 
-    public void setTulajdonos(Tulajdonos tulajdonos) {
-        this.tulajdonos = tulajdonos;
+    public void setUgyfel(Ugyfel ugyfel) {
+        this.ugyfel = ugyfel;
     }
 
     public Integer getMunkavegzesKoltsege() {
@@ -118,7 +123,7 @@ public class Szereles implements Serializable {
                 ", szerelesKezdete=" + szerelesKezdete +
                 ", szerelesVege=" + szerelesVege +
                 ", gepjarmu=" + gepjarmu +
-                ", tulajdonos=" + tulajdonos +
+                ", ugyfel=" + ugyfel +
                 ", munkavegzesKoltsege=" + munkavegzesKoltsege +
                // ", munkaorakSzama=" + munkaorakSzama +
                // ", alkatreszek=" + alkatreszek +

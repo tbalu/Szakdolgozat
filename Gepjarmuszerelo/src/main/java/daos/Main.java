@@ -94,7 +94,7 @@ public class Main {
 
         Gepjarmu gepjarmu = gepjarmuDao.getByRendszam("ABC-123");
 
-        Szereles szereles = new Szereles(new Timestamp(100000), new Timestamp(System.currentTimeMillis()),gepjarmu, gepjarmu.getTulajdonos()
+        Szereles szereles = new Szereles(new Timestamp(100000), new Timestamp(System.currentTimeMillis()),gepjarmu, gepjarmu.getUgyfel()
                 ,1000000,32, null);
 
 

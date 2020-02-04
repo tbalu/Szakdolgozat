@@ -9,14 +9,14 @@ import java.util.List;
 
 public class SzerelesDao extends BasicDao<Szereles> {
 
-        SzerelesDao(EntityManager em){
+        public SzerelesDao(EntityManager em){
             super(Szereles.class);
             this.em = em;
         }
 
-        public List<Szereles> befejezetlenSzerelesek(){
+       /* public List<Szereles> befejezetlenSzerelesek(){
             JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
             QSzereles qSzereles = QSzereles.szereles;
             return queryFactory.selectFrom(qSzereles).where(qSzereles.szerelesVege.isNull()).fetch();
-    }
+    }*/
 }
