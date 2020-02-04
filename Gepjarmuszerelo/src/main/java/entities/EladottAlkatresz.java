@@ -9,17 +9,23 @@ public class EladottAlkatresz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    private Alkatresz alkatresz;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "alkatresz_id")
+    private OsAlkatresz alkatresz;
 
     @Column(name = "cikkszam")
     private Integer cikkszam;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "javitas_id")
+    private OsJavitas javitas;
+
     public EladottAlkatresz(){}
 
-    public EladottAlkatresz(Integer id, Integer cikkszam) {
-        this.id = id;
+    public EladottAlkatresz(Integer cikkszam, OsAlkatresz alkatresz, OsJavitas javitas) {
         this.cikkszam = cikkszam;
+        this.alkatresz = alkatresz;
+        this.javitas = javitas;
     }
 
     public Integer getId() {
@@ -30,11 +36,27 @@ public class EladottAlkatresz {
         this.id = id;
     }
 
+    public OsAlkatresz getAlkatresz() {
+        return alkatresz;
+    }
+
+    public void setAlkatresz(OsAlkatresz alkatresz) {
+        this.alkatresz = alkatresz;
+    }
+
     public Integer getCikkszam() {
         return cikkszam;
     }
 
     public void setCikkszam(Integer cikkszam) {
         this.cikkszam = cikkszam;
+    }
+
+    public OsJavitas getJavitas() {
+        return javitas;
+    }
+
+    public void setJavitas(OsJavitas javitas) {
+        this.javitas = javitas;
     }
 }

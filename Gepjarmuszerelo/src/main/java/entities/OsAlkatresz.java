@@ -16,12 +16,12 @@ public abstract class OsAlkatresz {
     @Column(name = "nev")
     private String nev;
 
-    @Column(name = "cikkszam")
+  /*  @Column(name = "cikkszam")
     private Integer cikkszam;
-
+*/
     @Column(name = "ar")
     private Integer ar;
-
+/*
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "javitas_id")
     private OsJavitas javitas;
@@ -32,8 +32,13 @@ public abstract class OsAlkatresz {
         this.ar = ar;
         this.javitas = javitas;
     }
-
+*/
     public OsAlkatresz(){}
+
+    public OsAlkatresz(String nev, Integer ar) {
+        this.nev = nev;
+        this.ar = ar;
+    }
 
     public Integer getId() {
         return id;
@@ -51,14 +56,14 @@ public abstract class OsAlkatresz {
         this.nev = nev;
     }
 
-    public Integer getCikkszam() {
+  /*  public Integer getCikkszam() {
         return cikkszam;
     }
 
     public void setCikkszam(Integer cikkszam) {
         this.cikkszam = cikkszam;
     }
-
+*/
     public Integer getAr() {
         return ar;
     }
@@ -67,11 +72,12 @@ public abstract class OsAlkatresz {
         this.ar = ar;
     }
 
+    /*
     public OsJavitas getJavitas() {
         return javitas;
     }
 
     public void setJavitas(OsJavitas javitas) {
         this.javitas = javitas;
-    }
+    }*/
 }

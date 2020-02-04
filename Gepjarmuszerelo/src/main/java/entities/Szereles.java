@@ -33,27 +33,12 @@ public class Szereles implements Serializable {
     @JoinColumn(name = "tulajdonos_id")
     private Tulajdonos tulajdonos;
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "tulajdonos", fetch = FetchType.LAZY)
+    private List<OsJavitas> javitasok;
+
+
     @Column(name = "munkavegzes_koltsege")
     private Integer munkavegzesKoltsege;
-
-    /*
-    @Column(name = "munkaorak_szama")
-    private Integer munkaorakSzama;*/
-/*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles", fetch = FetchType.LAZY)
-    private List<Alkatresz> alkatreszek;
-*/
-    //private List<GarancialisAlkatresz> garancialisAlkatreszek;
-
-    //private List<GarancialisJavitas> garancialisJavitasok;
-
-    /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "szereles", fetch = FetchType.LAZY)
-    private List<Alkatresz> alkatreszek;
-    */
-
-
-   // private List<OsJavitas> javitasok;
 
 
     public Szereles(){}
@@ -65,8 +50,6 @@ public class Szereles implements Serializable {
         this.gepjarmu = gepjarmu;
         this.tulajdonos = tulajdonos;
         this.munkavegzesKoltsege = munkavegzesKoltsege;
-        //this.munkaorakSzama = munkaorakSzama;
-      //  this.alkatreszek = alkatreszek;
     }
 
     public Integer getId() {

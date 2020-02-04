@@ -3,6 +3,7 @@ package entities;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "javitas")
@@ -24,7 +25,20 @@ public abstract class OsJavitas {
     //---------------
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "javitas", fetch = FetchType.LAZY)
-    private List<OsAlkatresz> alkatreszek;
+    private List<EladottAlkatresz> eladottAlkatreszek;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "dolgozott_rajta",
+            joinColumns = @JoinColumn(name = "javitas_id"),
+            inverseJoinColumns = @JoinColumn(name = "szerelo_id")
+
+    )
+    private List<Szerelo> szerelok = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "szereles_id")
+    private Szereles szereles;
 
     //---------------
   /*
@@ -32,6 +46,13 @@ public abstract class OsJavitas {
     private List<GarancialisAlkatresz> garancialisAlkatreszek;
 */
     public OsJavitas() {}
+
+    public OsJavitas(String leiras, Integer ar, List<EladottAlkatresz> eladottAlkatreszek, Szereles szereles) {
+        this.leiras = leiras;
+        this.ar = ar;
+        this.eladottAlkatreszek = eladottAlkatreszek;
+        this.szereles = szereles;
+    }
 
     public OsJavitas(String leiras, Integer ar/*, List<Alkatresz> alkatreszek, List<GarancialisAlkatresz> garancialisAlkatreszek*/) {
         this.leiras = leiras;
@@ -63,20 +84,20 @@ public abstract class OsJavitas {
     public void setAr(Integer ar) {
         this.ar = ar;
     }
-/*
-    public List<Alkatresz> getAlkatreszek() {
-        return alkatreszek;
+
+    public List<EladottAlkatresz> getEladottAlkatreszek() {
+        return eladottAlkatreszek;
     }
 
-    public void setAlkatreszek(List<Alkatresz> alkatreszek) {
-        this.alkatreszek = alkatreszek;
+    public void setEladottAlkatreszek(List<EladottAlkatresz> eladottAlkatreszek) {
+        this.eladottAlkatreszek = eladottAlkatreszek;
     }
 
-    public List<GarancialisAlkatresz> getGarancialisAlkatreszek() {
-        return garancialisAlkatreszek;
+    public Szereles getSzereles() {
+        return szereles;
     }
 
-    public void setGarancialisAlkatreszek(List<GarancialisAlkatresz> garancialisAlkatreszek) {
-        this.garancialisAlkatreszek = garancialisAlkatreszek;
-    }*/
+    public void setSzereles(Szereles szereles) {
+        this.szereles = szereles;
+    }
 }

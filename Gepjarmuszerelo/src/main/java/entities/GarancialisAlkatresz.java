@@ -30,8 +30,8 @@ public class GarancialisAlkatresz extends OsAlkatresz{
         this.cikkSzam = cikkSzam;
     }*/
 
-    public GarancialisAlkatresz(String nev, Integer cikkszam, Integer ar, OsJavitas javitas, GarancialisAlkatreszTipus garancialisAlkatreszTipus) {
-        super(nev, cikkszam, ar, javitas);
+    public GarancialisAlkatresz(String nev, Integer ar, GarancialisAlkatreszTipus garancialisAlkatreszTipus) {
+        super(nev, ar);
         this.garancialisAlkatreszTipus = garancialisAlkatreszTipus;
     }
 

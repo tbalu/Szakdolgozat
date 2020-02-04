@@ -4,6 +4,7 @@ import daos.*;
 import entities.*;
 
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -15,10 +16,34 @@ public class Main {
     public static void main(String[] args){
 
     setUp();
-    alkatreszteszt3();
+    teljesAlkatreszteszt();
     }
 
-    public static void alkatreszteszt3(){
+    public static void teljesAlkatreszteszt(){
+
+        AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
+        EladottAlkatreszDao eladottAlkatreszDao = new EladottAlkatreszDao(EntityManagerCreator.getEntityManager());
+        JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
+        GarancialisAlkatreszTipusDao garancialisAlkatreszTipusDao = new GarancialisAlkatreszTipusDao(EntityManagerCreator.getEntityManager());
+
+
+        OsJavitas javitas = new Javitas("xyz",12000);
+
+        OsAlkatresz alkatresz = new Alkatresz("fluxus kondenzátor",2234,new ArrayList<>());
+
+        EladottAlkatresz eladottAlkatresz = new EladottAlkatresz(1234,alkatresz,javitas);
+
+        javitasDao.persist(javitas);
+
+        alkatreszDao.persist(alkatresz);
+
+        eladottAlkatreszDao.persist(eladottAlkatresz);
+
+        eladottAlkatreszDao.persist(eladottAlkatresz);
+
+    }
+
+    /*public static void alkatreszteszt3(){
 
         AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
         JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
@@ -37,8 +62,8 @@ public class Main {
 
 
 
-    }
-
+    }*/
+/*
     public static void alkatreszteszt2(){
 
         AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
@@ -52,7 +77,7 @@ public class Main {
         alkatreszDao.persist(alkatresz);
 
 
-    }
+    }*/
 
     public static void javitasteszt2(){
 
