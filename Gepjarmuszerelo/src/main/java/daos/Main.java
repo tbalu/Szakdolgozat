@@ -24,7 +24,7 @@ public class Main {
         List<String> jogositvanyszamok = tulajdonosDao.getAllJogositvanyszam();
         Logger.info(jogositvanyszamok.toString());
     }
-
+/*
     public static void addTulajdonosok(TulajdonosDao tulajdonosDao){
         Tulajdonos tulajdonos1 = new Tulajdonos("1235","Tóth János","Debrecen", null);
         Tulajdonos tulajdonos2 = new Tulajdonos("1236","Szathmári Edit","Debrecen", null);
@@ -47,7 +47,7 @@ public class Main {
         gepjarmuDao.persist(gepjarmu);
 
 
-    }
+    }*/
 /*
     public static void addLetezoGepjarmu(TulajdonosDao tulajdonosDao, GepjarmuDao gepjarmuDao){
         Tulajdonos tulajdonos = tulajdonosDao.getByJogositvanyszam("1234");
@@ -195,7 +195,7 @@ public class Main {
 
         t.setGepjarmuvek(gepjarmuSet);
 
-        tulajdonosDao.ment(t);
+        //tulajdonosDao.ment(t);
     }
 /*
     public static void elso(){

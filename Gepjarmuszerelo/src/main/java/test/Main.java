@@ -4,6 +4,8 @@ import daos.*;
 import entities.*;
 
 import javax.persistence.Persistence;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
@@ -15,9 +17,10 @@ public class Main {
     }
 
 
-    public void teljesTeszt(){
+    public static void teljesTeszt(){
         //Dao-k
         TulajdonosDao tulajdonosDao = new TulajdonosDao(EntityManagerCreator.getEntityManager());
+        UgyfelDao ugyfelDao = new UgyfelDao(EntityManagerCreator.getEntityManager());
         GepjarmuDao gepjarmuDao = new GepjarmuDao(EntityManagerCreator.getEntityManager());
         SzereloDao szereloDao = new SzereloDao(EntityManagerCreator.getEntityManager());
         SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
@@ -26,13 +29,30 @@ public class Main {
         EladottAlkatreszDao eladottAlkatreszDao = new EladottAlkatreszDao(EntityManagerCreator.getEntityManager());
         JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
 
+        //Tulajdonos tulajdonos = new Tulajdonos("asdf","asdfg","asdfg");
         //Entitasok létrehozása
 
+
         Ugyfel ugyfel = new Ugyfel("+36 ...","Tóth Balázs","Debrecen");
-        Gepjarmu gepjarmu = new Gepjarmu("Tesla","")
+        Gepjarmu gepjarmu = gepjarmuDao.getById(303);
+        //Gepjarmu gepjarmu = new Gepjarmu("Tesla",1000,100, LocalDate.of(2020,02,26),2000,null,new ArrayList<>());
+        Szereles szereles = new Szereles(new Timestamp(System.currentTimeMillis()-100000),new Timestamp(System.currentTimeMillis()),gepjarmu,ugyfel,20000);
+
         OsJavitas javitas = new GarancialisJavitas("abc",12000,12);
+        javitas.setSzereles(szereles);
         OsAlkatresz alkatresz = new Alkatresz("fluxus kondenzátor", 200000);
+        szereles.getJavitasok().add(javitas);
         EladottAlkatresz eladottAlkatresz = new EladottAlkatresz(1234,alkatresz,javitas);
+        javitas.getEladottAlkatreszek().add(eladottAlkatresz);
+
+       // ugyfelDao.persist(ugyfel);
+       // gepjarmuDao.persist(gepjarmu);
+
+        //gepjarmuDao.update(gepjarmu);
+        alkatreszDao.persist(alkatresz);
+        szerelesDao.persist(szereles);
+        //javitasDao.persist(javitas);
+        //eladottAlkatreszDao.persist(eladottAlkatresz);
 
 
 
@@ -45,7 +65,7 @@ public class Main {
     public static void main(String[] args){
 
     setUp();
-    teljesAlkatreszteszt();
+    teljesTeszt();
     }
 
     public static void teljesAlkatreszteszt(){

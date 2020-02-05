@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Szereles implements Serializable {
+public class Szereles  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Szereles implements Serializable {
     @JoinColumn(name = "gepjarmu_id")
     private Gepjarmu gepjarmu;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ugyfel_id")
     private Ugyfel ugyfel;
 
@@ -33,28 +33,28 @@ public class Szereles implements Serializable {
     private List<OsJavitas> javitasok = new ArrayList<>();
 
 
-    @Column(name = "munkavegzes_koltsege")
-    private Integer munkavegzesKoltsege;
+    @Column(name = "ar")
+    private Integer ar;
 
 
     public Szereles(){}
 
-    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel, List<OsJavitas> javitasok, Integer munkavegzesKoltsege) {
+    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel, List<OsJavitas> javitasok, Integer ar) {
         this.szerelesKezdete = szerelesKezdete;
         this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
         this.ugyfel = ugyfel;
         this.javitasok = javitasok;
-        this.munkavegzesKoltsege = munkavegzesKoltsege;
+        this.ar = ar;
     }
 
     public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel,
-                    Integer munkavegzesKoltsege) {
+                    Integer ar) {
         this.szerelesKezdete = szerelesKezdete;
         this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
         this.ugyfel = ugyfel;
-        this.munkavegzesKoltsege = munkavegzesKoltsege;
+        this.ar = ar;
     }
 
     public Integer getId() {
@@ -97,15 +97,22 @@ public class Szereles implements Serializable {
         this.ugyfel = ugyfel;
     }
 
-    public Integer getMunkavegzesKoltsege() {
-        return munkavegzesKoltsege;
+    public Integer getAr() {
+        return ar;
     }
 
-    public void setMunkavegzesKoltsege(Integer munkavegzesKoltsege) {
-        this.munkavegzesKoltsege = munkavegzesKoltsege;
+    public void setAr(Integer ar) {
+        this.ar = ar;
     }
 
-    /*
+    public List<OsJavitas> getJavitasok() {
+        return javitasok;
+    }
+
+    public void setJavitasok(List<OsJavitas> javitasok) {
+        this.javitasok = javitasok;
+    }
+/*
     public Integer getMunkaorakSzama() {
         return munkaorakSzama;
     }
@@ -124,7 +131,7 @@ public class Szereles implements Serializable {
                 ", szerelesVege=" + szerelesVege +
                 ", gepjarmu=" + gepjarmu +
                 ", ugyfel=" + ugyfel +
-                ", munkavegzesKoltsege=" + munkavegzesKoltsege +
+                ", munkavegzesKoltsege=" + ar +
                // ", munkaorakSzama=" + munkaorakSzama +
                // ", alkatreszek=" + alkatreszek +
                 '}';

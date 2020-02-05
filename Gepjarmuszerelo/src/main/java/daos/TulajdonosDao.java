@@ -21,7 +21,7 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
 
     }
 
-
+/*
 
     public void ment(Tulajdonos tulajdonos){
         Tulajdonos lekerdezettTulajdonos = this.getByJogositvanyszam(tulajdonos.getTelefonszam());
@@ -38,8 +38,9 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
             this.em.getTransaction().commit();
         }
     }
-
-    Tulajdonos getByJogositvanyszam(String jogositvanyszam){
+*/
+    //---------------------------------------------------------------
+  /*  Tulajdonos getByJogositvanyszam(String jogositvanyszam){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
         QTulajdonos qTulajdonos = QTulajdonos.tulajdonos;
         Tulajdonos tnev = queryFactory.selectFrom(qTulajdonos)
@@ -47,7 +48,8 @@ public class TulajdonosDao extends BasicDao<Tulajdonos> {
                 .fetchFirst();
     return tnev;
     }
-
+*/
+  //-------------------------------------------------------------------
     public List<Tulajdonos> getAll(){
 
         Query query = this.em.createQuery("from Tulajdonos T");

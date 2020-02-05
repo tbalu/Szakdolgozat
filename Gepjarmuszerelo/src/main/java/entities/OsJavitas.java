@@ -12,7 +12,7 @@ import java.util.List;
         "case when garancia_idotartama is not null then 'GJ' else 'J' end"
 )
 //@DiscriminatorColumn(name = "JAVITAS_TYPE")
-public abstract class OsJavitas {
+public class OsJavitas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,12 @@ public abstract class OsJavitas {
     @Column(name = "ar")
     private Integer ar;
 
-    //---------------
+
+
+
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "javitas", fetch = FetchType.LAZY)
-    private List<EladottAlkatresz> eladottAlkatreszek;
+    private List<EladottAlkatresz> eladottAlkatreszek = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(

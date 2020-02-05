@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.UjSzerelesFelvetele">
+  <children>
+    <VBox layoutX="190.0" layoutY="93.0" prefHeight="210.0" prefWidth="269.0">
+      <children>
+        <HBox prefHeight="50.0" prefWidth="194.0">
+          <children>
+            <TextField id="nevTextField" fx:id="nevTF" />
+          </children>
+        </HBox>
+        <HBox prefHeight="50.0" prefWidth="194.0">
+          <children>
+            <TextField id="telefonszamTextField" fx:id="telefonszamTF" />
+          </children>
+        </HBox>
+        <HBox prefHeight="50.000099999997474" prefWidth="312.0001220703125">
+          <children>
+            <TextField id="lakcimTextField" fx:id="lakcimTF" />
+          </children>
+        </HBox>
+        <HBox prefHeight="50.0" prefWidth="200.0">
+          <children>
+            <Button id="ujUgyfelFelvetele" fx:id="ujUgyfel" mnemonicParsing="false" onAction="#ujUgyfelFelvetele" text="Új ügyfél felvétele" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+    <MenuBar prefHeight="30.0" prefWidth="1200.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Delete" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <VBox layoutX="14.0" layoutY="93.0" prefHeight="200.0" prefWidth="145.0">
+      <children>
+        <HBox prefHeight="50.0" prefWidth="200.0">
+          <children>
+            <Label text="Név" />
+          </children>
+        </HBox>
+        <HBox prefHeight="50.0" prefWidth="200.0">
+          <children>
+            <Label text="Telefonszám" />
+          </children>
+        </HBox>
+        <HBox prefHeight="50.0" prefWidth="200.0">
+          <children>
+            <Label text="Lakcím" />
+          </children>
+        </HBox>
+        <Button fx:id="tulajdonostKeres" mnemonicParsing="false" text="Keres" />
+      </children>
+    </VBox>
+    <HBox layoutX="11.0" layoutY="333.0" prefHeight="393.0" prefWidth="450.0">
+      <children>
+        <VBox prefHeight="210.0" prefWidth="150.0">
+          <children>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <Label text="Típus" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <Label text="Motor térfogata" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <Label text="Teljesítmény" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <Label text="Évjárat" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="150.0">
+              <children>
+                <Label text="Vizsga lejárta" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <Button mnemonicParsing="false" text="Keresés" />
+              </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+              <children>
+                <Button fx:id="szerelesInditasa" mnemonicParsing="false" text="Szerelés indítása" />
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+        <VBox prefHeight="0.0" prefWidth="300.0">
+          <children>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <TextField id="tipusTextField" fx:id="tipusTF" prefWidth="200.0" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <TextField id="motorTerfogata" fx:id="motorTerfogataTF" prefWidth="200.0" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <TextField id="teljesitmenyTextField" fx:id="teljesitmenyTF" prefWidth="200.0" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <TextField fx:id="evjaratTF" prefWidth="200.0" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <TextField id="vizsgaLejarataTF" fx:id="vizsgaLejartaTF" prefWidth="200.0" />
+              </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+              <children>
+                <Button fx:id="ujGepjarmu" mnemonicParsing="false" text="Új gépjarmű" />
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>
