@@ -42,42 +42,37 @@ public class Gepjarmu {
     @Column(name =  "evjarat")
     private Integer evjarat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tulajdonos_id")
-    private Tulajdonos tulajdonos;
 
 
     @OneToMany(mappedBy = "gepjarmu", fetch = FetchType.LAZY)
-    private List<Szereles> szerelesek;
+    private List<Szereles> szerelesek = new ArrayList<>();
 
 
 
     public Gepjarmu(){
         Logger.info("Noarg gepjarmu");
     }
-    public Gepjarmu(String tipus, String rendszam, Tulajdonos tulajdonos) {
-        this.tipus = tipus;
-        //this.rendszam = rendszam;
-        this.tulajdonos = tulajdonos;
 
-    }
 
-    public Gepjarmu(String rendszam, String tipus, Set<Szereles> szerelesek, Tulajdonos tulajdonos) {
-       // this.rendszam = rendszam;
-        this.tipus = tipus;
-        this.szerelesek = new ArrayList<>();
-        this.tulajdonos = tulajdonos;
-    }
-
-    public Gepjarmu(String tipus, Integer motorTerfogat, Integer teljesitmeny, LocalDate vizsgaLejarta, Integer evjarat, Tulajdonos tulajdonos, List<Szereles> szerelesek) {
+    public Gepjarmu(String tipus, Integer motorTerfogat, Integer teljesitmeny, LocalDate vizsgaLejarta, Integer evjarat,  List<Szereles> szerelesek) {
         //this.rendszam = rendszam;
         this.tipus = tipus;
         this.motorTerfogat = motorTerfogat;
         this.teljesitmeny = teljesitmeny;
         this.vizsgaLejarta = vizsgaLejarta;
         this.evjarat = evjarat;
-        this.tulajdonos = tulajdonos;
+
         this.szerelesek = szerelesek;
+    }
+
+    public Gepjarmu(String tipus, Integer motorTerfogat, Integer teljesitmeny, LocalDate vizsgaLejarta, Integer evjarat) {
+        //this.rendszam = rendszam;
+        this.tipus = tipus;
+        this.motorTerfogat = motorTerfogat;
+        this.teljesitmeny = teljesitmeny;
+        this.vizsgaLejarta = vizsgaLejarta;
+        this.evjarat = evjarat;
+
     }
 
     public List<Szereles> getSzerelesek() {
@@ -88,13 +83,6 @@ public class Gepjarmu {
         this.szerelesek = szerelesek;
     }
 
-    public entities.Tulajdonos getTulajdonos() {
-        return tulajdonos;
-    }
-
-    public void setTulajdonos(entities.Tulajdonos tulajdonos) {
-        tulajdonos = tulajdonos;
-    }
 
     public String getTipus() {
         return tipus;
@@ -153,7 +141,6 @@ public class Gepjarmu {
                 ", teljesitmeny=" + teljesitmeny +
                 ", vizsgaLejarta=" + vizsgaLejarta +
                 ", evjarat=" + evjarat +
-                ", tulajdonos=" + tulajdonos +
                 ", szerelesek=" + szerelesek +
                 '}';
     }

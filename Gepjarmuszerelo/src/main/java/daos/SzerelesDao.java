@@ -14,9 +14,9 @@ public class SzerelesDao extends BasicDao<Szereles> {
             this.em = em;
         }
 
-       /* public List<Szereles> befejezetlenSzerelesek(){
+        public List<Szereles> folyamatbanLevoSzerelesek(){
             JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
             QSzereles qSzereles = QSzereles.szereles;
             return queryFactory.selectFrom(qSzereles).where(qSzereles.szerelesVege.isNull()).fetch();
-    }*/
+    }
 }

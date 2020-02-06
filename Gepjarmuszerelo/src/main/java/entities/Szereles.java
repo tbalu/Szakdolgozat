@@ -25,7 +25,7 @@ public class Szereles  {
     @JoinColumn(name = "gepjarmu_id")
     private Gepjarmu gepjarmu;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ugyfel_id")
     private Ugyfel ugyfel;
 
@@ -38,6 +38,17 @@ public class Szereles  {
 
 
     public Szereles(){}
+
+    public Szereles(Gepjarmu gepjarmu, Ugyfel ugyfel) {
+
+        this.gepjarmu = gepjarmu;
+        this.ugyfel = ugyfel;
+
+        this.szerelesKezdete = new Timestamp(System.currentTimeMillis());
+
+        this.ar = 0;
+
+    }
 
     public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel, List<OsJavitas> javitasok, Integer ar) {
         this.szerelesKezdete = szerelesKezdete;

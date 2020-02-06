@@ -34,9 +34,9 @@ public class MainAppClass extends Application {
         //Parent root =  FXMLLoader.load(FXMLLoader.getDefaultClassLoader().getResource("TulajdonosokListaja.fxml"));
 
 
-//        Parent root =  FXMLLoader.load(FXMLLoader.getDefaultClassLoader().getResource("UjSzerelesFelvetele.fxml"));
+        Parent root =  FXMLLoader.load(FXMLLoader.getDefaultClassLoader().getResource("UjSzerelesFelvetele.fxml"));
 
-        Parent root =  FXMLLoader.load(FXMLLoader.getDefaultClassLoader().getResource("oroklodesestablaproba.fxml"));
+       // Parent root =  FXMLLoader.load(FXMLLoader.getDefaultClassLoader().getResource("oroklodesestablaproba.fxml"));
 
 
 

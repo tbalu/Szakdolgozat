@@ -56,7 +56,7 @@ public class TableInjector<E> implements TableManager<E> {
     public void addEntity(List<E> entities) {
 
         this.tabla.setItems(FXCollections.observableArrayList(entities));
-
+        Logger.info("----"+this.tabla.getItems());
     }
 
     @Override
