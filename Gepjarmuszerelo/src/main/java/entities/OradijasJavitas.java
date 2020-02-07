@@ -5,11 +5,11 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("ODJ")
-public class OradijasJavitas extends OsJavitas {
+public class OradijasJavitas extends Javitas {
 
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "javitas_tipus_id")
     private OradijasJavitasTipus oradijasJavitasTipus;
 

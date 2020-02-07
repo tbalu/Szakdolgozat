@@ -20,7 +20,7 @@ public class OradijasJavitasTipus {
     @Column(name = "leiras")
     private String leiras;
 
-    @Column(name = "garancia_idotartama")
+    @Column(name = "garancia_idotartama_")
     private Integer garanciaIdotartama;
 
     @OneToMany(mappedBy = "oradijasJavitasTipus", fetch = FetchType.LAZY)

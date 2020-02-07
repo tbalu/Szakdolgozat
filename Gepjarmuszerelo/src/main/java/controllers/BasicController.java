@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BasicController implements Initializable {
+public class BasicController  {
 
 
     @FXML protected MenuBar menuBar;
@@ -69,10 +69,5 @@ public class BasicController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-
-
-    }
 }

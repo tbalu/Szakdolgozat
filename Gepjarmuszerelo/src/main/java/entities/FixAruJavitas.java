@@ -4,9 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("FAJ")
-public class FixAruJavitas extends OsJavitas{
+public class FixAruJavitas extends Javitas {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private FixAruJavitasTipus fixAruJavitasTipus;
 
 

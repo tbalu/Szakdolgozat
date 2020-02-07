@@ -16,6 +16,6 @@ public class Szerelo {
     // Lesznek még további funkciók
 
     @ManyToMany(mappedBy = "szerelok")
-    private List<OsJavitas> elvegzettJavitasok;
+    private List<Javitas> elvegzettJavitasok;
 
 }

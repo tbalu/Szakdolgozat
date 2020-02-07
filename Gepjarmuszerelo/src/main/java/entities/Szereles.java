@@ -1,5 +1,7 @@
 package entities;
 
+import org.pmw.tinylog.Logger;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ public class Szereles  {
     private Ugyfel ugyfel;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "szereles", fetch = FetchType.LAZY)
-    private List<OsJavitas> javitasok = new ArrayList<>();
+    private List<Javitas> javitasok = new ArrayList<>();
 
 
     @Column(name = "ar")
@@ -49,7 +51,7 @@ public class Szereles  {
 
     }
 
-    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel, List<OsJavitas> javitasok, Integer ar) {
+    public Szereles(Timestamp szerelesKezdete, Timestamp szerelesVege, Gepjarmu gepjarmu, Ugyfel ugyfel, List<Javitas> javitasok, Integer ar) {
         this.szerelesKezdete = szerelesKezdete;
         this.szerelesVege = szerelesVege;
         this.gepjarmu = gepjarmu;
@@ -115,11 +117,11 @@ public class Szereles  {
         this.ar = ar;
     }
 
-    public List<OsJavitas> getJavitasok() {
+    public List<Javitas> getJavitasok() {
         return javitasok;
     }
 
-    public void setJavitasok(List<OsJavitas> javitasok) {
+    public void setJavitasok(List<Javitas> javitasok) {
         this.javitasok = javitasok;
     }
 /*
@@ -145,5 +147,15 @@ public class Szereles  {
                // ", munkaorakSzama=" + munkaorakSzama +
                // ", alkatreszek=" + alkatreszek +
                 '}';
+    }
+
+    public List<Object> getJavitasokIdk() {
+        List<Object> javitasokIdk = new ArrayList<>();
+        Logger.info(this.getJavitasok().size());
+        for(Javitas javitas : this.getJavitasok()){
+            javitasokIdk.add(javitas.getId());
+
+        }
+        return javitasokIdk;
     }
 }

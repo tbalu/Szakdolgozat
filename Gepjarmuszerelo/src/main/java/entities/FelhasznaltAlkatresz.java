@@ -9,20 +9,20 @@ public class FelhasznaltAlkatresz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "alkatresz_id")
-    private OsAlkatresz alkatresz;
+    private Alkatresz alkatresz;
 
     @Column(name = "cikkszam")
     private Integer cikkszam;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "javitas_id")
-    private OsJavitas javitas;
+    private Javitas javitas;
 
     public FelhasznaltAlkatresz(){}
 
-    public FelhasznaltAlkatresz(Integer cikkszam, OsAlkatresz alkatresz, OsJavitas javitas) {
+    public FelhasznaltAlkatresz(Integer cikkszam, Alkatresz alkatresz, Javitas javitas) {
         this.cikkszam = cikkszam;
         this.alkatresz = alkatresz;
         this.javitas = javitas;
@@ -36,11 +36,11 @@ public class FelhasznaltAlkatresz {
         this.id = id;
     }
 
-    public OsAlkatresz getAlkatresz() {
+    public Alkatresz getAlkatresz() {
         return alkatresz;
     }
 
-    public void setAlkatresz(OsAlkatresz alkatresz) {
+    public void setAlkatresz(Alkatresz alkatresz) {
         this.alkatresz = alkatresz;
     }
 
@@ -52,11 +52,11 @@ public class FelhasznaltAlkatresz {
         this.cikkszam = cikkszam;
     }
 
-    public OsJavitas getJavitas() {
+    public Javitas getJavitas() {
         return javitas;
     }
 
-    public void setJavitas(OsJavitas javitas) {
+    public void setJavitas(Javitas javitas) {
         this.javitas = javitas;
     }
 }

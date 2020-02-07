@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "javitas")
+@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @org.hibernate.annotations.DiscriminatorFormula(
         "case when fix_ar is not null then 'FAJ' else 'ODJ'"
 )
-public abstract class OsJavitas {
+public abstract class Javitas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +36,9 @@ public abstract class OsJavitas {
     private List<Alkatresz> alkatreszek;
     private List<GarancialisAlkatresz> garancialisAlkatreszek;
 */
-    public OsJavitas() {}
+    public Javitas() {}
 
-    public OsJavitas(String leiras, List<FelhasznaltAlkatresz> felhasznaltAlkatreszek, Szereles szereles) {
+    public Javitas(String leiras, List<FelhasznaltAlkatresz> felhasznaltAlkatreszek, Szereles szereles) {
 
         this.felhasznaltAlkatreszek = felhasznaltAlkatreszek;
         this.szereles = szereles;

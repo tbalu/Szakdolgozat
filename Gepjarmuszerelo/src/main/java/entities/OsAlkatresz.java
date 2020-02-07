@@ -24,9 +24,9 @@ public abstract class OsAlkatresz {
 /*
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "javitas_id")
-    private OsJavitas javitas;
+    private Javitas javitas;
 
-    public OsAlkatresz(String nev, Integer cikkszam, Integer ar, OsJavitas javitas) {
+    public OsAlkatresz(String nev, Integer cikkszam, Integer ar, Javitas javitas) {
         this.nev = nev;
         this.cikkszam = cikkszam;
         this.ar = ar;
@@ -73,11 +73,11 @@ public abstract class OsAlkatresz {
     }
 
     /*
-    public OsJavitas getJavitas() {
+    public Javitas getJavitas() {
         return javitas;
     }
 
-    public void setJavitas(OsJavitas javitas) {
+    public void setJavitas(Javitas javitas) {
         this.javitas = javitas;
     }*/
 }

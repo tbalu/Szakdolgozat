@@ -2,6 +2,7 @@ package daos;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BasicDao<T> {
@@ -61,5 +62,15 @@ public abstract class BasicDao<T> {
 
     public void setEm(EntityManager em) {
         this.em = em;
+    }
+
+    public List<T> findAll(List<Object> idk){
+
+        List<T> result = new ArrayList<>();
+
+        for(Object id: idk) {
+         result.add(this.em.find(entityClass, id));
+        }
+        return result;
     }
 }

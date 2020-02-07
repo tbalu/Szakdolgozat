@@ -1,19 +1,30 @@
 package nezetek;
 
 import entities.FixAruJavitas;
+import entities.Javitas;
 import entities.OradijasJavitas;
-import entities.OsJavitas;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JavitasokNezet {
 
-    public static List<JavitasokNezet> listaLetrehozasa(List<OsJavitas> javitasok){
+    public static JavitasokNezet of(Javitas javitas){
+        if(javitas instanceof OradijasJavitas){
+            return new JavitasokNezet((OradijasJavitas) javitas);
+        }else if(javitas instanceof FixAruJavitas){
+            return new JavitasokNezet((FixAruJavitas)javitas);
+        }
+        else {
+            return null;
+        }
+    }
+
+    public static List<JavitasokNezet> of(List<Javitas> javitasok){
 
         List<JavitasokNezet> javitasokNezetek = new ArrayList<>();
 
-        for(OsJavitas javitas: javitasok){
+        for(Javitas javitas: javitasok){
 
             if(javitas instanceof OradijasJavitas){
                 javitasokNezetek.add(new JavitasokNezet((OradijasJavitas) javitas));
@@ -30,6 +41,7 @@ public class JavitasokNezet {
 
     }
 
+    private Integer id;
     private String leiras;
     private Integer ar;
     private Integer javitasGaranciaIdotartama;
@@ -43,6 +55,7 @@ public class JavitasokNezet {
 
     public JavitasokNezet(FixAruJavitas fixAruJavitas){
 
+        this.id = fixAruJavitas.getId();
         this.ar = fixAruJavitas.getFixAruJavitasTipus().getAr();
         this.leiras = fixAruJavitas.getFixAruJavitasTipus().getLeiras();
         this.javitasGaranciaIdotartama = fixAruJavitas.getFixAruJavitasTipus().getGaranciaIdotartama();
@@ -51,12 +64,20 @@ public class JavitasokNezet {
     }
 
     public JavitasokNezet(OradijasJavitas oradijasJavitas){
-
+        this.id = oradijasJavitas.getId();
         this.javitasGaranciaIdotartama = oradijasJavitas.getOradijasJavitasTipus().getGaranciaIdotartama();
         this.leiras = oradijasJavitas.getOradijasJavitasTipus().getLeiras();
         this.munkaorakSzama = oradijasJavitas.getMunkaOrakSzama();
         this.ar = oradijasJavitas.munkavegzesKoltsegenekKiszamitasa();
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLeiras() {
@@ -81,5 +102,13 @@ public class JavitasokNezet {
 
     public void setJavitasGaranciaIdotartama(Integer javitasGaranciaIdotartama) {
         this.javitasGaranciaIdotartama = javitasGaranciaIdotartama;
+    }
+
+    public Integer getMunkaorakSzama() {
+        return munkaorakSzama;
+    }
+
+    public void setMunkaorakSzama(Integer munkaorakSzama) {
+        this.munkaorakSzama = munkaorakSzama;
     }
 }
