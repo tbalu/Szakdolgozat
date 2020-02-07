@@ -1,5 +1,7 @@
 package daos;
 
+import org.pmw.tinylog.Logger;
+
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
@@ -72,5 +74,17 @@ public abstract class BasicDao<T> {
          result.add(this.em.find(entityClass, id));
         }
         return result;
+    }
+
+    public void removeAll(List<Object> idk){
+
+
+
+        for(Object id: idk) {
+            Logger.info(id);
+            Logger.info(this.getById(id));
+            this.remove(this.getById(id));
+        }
+
     }
 }

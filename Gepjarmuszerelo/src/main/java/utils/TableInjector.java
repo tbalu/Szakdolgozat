@@ -91,6 +91,11 @@ public class TableInjector<E> implements TableManager<E> {
         this.tabla.refresh();
     }
 
+    @Override
+    public void removeAll() {
+        this.tabla.getItems().removeAll(this.tabla.getItems());
+    }
+
 
     private void setTableColumnokPropValue(){
 

@@ -6,9 +6,12 @@ import javax.persistence.*;
 @DiscriminatorValue("FAJ")
 public class FixAruJavitas extends Javitas {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "javitas_tipus_id")
     private FixAruJavitasTipus fixAruJavitasTipus;
 
+
+    public FixAruJavitas(){}
 
     @Override
     public Integer munkavegzesKoltsegenekKiszamitasa() {

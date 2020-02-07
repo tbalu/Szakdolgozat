@@ -2,22 +2,7 @@
 
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.SzerelesSzerkesztese">
   <children>
@@ -106,7 +91,7 @@
                   <contextMenu>
                     <ContextMenu>
                       <items>
-                        <MenuItem mnemonicParsing="false" onAction="#javitasTorlese" text="Törlés" fx:id="torlesMI" />
+                        <MenuItem mnemonicParsing="false" onAction="#javitasTorlese" text="Törlés" fx:id="javitasTorleseMI" />
                         <MenuItem mnemonicParsing="false" onAction="#felhasznaltAlkatreszeinekMegjelenitese" text="Alkatrészei" fx:id="felhasznaltAlkatreszeiMI" />
                       </items>
                     </ContextMenu>
@@ -125,12 +110,20 @@
             </HBox>
             <HBox prefHeight="170.0" prefWidth="200.0">
               <children>
-                <TableView fx:id="felhasznaltAlkatreszekTV" prefHeight="164.0" prefWidth="388.0">
+                <TableView fx:id="felhasznaltAlkatreszekTV" prefHeight="164.0" prefWidth="500.0">
                   <columns>
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Név" fx:id="nevOszlop" />
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Ár" fx:id="arOszlop" />
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="163.0" text="Garancia időtartama" fx:id="felhasznaltAlkatreszGaranciaIdotartamaOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Cikkszám" fx:id="cikkszamOszlop" />
                   </columns>
+                  <contextMenu>
+                    <ContextMenu>
+                      <items>
+                        <MenuItem mnemonicParsing="false" onAction="#alkatreszTorlese" text="Törlés" fx:id="alkatreszTorlese" />
+                      </items>
+                    </ContextMenu>
+                  </contextMenu>
                 </TableView>
               </children>
             </HBox>
@@ -186,7 +179,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <MenuBar id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1200.0">
+    <MenuBar fx:id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1200.0">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>

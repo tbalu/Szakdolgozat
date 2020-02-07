@@ -2,7 +2,7 @@ package entities;
 
 import javax.persistence.*;
 
-@Entity(name = "eladott_alkatresz")
+@Entity(name = "felhasznalt_alkatresz")
 public class FelhasznaltAlkatresz {
 
     @Id
@@ -16,7 +16,7 @@ public class FelhasznaltAlkatresz {
     @Column(name = "cikkszam")
     private Integer cikkszam;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.REMOVE)
     @JoinColumn(name = "javitas_id")
     private Javitas javitas;
 

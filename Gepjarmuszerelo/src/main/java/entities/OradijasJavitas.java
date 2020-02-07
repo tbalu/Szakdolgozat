@@ -9,7 +9,7 @@ public class OradijasJavitas extends Javitas {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "javitas_tipus_id")
     private OradijasJavitasTipus oradijasJavitasTipus;
 

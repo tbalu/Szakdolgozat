@@ -15,6 +15,8 @@ import utils.TableManager;
 
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SzerelesSzerkesztese extends BasicController implements Initializable {
@@ -28,6 +30,7 @@ public class SzerelesSzerkesztese extends BasicController implements Initializab
 
     private OradijasJavitasTipusDao oradijasJavitasTipusDao = new OradijasJavitasTipusDao(EntityManagerCreator.getEntityManager());
     private JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
+    private JavitasTipusDao javitasTipusDao = new JavitasTipusDao(EntityManagerCreator.getEntityManager());
 
     private AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
     private FelhasznaltAlkatreszDao felhasznaltAlkatreszDao = new FelhasznaltAlkatreszDao(EntityManagerCreator.getEntityManager());
@@ -54,8 +57,12 @@ public class SzerelesSzerkesztese extends BasicController implements Initializab
         this.felahasznaltAlkatreszekTM = new TableInjector<>(this.felhasznaltAlkatreszekTV);
         this.javitasokTM = new TableInjector<>(this.javitasokTV);
 
-        Logger.info("---"+this.javitasDao.getById(4));
+       // Logger.info(this.szerelesDao.getById(12).getSzerelesKezdete());
 
+        List<Object> idk = new ArrayList<>();
+        /*idk.add(19);
+       // idk.add(20);
+        this.felhasznaltAlkatreszDao.removeAll(idk);*/
     }
 
 
@@ -105,12 +112,14 @@ public class SzerelesSzerkesztese extends BasicController implements Initializab
 
         FelhasznaltAlkatresz felhasznaltAlkatresz = new FelhasznaltAlkatresz(Integer.parseInt(this.cikkszamTF.getText()),alkatresz,javitas);
 
+        this.felhasznaltAlkatreszDao.persist(felhasznaltAlkatresz);
         return felhasznaltAlkatresz;
     }
 
     public void alkatresztHozzaad(){
 
         Alkatresz alkatresz = ujAlkatreszMentese();
+
         Javitas javitas = this.javitasDao.getById( this.javitasokTM.getSelectedEntity().getId());
 
         FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
@@ -122,13 +131,39 @@ public class SzerelesSzerkesztese extends BasicController implements Initializab
     public void felhasznaltAlkatreszeinekMegjelenitese(){
 
         Javitas javitas = this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
+        Logger.info(javitas.getId());
+        Logger.info(javitas.getFelhasznaltAlkatreszek().size());
         this.felahasznaltAlkatreszekTM.setEntitasok(FelhasznaltAlkatreszekNezet.of(javitas.getFelhasznaltAlkatreszek()));
 
     }
 
     public void  javitasTorlese(){
 
+        Javitas javitas =  this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
+        Logger.info("felhasznalt alkatreszek idei"+javitas.getFelhasznaltAlkatreszekIdei());
+        Logger.info("19es: " + felhasznaltAlkatreszDao.getById(20));
+        //this.felhasznaltAlkatreszDao.removeAll(javitas.getFelhasznaltAlkatreszekIdei());
+
+        /*for(FelhasznaltAlkatresz felhasznaltAlkatresz: javitas.getFelhasznaltAlkatreszek()){
+
+            this.felhasznaltAlkatreszDao.remove(felhasznaltAlkatresz);
+
+        }*/
+
+        this.javitasDao.remove(javitas);
+        this.javitasokTM.removeSelectedEntity();
+        this.javitasokTM.rerfreshTable();
+        this.felahasznaltAlkatreszekTM.removeAll();
     }
 
+    public void alkatreszTorlese(){
+        Logger.info("alkatresz torlese");
+        Logger.info(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId());
+        Logger.info("az alkatresz:" +this.alkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId()));
+
+        this.felhasznaltAlkatreszDao.remove(this.felhasznaltAlkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId()));
+        this.felahasznaltAlkatreszekTM.removeSelectedEntity();
+        this.felahasznaltAlkatreszekTM.rerfreshTable();
+    }
 
 }

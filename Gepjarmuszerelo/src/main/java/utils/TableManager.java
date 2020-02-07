@@ -32,4 +32,5 @@ public interface TableManager<E> {
 
     void rerfreshTable();
 
+    void removeAll();
 }

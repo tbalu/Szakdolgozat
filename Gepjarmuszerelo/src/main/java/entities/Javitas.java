@@ -1,13 +1,14 @@
 package entities;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @org.hibernate.annotations.DiscriminatorFormula(
-        "case when fix_ar is not null then 'FAJ' else 'ODJ'"
+        "case when munkaorak_szama is not null then 'FAJ' else 'ODJ' end"
 )
 public abstract class Javitas {
 
@@ -18,7 +19,7 @@ public abstract class Javitas {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "javitas", fetch = FetchType.LAZY)
     protected List<FelhasznaltAlkatresz> felhasznaltAlkatreszek = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany()
     @JoinTable(
             name = "dolgozott_rajta",
             joinColumns = @JoinColumn(name = "javitas_id"),
@@ -81,4 +82,14 @@ public abstract class Javitas {
 
     public abstract Integer munkavegzesKoltsegenekKiszamitasa();
 
+    public List<Object> getFelhasznaltAlkatreszekIdei(){
+
+        List<Object> idk = new ArrayList<>();
+        for(FelhasznaltAlkatresz felhasznaltAlkatresz: this.felhasznaltAlkatreszek){
+
+            idk.add((Object)felhasznaltAlkatresz.getId());
+
+        }
+        return idk;
+    }
 }
