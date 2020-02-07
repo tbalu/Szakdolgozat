@@ -4,6 +4,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
@@ -11,11 +12,13 @@ import javafx.stage.Stage;
 import org.pmw.tinylog.Logger;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class BasicController {
+public class BasicController implements Initializable {
 
 
-    @FXML private MenuBar menuBar;
+    @FXML protected MenuBar menuBar;
 
     public void folyamatbanLevoSzerelesek(ActionEvent event) throws IOException {
 
@@ -63,6 +66,13 @@ public class BasicController {
         window.setScene(folyamatbanLevoSzerelesekScene);
         window.show();
         Logger.info("meghivtak");
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+
 
     }
 }

@@ -4,9 +4,8 @@ import entities.FelhasznaltAlkatresz;
 
 import javax.persistence.EntityManager;
 
-
-public class EladottAlkatreszDao extends BasicDao<FelhasznaltAlkatresz> {
-    public EladottAlkatreszDao(EntityManager em) {
+public class FelhasznaltAlkatreszDao extends BasicDao<FelhasznaltAlkatresz> {
+    public FelhasznaltAlkatreszDao(EntityManager em) {
         super(FelhasznaltAlkatresz.class);
         this.em = em;
     }

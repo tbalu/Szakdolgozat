@@ -3,7 +3,7 @@ package entities;
 import javax.persistence.*;
 
 @Entity(name = "eladott_alkatresz")
-public class EladottAlkatresz {
+public class FelhasznaltAlkatresz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class EladottAlkatresz {
     @JoinColumn(name = "javitas_id")
     private OsJavitas javitas;
 
-    public EladottAlkatresz(){}
+    public FelhasznaltAlkatresz(){}
 
-    public EladottAlkatresz(Integer cikkszam, OsAlkatresz alkatresz, OsJavitas javitas) {
+    public FelhasznaltAlkatresz(Integer cikkszam, OsAlkatresz alkatresz, OsJavitas javitas) {
         this.cikkszam = cikkszam;
         this.alkatresz = alkatresz;
         this.javitas = javitas;

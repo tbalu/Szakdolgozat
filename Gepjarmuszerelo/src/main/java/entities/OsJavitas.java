@@ -1,7 +1,5 @@
 package entities;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,25 +7,16 @@ import java.util.List;
 @Entity(name = "javitas")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @org.hibernate.annotations.DiscriminatorFormula(
-        "case when garancia_idotartama is not null then 'GJ' else 'J' end"
+        "case when fix_ar is not null then 'FAJ' else 'ODJ'"
 )
-//@DiscriminatorColumn(name = "JAVITAS_TYPE")
-public class OsJavitas {
+public abstract class OsJavitas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "leiras")
-    private String leiras;
-    @Column(name = "ar")
-    private Integer ar;
+    protected Integer id;
 
-
-
-
-
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "javitas", fetch = FetchType.LAZY)
-    private List<EladottAlkatresz> eladottAlkatreszek = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "javitas", fetch = FetchType.LAZY)
+    protected List<FelhasznaltAlkatresz> felhasznaltAlkatreszek = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -36,11 +25,11 @@ public class OsJavitas {
             inverseJoinColumns = @JoinColumn(name = "szerelo_id")
 
     )
-    private List<Szerelo> szerelok = new ArrayList<>();
+    protected List<Szerelo> szerelok = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "szereles_id")
-    private Szereles szereles;
+    protected Szereles szereles;
 
     //---------------
   /*
@@ -49,19 +38,13 @@ public class OsJavitas {
 */
     public OsJavitas() {}
 
-    public OsJavitas(String leiras, Integer ar, List<EladottAlkatresz> eladottAlkatreszek, Szereles szereles) {
-        this.leiras = leiras;
-        this.ar = ar;
-        this.eladottAlkatreszek = eladottAlkatreszek;
+    public OsJavitas(String leiras, List<FelhasznaltAlkatresz> felhasznaltAlkatreszek, Szereles szereles) {
+
+        this.felhasznaltAlkatreszek = felhasznaltAlkatreszek;
         this.szereles = szereles;
     }
 
-    public OsJavitas(String leiras, Integer ar/*, List<Alkatresz> alkatreszek, List<GarancialisAlkatresz> garancialisAlkatreszek*/) {
-        this.leiras = leiras;
-        this.ar = ar;/*
-        this.alkatreszek = alkatreszek;
-        this.garancialisAlkatreszek = garancialisAlkatreszek;*/
-    }
+
 
     public Integer getId() {
         return id;
@@ -71,28 +54,20 @@ public class OsJavitas {
         this.id = id;
     }
 
-    public String getLeiras() {
-        return leiras;
+    public List<Szerelo> getSzerelok() {
+        return szerelok;
     }
 
-    public void setLeiras(String leiras) {
-        this.leiras = leiras;
+    public void setSzerelok(List<Szerelo> szerelok) {
+        this.szerelok = szerelok;
     }
 
-    public Integer getAr() {
-        return ar;
+    public List<FelhasznaltAlkatresz> getFelhasznaltAlkatreszek() {
+        return felhasznaltAlkatreszek;
     }
 
-    public void setAr(Integer ar) {
-        this.ar = ar;
-    }
-
-    public List<EladottAlkatresz> getEladottAlkatreszek() {
-        return eladottAlkatreszek;
-    }
-
-    public void setEladottAlkatreszek(List<EladottAlkatresz> eladottAlkatreszek) {
-        this.eladottAlkatreszek = eladottAlkatreszek;
+    public void setFelhasznaltAlkatreszek(List<FelhasznaltAlkatresz> felhasznaltAlkatreszek) {
+        this.felhasznaltAlkatreszek = felhasznaltAlkatreszek;
     }
 
     public Szereles getSzereles() {
@@ -102,4 +77,8 @@ public class OsJavitas {
     public void setSzereles(Szereles szereles) {
         this.szereles = szereles;
     }
+
+
+    public abstract Integer munkavegzesKoltsegenekKiszamitasa();
+
 }

@@ -2,17 +2,19 @@ package entities;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-@DiscriminatorValue("FJ")
-public class FixAruJavitasTipus extends OsJavitasTipus {
+@Entity
+@DiscriminatorValue("FAJT")
+public class FixAruJavitasTipus extends OradijasJavitasTipus {
 
     @Column(name = "fix_ar")
     private Integer fixAr;
     
     public FixAruJavitasTipus(){}
 
-    public FixAruJavitasTipus( String leiras, Integer fixAr) {
-        super(leiras);
+    public FixAruJavitasTipus(String leiras, Integer garanciaIdotartama, Integer fixAr) {
+        super(leiras,garanciaIdotartama);
         this.fixAr = fixAr;
     }
 

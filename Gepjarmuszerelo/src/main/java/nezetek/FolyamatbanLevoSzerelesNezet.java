@@ -24,6 +24,8 @@ public class FolyamatbanLevoSzerelesNezet {
 
     }
 
+    private Integer id;
+
     private String nev;
 
     private String telefonszam;
@@ -34,6 +36,7 @@ public class FolyamatbanLevoSzerelesNezet {
 
     public FolyamatbanLevoSzerelesNezet(Ugyfel ugyfel, Gepjarmu gepjarmu, Szereles szereles){
 
+        this.id = szereles.getId();
         this.nev = ugyfel.getNev();
         this.telefonszam = ugyfel.getTelefonszam();
         this.szerelesKezdete = szereles.getSzerelesKezdete();
@@ -42,6 +45,8 @@ public class FolyamatbanLevoSzerelesNezet {
     }
 
     public FolyamatbanLevoSzerelesNezet(Szereles szereles){
+
+        this.id = szereles.getId();
         this.nev = szereles.getUgyfel().getNev();
         this.telefonszam = szereles.getUgyfel().getTelefonszam();
         this.szerelesKezdete = szereles.getSzerelesKezdete();
@@ -50,6 +55,14 @@ public class FolyamatbanLevoSzerelesNezet {
     }
 
     public FolyamatbanLevoSzerelesNezet(){}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNev() {
         return nev;
