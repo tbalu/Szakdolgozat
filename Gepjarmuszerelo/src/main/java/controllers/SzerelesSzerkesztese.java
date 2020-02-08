@@ -2,12 +2,14 @@ package controllers;
 
 import daos.*;
 import entities.*;
+import filters.JavitasTipusFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nezetek.FelhasznaltAlkatreszekNezet;
+import nezetek.JavitasTipusNezet;
 import nezetek.JavitasokNezet;
 import org.pmw.tinylog.Logger;
 import utils.TableInjector;
@@ -39,6 +41,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     @FXML private TextArea leirasTA;
     @FXML private TextField munkaorakSzamaTF;
     @FXML private TextField javitasGaranciaIdotartamaTF;
+    @FXML private TextField fixArTF;
 
     @FXML private TableView felhasznaltAlkatreszekTV;
     @FXML private TextField nevTF;
@@ -46,8 +49,11 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     @FXML private TextField felhasznaltAlkatreszgaranciaIdotartamaTF;
     @FXML private TextField cikkszamTF;
 
+    @FXML private TableView<JavitasTipusNezet> javitasTipusokTV;
+
     private TableManager<FelhasznaltAlkatreszekNezet> felahasznaltAlkatreszekTM;
     private TableManager<JavitasokNezet> javitasokTM ;
+    private TableManager<JavitasTipusNezet> javitasTipusTM;
 
 
     @Override
@@ -56,13 +62,9 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
         this.felahasznaltAlkatreszekTM = new TableInjector<>(this.felhasznaltAlkatreszekTV);
         this.javitasokTM = new TableInjector<>(this.javitasokTV);
+        this.javitasTipusTM = new TableInjector<>(this.javitasTipusokTV);
+        Logger.info(this.javitasTipusDao.find(new JavitasTipusFilter(0,"asdf",null,null)));
 
-       // Logger.info(this.szerelesDao.getById(12).getSzerelesKezdete());
-
-        List<Object> idk = new ArrayList<>();
-        /*idk.add(19);
-       // idk.add(20);
-        this.felhasznaltAlkatreszDao.removeAll(idk);*/
     }
 
 /*
@@ -177,5 +179,13 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         this.felahasznaltAlkatreszekTM.rerfreshTable();
     }
 
+
+    public void javitasTipustKeres(){
+        JavitasTipusFilter javitasTipusFilter = new JavitasTipusFilter(null,this.leirasTA.getText(),
+                Integer.parseInt(this.javitasGaranciaIdotartamaTF.getText()),Integer.parseInt(this.fixArTF.getText()));
+
+        this.javitasTipusTM.setEntitasok(JavitasTipusNezet.of(this.javitasTipusDao.find(javitasTipusFilter)));
+
+    }
 
 }
