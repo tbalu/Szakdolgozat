@@ -68,7 +68,7 @@ public class JavitasokNezet {
         this.javitasGaranciaIdotartama = oradijasJavitas.getOradijasJavitasTipus().getGaranciaIdotartama();
         this.leiras = oradijasJavitas.getOradijasJavitasTipus().getLeiras();
         this.munkaorakSzama = oradijasJavitas.getMunkaOrakSzama();
-        this.ar = oradijasJavitas.munkavegzesKoltsegenekKiszamitasa();
+        this.ar = oradijasJavitas.aratSzamol();
 
     }
 

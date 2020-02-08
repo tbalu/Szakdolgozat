@@ -1,12 +1,14 @@
 package entities;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 
 @Entity
 @DiscriminatorValue("ODJ")
 public class OradijasJavitas extends Javitas {
 
+    public static Integer oradij = 2000;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -25,8 +27,18 @@ public class OradijasJavitas extends Javitas {
     }
 
     @Override
-    public Integer munkavegzesKoltsegenekKiszamitasa() {
-        return null;
+    public Integer aratSzamol() {
+
+        Integer ar = this.alkatreszekAra();
+        ar += this.munkaKoltsege();
+        return ar;
+    }
+
+    private Integer munkaKoltsege(){
+        if(munkaOrakSzama!=null)
+        return this.munkaOrakSzama*OradijasJavitas.oradij;
+        else
+            return 0;
     }
 
     public OradijasJavitasTipus getOradijasJavitasTipus() {
@@ -43,5 +55,9 @@ public class OradijasJavitas extends Javitas {
 
     public void setMunkaOrakSzama(Integer munkaOrakSzama) {
         this.munkaOrakSzama = munkaOrakSzama;
+    }
+
+    public static void setOradij(Integer ujOraDij){
+        oradij = ujOraDij;
     }
 }

@@ -20,9 +20,11 @@ public class FixAruJavitas extends Javitas {
     }
 
     @Override
-    public Integer munkavegzesKoltsegenekKiszamitasa() {
-        return null;
+    public Integer aratSzamol() {
+         return this.alkatreszekAra() + this.getFixAruJavitasTipus().getAr();
     }
+
+
 
     public FixAruJavitas(FixAruJavitasTipus fixAruJavitasTipus) {
         this.fixAruJavitasTipus = fixAruJavitasTipus;

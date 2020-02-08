@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity(name = "felhasznalt_alkatresz")
 public class FelhasznaltAlkatresz {
@@ -58,5 +59,9 @@ public class FelhasznaltAlkatresz {
 
     public void setJavitas(Javitas javitas) {
         this.javitas = javitas;
+    }
+
+    public Integer getAr() {
+        return this.alkatresz.getAr();
     }
 }

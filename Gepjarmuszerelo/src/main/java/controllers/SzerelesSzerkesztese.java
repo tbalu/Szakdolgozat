@@ -11,12 +11,14 @@ import javafx.scene.control.TextField;
 import nezetek.FelhasznaltAlkatreszekNezet;
 import nezetek.JavitasTipusNezet;
 import nezetek.JavitasokNezet;
+import org.hibernate.Hibernate;
 import org.pmw.tinylog.Logger;
 import utils.TableInjector;
 import utils.TableManager;
 
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -110,6 +112,8 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
             FixAruJavitas fixaruJavitas =
                     this.ujFixaruJavitasTipusMentese((FixAruJavitasTipus)this.kivalasztottJavitasTipus);
             this.javitasokTM.addEntity(JavitasokNezet.of(fixaruJavitas));
+            this.szereles.getJavitasok().add(fixaruJavitas);
+            this.szerelesDao.update(this.szereles);
 
         }
         else if(this.kivalasztottJavitasTipus instanceof OradijasJavitasTipus){
@@ -123,9 +127,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     public void javitastHozzaad(){
 
         if(this.kivalasztottJavitasTipus!=null){
-
          this.hozzaadhatJavitast();
-
         }else{
             this.nincsKivalasztottjavitasTipusFigyelmeztetes();
         }
@@ -189,8 +191,9 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         Javitas javitas =  this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
         Logger.info("felhasznalt alkatreszek idei"+javitas.getFelhasznaltAlkatreszekIdei());
         Logger.info("19es: " + felhasznaltAlkatreszDao.getById(20));
-
+        this.szereles.getJavitasok().remove(javitas);
         this.javitasDao.remove(javitas);
+        this.szerelesDao.update(szereles);
         this.javitasokTM.removeSelectedEntity();
         this.javitasokTM.rerfreshTable();
         this.felahasznaltAlkatreszekTM.removeAll();
@@ -255,6 +258,20 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
                 oradijasJavitasTipus.getGaranciaIdotartama().toString(): "");
 
         this.kivalasztottJavitasTipus = oradijasJavitasTipus;
+    }
+
+    public void szerelestLezar(){
+
+  /*      this.szereles.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
+        this.szerelesDao.update(szereles);
+*/
+        Hibernate.initialize(szereles.getJavitasok());
+//  Logger.info(szereles.getJavitasok().get(1).getFelhasznaltAlkatreszek().get(2).getCikkszam());
+  //Logger.info(szereles.aratSzamol());
+    szereles.aratSzamol();
+ //   szereles.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
+ //   szerelesDao.update(szereles);
+    Logger.info(szereles.getAr());
     }
 
 }

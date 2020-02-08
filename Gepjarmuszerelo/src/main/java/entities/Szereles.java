@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Szereles  {
+public class Szereles implements Szolgaltatas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -118,6 +118,7 @@ public class Szereles  {
     }
 
     public List<Javitas> getJavitasok() {
+
         return javitasok;
     }
 
@@ -157,5 +158,24 @@ public class Szereles  {
 
         }
         return javitasokIdk;
+    }
+    public Integer aratSzamol(){
+
+        Integer ar = new Integer(0);
+        for(Javitas javitas: this.getJavitasok()){
+
+            ar += javitas.aratSzamol();
+            /*
+            if(javitas instanceof FixAruJavitas) {
+                Logger.info("Fix");
+                ar += ((FixAruJavitas)javitas).aratSzamol();
+            }else if(javitas instanceof  OradijasJavitas){
+                Logger.info("Oradijas");
+                ar += ((OradijasJavitas)javitas).aratSzamol();
+            }*/
+
+        }
+        this.ar = ar;
+        return ar;
     }
 }

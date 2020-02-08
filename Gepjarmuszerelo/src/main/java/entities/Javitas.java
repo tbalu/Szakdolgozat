@@ -8,15 +8,15 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @org.hibernate.annotations.DiscriminatorFormula(
-        "case when munkaorak_szama is not null then 'FAJ' else 'ODJ' end"
+        "case when munkaorak_szama is not null then 'ODJ' else 'FAJ' end"
 )
-public abstract class Javitas {
+public abstract class Javitas implements Szolgaltatas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "javitas", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "javitas", fetch = FetchType.EAGER)
     protected List<FelhasznaltAlkatresz> felhasznaltAlkatreszek = new ArrayList<>();
 
     @ManyToMany()
@@ -85,7 +85,20 @@ public abstract class Javitas {
     }
 
 
-    public abstract Integer munkavegzesKoltsegenekKiszamitasa();
+    public abstract Integer aratSzamol();
+
+    protected Integer alkatreszekAra(){
+
+        Integer ar = new Integer(0);
+
+        for(FelhasznaltAlkatresz alkatresz : this.getFelhasznaltAlkatreszek()){
+
+            ar += alkatresz.getAr();
+
+        }
+        return ar;
+
+    }
 
     public List<Object> getFelhasznaltAlkatreszekIdei(){
 

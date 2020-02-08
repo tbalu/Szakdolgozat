@@ -222,5 +222,6 @@
         </ContextMenu>
       </contextMenu>
     </TableView>
+    <Button layoutX="750.0" layoutY="671.0" mnemonicParsing="false" onAction="#szerelestLezar" prefHeight="100.0" prefWidth="138.0" text="Szerelés lezárása" />
   </children>
 </AnchorPane>
