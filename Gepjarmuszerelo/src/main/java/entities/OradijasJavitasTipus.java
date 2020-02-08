@@ -7,7 +7,7 @@ import java.util.List;
 @Entity(name = "javitas_tipus")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @org.hibernate.annotations.DiscriminatorFormula(
-        "case when fix_ar is null then 'ODJT' else 'FAJT'"
+        "case when fix_ar is null then 'ODJT' else 'FAJT' end"
 )
 @DiscriminatorValue("ODJT")
 public class OradijasJavitasTipus {
@@ -57,5 +57,13 @@ public class OradijasJavitasTipus {
 
     public void setGaranciaIdotartama(Integer garanciaIdotartama) {
         this.garanciaIdotartama = garanciaIdotartama;
+    }
+
+    public List<OradijasJavitas> getJavitasok() {
+        return javitasok;
+    }
+
+    public void setJavitasok(List<OradijasJavitas> javitasok) {
+        this.javitasok = javitasok;
     }
 }

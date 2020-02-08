@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SzerelesSzerkesztese extends BasicController implements Initializable {
+public class SzerelesSzerkesztese extends BasicControllerWithInitData implements Initializable {
 
 
     private Szereles szereles;
@@ -65,7 +65,7 @@ public class SzerelesSzerkesztese extends BasicController implements Initializab
         this.felhasznaltAlkatreszDao.removeAll(idk);*/
     }
 
-
+/*
     public void intiData(Szereles szereles){
 
         this.szereles = szereles;
@@ -73,6 +73,17 @@ public class SzerelesSzerkesztese extends BasicController implements Initializab
         this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
 
     }
+
+    */
+
+    @Override
+    public void initData(Object o) {
+        Szereles szereles = (Szereles)o;
+        this.szereles = szereles;
+
+        this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
+    }
+
 
     private OradijasJavitasTipus ujOradijasJavitasTipusMentese(){
         OradijasJavitasTipus oradijasJavitasTipus =
@@ -165,5 +176,6 @@ public class SzerelesSzerkesztese extends BasicController implements Initializab
         this.felahasznaltAlkatreszekTM.removeSelectedEntity();
         this.felahasznaltAlkatreszekTM.rerfreshTable();
     }
+
 
 }

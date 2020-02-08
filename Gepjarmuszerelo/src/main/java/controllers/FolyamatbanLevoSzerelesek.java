@@ -56,7 +56,7 @@ public class FolyamatbanLevoSzerelesek extends BasicController implements Initia
     }
 
     public void szerelesSzerkesztesereNavigal() throws IOException {
-
+/*
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("SzerelesSzerkesztese.fxml"));
         loader.setLocation(FXMLLoader.getDefaultClassLoader()
@@ -66,8 +66,9 @@ public class FolyamatbanLevoSzerelesek extends BasicController implements Initia
 
         SzerelesSzerkesztese controller = loader.getController();
 
-        controller.intiData(this.szerelesDao.getById(this.folyamatbanLevoSzerelesekManager.getSelectedItem().getId()));
+        //controller.intiData(this.szerelesDao.getById(this.folyamatbanLevoSzerelesekManager.getSelectedItem().getId()));
 
+        controller.initData(this.szerelesDao.getById(this.folyamatbanLevoSzerelesekManager.getSelectedItem().getId()));
         Scene ujScene = new Scene(root);
 
 
@@ -79,6 +80,23 @@ public class FolyamatbanLevoSzerelesek extends BasicController implements Initia
         window.setScene(ujScene);
         window.show();
         Logger.info("meghivtak");
+*/
+
+        Logger.info( "kivalasztott szereles id-ja");
+    Logger.info( this.getKivalasztottSzerelesEntity().getId());
+    szerelesSzerkesztesereNavigal("SzerelesSzerkesztese", this.getKivalasztottSzerelesEntity() );
+    }
+
+    private void szerelesSzerkesztesereNavigal(String fxmlNev, Szereles szereles) throws IOException {
+        this.scenetValt(fxmlNev, szereles);
+
 
     }
+
+    private Szereles getKivalasztottSzerelesEntity(){
+
+        return this.szerelesDao.getById(this.folyamatbanLevoSzerelesekManager.getSelectedItem().getId());
+
+    }
+
 }
