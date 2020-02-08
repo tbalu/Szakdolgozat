@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("FAJ")
@@ -12,6 +13,11 @@ public class FixAruJavitas extends Javitas {
 
 
     public FixAruJavitas(){}
+
+    public FixAruJavitas(Szereles szereles, FixAruJavitasTipus fixAruJavitasTipus) {
+        super(szereles);
+        this.fixAruJavitasTipus = fixAruJavitasTipus;
+    }
 
     @Override
     public Integer munkavegzesKoltsegenekKiszamitasa() {

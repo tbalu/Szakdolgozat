@@ -55,6 +55,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     private TableManager<JavitasokNezet> javitasokTM ;
     private TableManager<JavitasTipusNezet> javitasTipusTM;
 
+    private OradijasJavitasTipus kivalasztottJavitasTipus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,20 +64,9 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         this.felahasznaltAlkatreszekTM = new TableInjector<>(this.felhasznaltAlkatreszekTV);
         this.javitasokTM = new TableInjector<>(this.javitasokTV);
         this.javitasTipusTM = new TableInjector<>(this.javitasTipusokTV);
-        Logger.info(this.javitasTipusDao.find(new JavitasTipusFilter(0,"asdf",null,null)));
 
     }
 
-/*
-    public void intiData(Szereles szereles){
-
-        this.szereles = szereles;
-        Logger.info("szereles id" + this.szereles.getId());
-        this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
-
-    }
-
-    */
 
     @Override
     public void initData(Object o) {
@@ -104,13 +94,56 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
             return oradijasJavitas;
     }
 
+    //Itt van a régi javitastHozzaad().
+    /*
     public void javitastHozzaad(){
 
         OradijasJavitas oradijasJavitas = ujOradijasJavitasMentese(this.ujOradijasJavitasTipusMentese());
         this.javitasokTM.addEntity(JavitasokNezet.of(oradijasJavitas));
 
     }
+*/
 
+    private void hozzaadhatJavitast(){
+
+        if(this.kivalasztottJavitasTipus instanceof FixAruJavitasTipus){
+            FixAruJavitas fixaruJavitas =
+                    this.ujFixaruJavitasTipusMentese((FixAruJavitasTipus)this.kivalasztottJavitasTipus);
+            this.javitasokTM.addEntity(JavitasokNezet.of(fixaruJavitas));
+
+        }
+        else if(this.kivalasztottJavitasTipus instanceof OradijasJavitasTipus){
+            OradijasJavitas oradijasJavitas= this.ujOradijasJavitasMentese(this.kivalasztottJavitasTipus);
+            this.javitasokTM.addEntity(JavitasokNezet.of(oradijasJavitas));
+        }
+
+
+    }
+
+    public void javitastHozzaad(){
+
+        if(this.kivalasztottJavitasTipus!=null){
+
+         this.hozzaadhatJavitast();
+
+        }else{
+            this.nincsKivalasztottjavitasTipusFigyelmeztetes();
+        }
+
+    }
+
+    private FixAruJavitas ujFixaruJavitasTipusMentese(FixAruJavitasTipus kivalasztottJavitasTipus) {
+
+        FixAruJavitas fixAruJavitas =
+                new FixAruJavitas(this.szereles,kivalasztottJavitasTipus);
+
+        this.javitasDao.persist(fixAruJavitas);
+        return fixAruJavitas;
+
+    }
+
+    private void nincsKivalasztottjavitasTipusFigyelmeztetes() {
+    }
 
     public Alkatresz ujAlkatreszMentese(){
 
@@ -137,7 +170,8 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
         FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
         this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
-
+        javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
+        this.javitasDao.update(javitas);
 
     }
 
@@ -155,13 +189,6 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         Javitas javitas =  this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
         Logger.info("felhasznalt alkatreszek idei"+javitas.getFelhasznaltAlkatreszekIdei());
         Logger.info("19es: " + felhasznaltAlkatreszDao.getById(20));
-        //this.felhasznaltAlkatreszDao.removeAll(javitas.getFelhasznaltAlkatreszekIdei());
-
-        /*for(FelhasznaltAlkatresz felhasznaltAlkatresz: javitas.getFelhasznaltAlkatreszek()){
-
-            this.felhasznaltAlkatreszDao.remove(felhasznaltAlkatresz);
-
-        }*/
 
         this.javitasDao.remove(javitas);
         this.javitasokTM.removeSelectedEntity();
@@ -181,11 +208,53 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
 
     public void javitasTipustKeres(){
-        JavitasTipusFilter javitasTipusFilter = new JavitasTipusFilter(null,this.leirasTA.getText(),
-                Integer.parseInt(this.javitasGaranciaIdotartamaTF.getText()),Integer.parseInt(this.fixArTF.getText()));
+        JavitasTipusFilter javitasTipusFilter = this.javitasTipusFilterLetrehozasa();
 
-        this.javitasTipusTM.setEntitasok(JavitasTipusNezet.of(this.javitasTipusDao.find(javitasTipusFilter)));
 
+        List javitasTipusok;
+
+        if(javitasTipusFilter.getFixar()==null) {
+                        javitasTipusok = this.javitasTipusDao.findOradijasJavitasTipus(javitasTipusFilter);
+        }else{
+            javitasTipusok = this.javitasTipusDao.findFixaruJavitasTipusok(javitasTipusFilter);
+
+        }
+
+        javitasTipusok.addAll(javitasTipusok);
+        this.javitasTipusTM.setEntitasok(JavitasTipusNezet.of(javitasTipusok));
+
+    }
+
+    public JavitasTipusFilter javitasTipusFilterLetrehozasa(){
+
+        JavitasTipusFilter javitasTipusFilter = new JavitasTipusFilter();
+        javitasTipusFilter.setId(null);
+        javitasTipusFilter.setLeiras(this.leirasTA.getText());
+        String fixar = this.fixArTF.getText();
+        String garanciaIdotartama = this.javitasGaranciaIdotartamaTF.getText();
+        Logger.info(fixar + "  -----  " + garanciaIdotartama);
+        if(!fixar.equals("")){
+            javitasTipusFilter.setFixar(Integer.parseInt(fixar));
+        }
+
+        if(!garanciaIdotartama.equals("")){
+            javitasTipusFilter.setGaranciIdotartama(Integer.parseInt(garanciaIdotartama));
+        }
+
+        return javitasTipusFilter;
+    }
+
+    public void javitasTipustValaszt(){
+
+        OradijasJavitasTipus oradijasJavitasTipus =  this.javitasTipusDao.getById(this.javitasTipusTM.getSelectedEntity().getId());
+        this.leirasTA.setText(oradijasJavitasTipus.getLeiras());
+        if(oradijasJavitasTipus instanceof FixAruJavitasTipus){
+            this.fixArTF.setText(((FixAruJavitasTipus) oradijasJavitasTipus).getAr().toString());
+        }
+        this.javitasGaranciaIdotartamaTF.setText(oradijasJavitasTipus.getGaranciaIdotartama()!=null ?
+                oradijasJavitasTipus.getGaranciaIdotartama().toString(): "");
+
+        this.kivalasztottJavitasTipus = oradijasJavitasTipus;
     }
 
 }

@@ -16,6 +16,8 @@ public class JavitasTipusFilter {
         this.fixar = fixar;
     }
 
+    public JavitasTipusFilter(){}
+
     public Integer getId() {
         return id;
     }

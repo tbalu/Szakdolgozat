@@ -45,6 +45,11 @@ public abstract class Javitas {
         this.szereles = szereles;
     }
 
+    public Javitas( Szereles szereles){
+        this.szereles = szereles;
+
+    }
+
 
 
     public Integer getId() {
