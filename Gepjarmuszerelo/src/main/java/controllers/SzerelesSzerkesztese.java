@@ -18,10 +18,10 @@ import utils.TableManager;
 
 
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class SzerelesSzerkesztese extends BasicControllerWithInitData implements Initializable {
 
@@ -39,6 +39,9 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     private AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
     private FelhasznaltAlkatreszDao felhasznaltAlkatreszDao = new FelhasznaltAlkatreszDao(EntityManagerCreator.getEntityManager());
 
+
+    private List<FelhasznaltAlkatresz> kitorlendoFelhasznaltAlkatreszek = new ArrayList<>();
+    private List<Javitas> kitorlendoJavitasok = new ArrayList<>();
     @FXML private TableView javitasokTV;
     @FXML private TextArea leirasTA;
     @FXML private TextField munkaorakSzamaTF;
@@ -73,9 +76,13 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     @Override
     public void initData(Object o) {
         Szereles szereles = (Szereles)o;
+        //Hibernate.initialize(szereles);
+
         this.szereles = szereles;
 
-        this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
+        //this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
+        this.javitasokTM.setEntitasok(JavitasokNezet.of(this.szereles.getJavitasok()));
+
     }
 
 
@@ -87,59 +94,59 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
     }
 
-    private OradijasJavitas ujOradijasJavitasMentese(OradijasJavitasTipus oradijasJavitasTipus){
-
-        OradijasJavitas oradijasJavitas =
-                new OradijasJavitas(this.szereles,oradijasJavitasTipus,Integer.parseInt(this.munkaorakSzamaTF.getText()));
-
-            this.javitasDao.persist(oradijasJavitas);
-            return oradijasJavitas;
-    }
-
-    //Itt van a régi javitastHozzaad().
-    /*
-    public void javitastHozzaad(){
-
-        OradijasJavitas oradijasJavitas = ujOradijasJavitasMentese(this.ujOradijasJavitasTipusMentese());
-        this.javitasokTM.addEntity(JavitasokNezet.of(oradijasJavitas));
-
-    }
-*/
-
-    private void hozzaadhatJavitast(){
-
-        if(this.kivalasztottJavitasTipus instanceof FixAruJavitasTipus){
-            FixAruJavitas fixaruJavitas =
-                    this.ujFixaruJavitasTipusMentese((FixAruJavitasTipus)this.kivalasztottJavitasTipus);
-            this.javitasokTM.addEntity(JavitasokNezet.of(fixaruJavitas));
-            this.szereles.getJavitasok().add(fixaruJavitas);
-            this.szerelesDao.update(this.szereles);
-
-        }
-        else if(this.kivalasztottJavitasTipus instanceof OradijasJavitasTipus){
-            OradijasJavitas oradijasJavitas= this.ujOradijasJavitasMentese(this.kivalasztottJavitasTipus);
-            this.javitasokTM.addEntity(JavitasokNezet.of(oradijasJavitas));
-        }
 
 
-    }
+// Javítás hozzáadása
 
-    public void javitastHozzaad(){
+    public void javitastHozzaadPushed(){
 
         if(this.kivalasztottJavitasTipus!=null){
-         this.hozzaadhatJavitast();
+         this.javitastHozzaad();
         }else{
             this.nincsKivalasztottjavitasTipusFigyelmeztetes();
         }
 
     }
 
-    private FixAruJavitas ujFixaruJavitasTipusMentese(FixAruJavitasTipus kivalasztottJavitasTipus) {
+    private void javitastHozzaad(){
+
+        if(this.kivalasztottJavitasTipus instanceof FixAruJavitasTipus){
+            FixAruJavitas fixaruJavitas =
+                    this.ujFixaruJavitasMentese((FixAruJavitasTipus)this.kivalasztottJavitasTipus);
+            this.javitasokTM.addEntity(JavitasokNezet.of(fixaruJavitas));
+            this.szereles.getJavitasok().add(fixaruJavitas);
+
+            // kivett update
+            //this.szerelesDao.update(this.szereles);
+
+        }
+        else if(this.kivalasztottJavitasTipus instanceof OradijasJavitasTipus){
+            OradijasJavitas oradijasJavitas= this.ujOradijasJavitasMentese(this.kivalasztottJavitasTipus);
+            this.szereles.getJavitasok().add(oradijasJavitas);
+            this.javitasokTM.addEntity(JavitasokNezet.of(oradijasJavitas));
+        }
+
+
+    }
+
+    private OradijasJavitas ujOradijasJavitasMentese(OradijasJavitasTipus oradijasJavitasTipus){
+
+        OradijasJavitas oradijasJavitas =
+                new OradijasJavitas(this.szereles,oradijasJavitasTipus,Integer.parseInt(this.munkaorakSzamaTF.getText()));
+
+        //kivett persist
+        //this.javitasDao.persist(oradijasJavitas);
+        return oradijasJavitas;
+    }
+
+
+    private FixAruJavitas ujFixaruJavitasMentese(FixAruJavitasTipus kivalasztottJavitasTipus) {
 
         FixAruJavitas fixAruJavitas =
                 new FixAruJavitas(this.szereles,kivalasztottJavitasTipus);
 
-        this.javitasDao.persist(fixAruJavitas);
+        //kivett persist
+        //this.javitasDao.persist(fixAruJavitas);
         return fixAruJavitas;
 
     }
@@ -147,12 +154,36 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     private void nincsKivalasztottjavitasTipusFigyelmeztetes() {
     }
 
+
+    // Új alkatrész mentése
+
+
+    public void alkatresztHozzaadPushed(){
+
+        Alkatresz alkatresz = ujAlkatreszMentese();
+
+        //Javitas javitas = this.javitasDao.getById( this.javitasokTM.getSelectedEntity().getId());
+
+        //Javitas javitas = this.szereles.getJavitasok().stream().filter(o -> o.getId().equals(this.javitasokTM.getSelectedEntity().getId())).findFirst().get();
+
+        //Javitas javitas = this.szereles.getJavitasok().stream().filter(o->o == this.javitasokTM.getSelectedEntity().getJavitas()).findFirst().get();
+        Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
+        FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
+        this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
+        javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
+        // kivett update
+
+        //this.javitasDao.update(javitas);
+
+    }
+
     public Alkatresz ujAlkatreszMentese(){
 
         Alkatresz alkatresz = new Alkatresz(this.nevTF.getText(), Integer.parseInt(this.arTF.getText()),
                 Integer.parseInt(this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText()));
 
-        this.alkatreszDao.persist(alkatresz);
+        //kivett persist
+        //this.alkatreszDao.persist(alkatresz);
         return alkatresz;
     }
 
@@ -160,57 +191,82 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
         FelhasznaltAlkatresz felhasznaltAlkatresz = new FelhasznaltAlkatresz(Integer.parseInt(this.cikkszamTF.getText()),alkatresz,javitas);
 
-        this.felhasznaltAlkatreszDao.persist(felhasznaltAlkatresz);
+        //kivett persist
+        //this.felhasznaltAlkatreszDao.persist(felhasznaltAlkatresz);
         return felhasznaltAlkatresz;
     }
 
-    public void alkatresztHozzaad(){
+// A kiválasztott javítás felhasznált alkatrészeinek megjelenítése.
 
-        Alkatresz alkatresz = ujAlkatreszMentese();
+    public void felhasznaltAlkatreszeinekMegjelenitesePushed(){
 
-        Javitas javitas = this.javitasDao.getById( this.javitasokTM.getSelectedEntity().getId());
-
-        FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
-        this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
-        javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
-        this.javitasDao.update(javitas);
-
-    }
-
-    public void felhasznaltAlkatreszeinekMegjelenitese(){
-
-        Javitas javitas = this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
+        //Javitas javitas = this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
+        Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
         Logger.info(javitas.getId());
         Logger.info(javitas.getFelhasznaltAlkatreszek().size());
         this.felahasznaltAlkatreszekTM.setEntitasok(FelhasznaltAlkatreszekNezet.of(javitas.getFelhasznaltAlkatreszek()));
 
     }
 
-    public void  javitasTorlese(){
 
-        Javitas javitas =  this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
-        Logger.info("felhasznalt alkatreszek idei"+javitas.getFelhasznaltAlkatreszekIdei());
-        Logger.info("19es: " + felhasznaltAlkatreszDao.getById(20));
+    // A kiválaszott javítás törlése
+    public void  javitasTorlesePushed(){
+
+        //Javitas javitas =  this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
+
+        Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
         this.szereles.getJavitasok().remove(javitas);
-        this.javitasDao.remove(javitas);
-        this.szerelesDao.update(szereles);
+        Logger.info(szereles.getJavitasok());
+        //kivett remove
+        //this.javitasDao.remove(javitas);
+
+        // kivett update
+        //this.szerelesDao.update(szereles);
+        if(javitas.getId()!=null){
+
+            this.kitorlendoJavitasok.add(javitas);
+
+        }
+
         this.javitasokTM.removeSelectedEntity();
         this.javitasokTM.rerfreshTable();
         this.felahasznaltAlkatreszekTM.removeAll();
     }
 
-    public void alkatreszTorlese(){
+    // Alkatrész törlése
+    public void alkatreszTorlesePushed(){
         Logger.info("alkatresz torlese");
-        Logger.info(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId());
-        Logger.info("az alkatresz:" +this.alkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId()));
 
-        this.felhasznaltAlkatreszDao.remove(this.felhasznaltAlkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId()));
+        Logger.info(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId());
+        //Logger.info("az alkatresz:" +this.alkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId()));
+
+        //FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId());
+
+        FelhasznaltAlkatresz felhasznaltAlkatresz = this.felahasznaltAlkatreszekTM.getSelectedEntity().getFelhasznaltAlkatresz();
+
+        Javitas javitas = felhasznaltAlkatresz.getJavitas();
+
+        //this.szereles.getJavitasok().remove(javitas);
+        javitas.getFelhasznaltAlkatreszek().remove(felhasznaltAlkatresz);
+        //this.szereles.getJavitasok().add(javitas);
+
+        //kivett remove
+        //this.felhasznaltAlkatreszDao.remove(felhasznaltAlkatresz);
+
+        if(felhasznaltAlkatresz.getId()!=null){
+            this.kitorlendoFelhasznaltAlkatreszek.add(felhasznaltAlkatresz);
+            //this.felhasznaltAlkatreszDao.remove(this.felhasznaltAlkatreszDao.getById(felhasznaltAlkatresz.getId()));
+        }
+
         this.felahasznaltAlkatreszekTM.removeSelectedEntity();
         this.felahasznaltAlkatreszekTM.rerfreshTable();
+
+        //kivett update
+        //javitasDao.update(javitas);
     }
 
-
-    public void javitasTipustKeres(){
+    // Javítás keresése
+    public void javitasTipustKeresPushed(){
         JavitasTipusFilter javitasTipusFilter = this.javitasTipusFilterLetrehozasa();
 
 
@@ -260,12 +316,31 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         this.kivalasztottJavitasTipus = oradijasJavitasTipus;
     }
 
-    public void szerelestLezar(){
+    public void modositasokMentesePushed(){
+
+        this.szerelesDao.update(szereles);
+
+        this.javitasDao.removeAll(this.kitorlendoJavitasok.stream().map(j->j.getId()).collect(Collectors.toList()));
+
+        this.felhasznaltAlkatreszDao.removeAll(this.kitorlendoFelhasznaltAlkatreszek.stream().map(j->j.getId()).collect(Collectors.toList()));
+
+
+
+
+    }
+
+    public void szerelestLezarPushed(){
 
   /*      this.szereles.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
         this.szerelesDao.update(szereles);
 */
-        Hibernate.initialize(szereles.getJavitasok());
+
+        //this.szereles = this.szerelesDao.getById(this.szereles.getId());
+        //Hibernate.initialize(szereles);
+
+        Logger.info(szereles);
+
+       // Hibernate.initialize(szereles.getJavitasok());
 //  Logger.info(szereles.getJavitasok().get(1).getFelhasznaltAlkatreszek().get(2).getCikkszam());
   //Logger.info(szereles.aratSzamol());
     szereles.aratSzamol();

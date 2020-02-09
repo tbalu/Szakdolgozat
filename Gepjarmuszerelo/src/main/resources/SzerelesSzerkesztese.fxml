@@ -91,8 +91,8 @@
                   <contextMenu>
                     <ContextMenu>
                       <items>
-                        <MenuItem mnemonicParsing="false" onAction="#javitasTorlese" text="Törlés" fx:id="javitasTorleseMI" />
-                        <MenuItem mnemonicParsing="false" onAction="#felhasznaltAlkatreszeinekMegjelenitese" text="Alkatrészei" fx:id="felhasznaltAlkatreszeiMI" />
+                        <MenuItem mnemonicParsing="false" onAction="#javitasTorlesePushed" text="Törlés" fx:id="javitasTorleseMI" />
+                        <MenuItem mnemonicParsing="false" onAction="#felhasznaltAlkatreszeinekMegjelenitesePushed" text="Alkatrészei" fx:id="felhasznaltAlkatreszeiMI" />
                       </items>
                     </ContextMenu>
                   </contextMenu>
@@ -120,7 +120,7 @@
                   <contextMenu>
                     <ContextMenu>
                       <items>
-                        <MenuItem mnemonicParsing="false" onAction="#alkatreszTorlese" text="Törlés" fx:id="alkatreszTorleseMI" />
+                        <MenuItem mnemonicParsing="false" onAction="#alkatreszTorlesePushed" text="Törlés" fx:id="alkatreszTorleseMI" />
                       </items>
                     </ContextMenu>
                   </contextMenu>
@@ -139,10 +139,10 @@
         <TextField id="arTextField" fx:id="fixArTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text="Garancia időtartama:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <TextField fx:id="javitasGaranciaIdotartamaTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Button mnemonicParsing="false" onAction="#javitasTipustKeres" text="Keres" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Button mnemonicParsing="false" onAction="#javitasTipustKeresPushed" text="Keres" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <Label text="Munkaórák száma:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <TextField fx:id="munkaorakSzamaTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Button mnemonicParsing="false" onAction="#javitastHozzaad" text="Javítást Hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Button mnemonicParsing="false" onAction="#javitastHozzaadPushed" text="Javítást Hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <Button mnemonicParsing="false" text="Javítástipust hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </children>
       <columnConstraints>
@@ -166,7 +166,7 @@
         <TextField fx:id="nevTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <TextField fx:id="arTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField id="garanciaIdotartamaTF" fx:id="felhasznaltAlkatreszgaranciaIdotartamaTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Button id="alkatresztHozzaad" mnemonicParsing="false" onAction="#alkatresztHozzaad" text="Hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Button id="alkatresztHozzaad" mnemonicParsing="false" onAction="#alkatresztHozzaadPushed" text="Hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label text="Cikkszám:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <TextField fx:id="cikkszamTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </children>
@@ -222,6 +222,7 @@
         </ContextMenu>
       </contextMenu>
     </TableView>
-    <Button layoutX="750.0" layoutY="671.0" mnemonicParsing="false" onAction="#szerelestLezar" prefHeight="100.0" prefWidth="138.0" text="Szerelés lezárása" />
+    <Button layoutX="931.0" layoutY="671.0" mnemonicParsing="false" onAction="#szerelestLezarPushed" prefHeight="100.0" prefWidth="138.0" text="Szerelés lezárása" />
+    <Button layoutX="571.0" layoutY="672.0" mnemonicParsing="false" onAction="#modositasokMentesePushed" prefHeight="100.0" prefWidth="200.0" text="Módositasok mentése" />
   </children>
 </AnchorPane>

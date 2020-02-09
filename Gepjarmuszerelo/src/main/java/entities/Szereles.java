@@ -30,7 +30,7 @@ public class Szereles implements Szolgaltatas {
     @JoinColumn(name = "ugyfel_id")
     private Ugyfel ugyfel;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "szereles", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "szereles", fetch = FetchType.LAZY)
     private List<Javitas> javitasok = new ArrayList<>();
 
 
@@ -135,18 +135,16 @@ public class Szereles implements Szolgaltatas {
     }*/
 
 
-
     @Override
     public String toString() {
         return "Szereles{" +
                 "id=" + id +
                 ", szerelesKezdete=" + szerelesKezdete +
                 ", szerelesVege=" + szerelesVege +
-                ", gepjarmu=" + gepjarmu +
-                ", ugyfel=" + ugyfel +
-                ", munkavegzesKoltsege=" + ar +
-               // ", munkaorakSzama=" + munkaorakSzama +
-               // ", alkatreszek=" + alkatreszek +
+                ", gepjarmu=" + gepjarmu.getId() +
+                ", ugyfel=" + ugyfel.getId() +
+                ", javitasok=" + javitasok +
+                ", ar=" + ar +
                 '}';
     }
 

@@ -25,10 +25,12 @@ public class FelhasznaltAlkatreszekNezet {
     private Integer ar;
     private Integer garanciaIdotartama;
     private Integer cikkszam;
+    private FelhasznaltAlkatresz felhasznaltAlkatresz;
 
 
     public FelhasznaltAlkatreszekNezet(FelhasznaltAlkatresz felhasznaltAlkatresz){
 
+        this.felhasznaltAlkatresz = felhasznaltAlkatresz;
         this.id = felhasznaltAlkatresz.getId();
         // DEMETER TORVENYENEK MEGSERTESE
         this.nev = felhasznaltAlkatresz.getAlkatresz().getNev();
@@ -75,5 +77,13 @@ public class FelhasznaltAlkatreszekNezet {
 
     public void setCikkszam(Integer cikkszam) {
         this.cikkszam = cikkszam;
+    }
+
+    public FelhasznaltAlkatresz getFelhasznaltAlkatresz() {
+        return felhasznaltAlkatresz;
+    }
+
+    public void setFelhasznaltAlkatresz(FelhasznaltAlkatresz felhasznaltAlkatresz) {
+        this.felhasznaltAlkatresz = felhasznaltAlkatresz;
     }
 }

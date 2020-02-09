@@ -46,6 +46,7 @@ public class JavitasokNezet {
     private Integer ar;
     private Integer javitasGaranciaIdotartama;
     private Integer munkaorakSzama;
+    private Javitas javitas;
 
     public JavitasokNezet(String leiras, Integer ar, Integer javitasGaranciaIdotartama) {
         this.leiras = leiras;
@@ -54,7 +55,7 @@ public class JavitasokNezet {
     }
 
     public JavitasokNezet(FixAruJavitas fixAruJavitas){
-
+        this.javitas = fixAruJavitas;
         this.id = fixAruJavitas.getId();
         this.ar = fixAruJavitas.getFixAruJavitasTipus().getAr();
         this.leiras = fixAruJavitas.getFixAruJavitasTipus().getLeiras();
@@ -64,6 +65,7 @@ public class JavitasokNezet {
     }
 
     public JavitasokNezet(OradijasJavitas oradijasJavitas){
+        this.javitas = oradijasJavitas;
         this.id = oradijasJavitas.getId();
         this.javitasGaranciaIdotartama = oradijasJavitas.getOradijasJavitasTipus().getGaranciaIdotartama();
         this.leiras = oradijasJavitas.getOradijasJavitasTipus().getLeiras();
@@ -110,5 +112,13 @@ public class JavitasokNezet {
 
     public void setMunkaorakSzama(Integer munkaorakSzama) {
         this.munkaorakSzama = munkaorakSzama;
+    }
+
+    public Javitas getJavitas() {
+        return javitas;
+    }
+
+    public void setJavitas(Javitas javitas) {
+        this.javitas = javitas;
     }
 }

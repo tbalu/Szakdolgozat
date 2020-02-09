@@ -60,4 +60,14 @@ public class OradijasJavitas extends Javitas {
     public static void setOradij(Integer ujOraDij){
         oradij = ujOraDij;
     }
+
+    @Override
+    public String toString() {
+        return "OradijasJavitas{" +
+                "oradijasJavitasTipus=" + oradijasJavitasTipus +
+                ", munkaOrakSzama=" + munkaOrakSzama +
+                ", id=" + id +
+                ", felhasznaltAlkatreszek=" + felhasznaltAlkatreszek +
+                '}';
+    }
 }

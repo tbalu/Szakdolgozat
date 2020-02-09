@@ -16,7 +16,7 @@ public abstract class Javitas implements Szolgaltatas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "javitas", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE,mappedBy = "javitas", fetch = FetchType.EAGER)
     protected List<FelhasznaltAlkatresz> felhasznaltAlkatreszek = new ArrayList<>();
 
     @ManyToMany()

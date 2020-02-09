@@ -2,22 +2,23 @@ package entities;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.io.Serializable;
 
 @Entity(name = "felhasznalt_alkatresz")
-public class FelhasznaltAlkatresz {
+public class FelhasznaltAlkatresz implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "alkatresz_id")
     private Alkatresz alkatresz;
 
     @Column(name = "cikkszam")
     private Integer cikkszam;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "javitas_id")
     private Javitas javitas;
 

@@ -24,6 +24,7 @@ public class FolyamatbanLevoSzerelesNezet {
 
     }
 
+
     private Integer id;
 
     private String nev;

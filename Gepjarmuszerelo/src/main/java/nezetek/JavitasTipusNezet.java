@@ -33,9 +33,10 @@ public class JavitasTipusNezet {
     private String leiras;
     private Integer garanciaIdotartama;
     private Integer fixar;
+    private OradijasJavitasTipus oradijasJavitasTipus;
 
     public JavitasTipusNezet(FixAruJavitasTipus fixAruJavitasTipus){
-
+        this.oradijasJavitasTipus = fixAruJavitasTipus;
         this.id = fixAruJavitasTipus.getId();
         this.leiras = fixAruJavitasTipus.getLeiras();
         this.fixar = fixAruJavitasTipus.getAr();
