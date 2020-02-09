@@ -2,6 +2,7 @@ package controllers;
 
 import daos.*;
 import entities.*;
+import filters.AlkatreszFilter;
 import filters.JavitasTipusFilter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,12 +55,15 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     @FXML private TextField felhasznaltAlkatreszgaranciaIdotartamaTF;
     @FXML private TextField cikkszamTF;
 
+
+    @FXML private TableView<AlkatreszNezet> alkatreszekTV;
+
     @FXML private TableView<JavitasTipusNezet> javitasTipusokTV;
 
     private TableManager<FelhasznaltAlkatreszekNezet> felahasznaltAlkatreszekTM;
     private TableManager<JavitasokNezet> javitasokTM ;
     private TableManager<JavitasTipusNezet> javitasTipusTM;
-
+    private TableManager<AlkatreszNezet> alkatreszNezetTM;
     private OradijasJavitasTipus kivalasztottJavitasTipus;
 
     @Override
@@ -69,6 +73,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         this.felahasznaltAlkatreszekTM = new TableInjector<>(this.felhasznaltAlkatreszekTV);
         this.javitasokTM = new TableInjector<>(this.javitasokTV);
         this.javitasTipusTM = new TableInjector<>(this.javitasTipusokTV);
+        this.alkatreszNezetTM = new TableInjector<>(this.alkatreszekTV);
 
     }
 
@@ -349,4 +354,30 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     Logger.info(szereles.getAr());
     }
 
+
+
+    //------------------------------------------------------------------------------------------------------------
+
+    public void alkatresztKeresPush(){
+
+        AlkatreszFilter alkatreszFilter = this.alkatreszFiltertLetrehoz();
+
+        alkatreszNezetTM.setEntitasok( AlkatreszNezet.of(this.alkatreszDao.find(alkatreszFilter)));
+
+    }
+
+
+    private AlkatreszFilter alkatreszFiltertLetrehoz(){
+
+        String nev = this.nevTF.getText();
+        String garanciaIdotartama = this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText();
+        String ar = this.arTF.getText();
+
+        return new AlkatreszFilter(nev,ar,garanciaIdotartama);
+
+    }
+
+    public void ujAlkatreszPushed(){
+
+    }
 }
