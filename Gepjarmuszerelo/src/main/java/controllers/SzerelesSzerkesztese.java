@@ -19,6 +19,7 @@ import utils.TableManager;
 
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -64,7 +65,9 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     private TableManager<JavitasokNezet> javitasokTM ;
     private TableManager<JavitasTipusNezet> javitasTipusTM;
     private TableManager<AlkatreszNezet> alkatreszNezetTM;
+
     private OradijasJavitasTipus kivalasztottJavitasTipus;
+    private Alkatresz kivalasztottAlkatresz;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -162,23 +165,25 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
     // Új alkatrész mentése
 
-
+/*
     public void alkatresztHozzaadPushed(){
 
         Alkatresz alkatresz = ujAlkatreszMentese();
-
-        //Javitas javitas = this.javitasDao.getById( this.javitasokTM.getSelectedEntity().getId());
-
-        //Javitas javitas = this.szereles.getJavitasok().stream().filter(o -> o.getId().equals(this.javitasokTM.getSelectedEntity().getId())).findFirst().get();
-
-        //Javitas javitas = this.szereles.getJavitasok().stream().filter(o->o == this.javitasokTM.getSelectedEntity().getJavitas()).findFirst().get();
         Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
         FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
         this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
         javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
-        // kivett update
 
-        //this.javitasDao.update(javitas);
+
+    }*/
+
+    public void alkatresztHozzaadPushed() {
+
+        Alkatresz alkatresz =this.kivalasztottAlkatresz; //= ujAlkatreszMentese();
+        Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
+        FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
+        this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
+        javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
 
     }
 
@@ -196,8 +201,6 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
         FelhasznaltAlkatresz felhasznaltAlkatresz = new FelhasznaltAlkatresz(Integer.parseInt(this.cikkszamTF.getText()),alkatresz,javitas);
 
-        //kivett persist
-        //this.felhasznaltAlkatreszDao.persist(felhasznaltAlkatresz);
         return felhasznaltAlkatresz;
     }
 
@@ -352,6 +355,9 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
  //   szereles.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
  //   szerelesDao.update(szereles);
     Logger.info(szereles.getAr());
+    this.szereles.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
+    this.szereles.setAr(this.szereles.aratSzamol());
+    this.szerelesDao.update(this.szereles);
     }
 
 
@@ -378,6 +384,18 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
     }
 
     public void ujAlkatreszPushed(){
+
+    }
+
+    public void alkatresztKivalasztPushed(){
+
+
+        Alkatresz alkatresz = this.alkatreszNezetTM.getSelectedEntity().getAlkatresz();
+        this.kivalasztottAlkatresz = alkatresz;
+        this.nevTF.setText(alkatresz.getNev());
+        this.felhasznaltAlkatreszgaranciaIdotartamaTF.setText(alkatresz.getGaranciaIdotartama().toString());
+        this.arTF.setText(alkatresz.getAr().toString());
+
 
     }
 }

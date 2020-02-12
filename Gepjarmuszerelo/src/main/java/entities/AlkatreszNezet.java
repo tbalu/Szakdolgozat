@@ -25,6 +25,7 @@ public class AlkatreszNezet {
 
     private Integer alkatreszGaranciaIdotartama;
 
+    private Alkatresz alkatresz;
     public AlkatreszNezet(String alkatreszNev, Integer alkatreszAr, Integer alkatreszGaranciaIdotartama) {
         this.alkatreszNev = alkatreszNev;
         this.alkatreszAr = alkatreszAr;
@@ -35,6 +36,7 @@ public class AlkatreszNezet {
         this.alkatreszNev = alkatresz.getNev();
         this.alkatreszAr = alkatresz.getAr();
         this.alkatreszGaranciaIdotartama = alkatresz.getGaranciaIdotartama();
+        this.alkatresz = alkatresz;
     }
 
     public String getAlkatreszNev() {
@@ -59,5 +61,15 @@ public class AlkatreszNezet {
 
     public void setAlkatreszGaranciaIdotartama(Integer alkatreszGaranciaIdotartama) {
         this.alkatreszGaranciaIdotartama = alkatreszGaranciaIdotartama;
+    }
+
+    public Integer getId(){
+
+        return this.alkatresz.getId();
+
+    }
+
+    public Alkatresz getAlkatresz() {
+        return alkatresz;
     }
 }

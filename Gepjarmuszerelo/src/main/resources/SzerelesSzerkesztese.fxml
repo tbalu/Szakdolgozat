@@ -231,6 +231,13 @@
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="147.0" text="Ár" fx:id="alkatreszArOszlop" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="226.0" text="Garancia időtartama" fx:id="alkatreszGaranciaIdotartamaOszlop" />
       </columns>
+      <contextMenu>
+        <ContextMenu>
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#alkatresztKivalasztPushed" text="Kiválaszt" />
+          </items>
+        </ContextMenu>
+      </contextMenu>
     </TableView>
     <Button layoutX="967.0" layoutY="569.0" mnemonicParsing="false" onAction="#ujAlkatreszPushed" text="Új alkatrész" />
   </children>
