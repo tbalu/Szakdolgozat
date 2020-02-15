@@ -20,6 +20,8 @@ public class Alkatresz {
     @Column(name = "garancia_idotartama")
     private Integer garanciaIdotartama;
 
+    @Column(name ="cikkszam")
+    private Integer cikkszam;
     //persistbol merge
     @OneToMany(/*cascade = CascadeType.MERGE, */mappedBy = "alkatresz", fetch = FetchType.LAZY)
     private List<FelhasznaltAlkatresz> felhasznaltAlkatreszek = new ArrayList<>();
@@ -32,6 +34,13 @@ public class Alkatresz {
         this.garanciaIdotartama = garanciaIdotartama;
     }
 
+
+    public Alkatresz(String nev, Integer ar, Integer garanciaIdotartama, Integer cikkszam) {
+        this.nev = nev;
+        this.ar = ar;
+        this.garanciaIdotartama = garanciaIdotartama;
+        this.cikkszam = cikkszam;
+    }
 
     public Integer getId() {
         return id;
@@ -72,5 +81,13 @@ public class Alkatresz {
 
     public void setFelhasznaltAlkatreszek(List<FelhasznaltAlkatresz> felhasznaltAlkatreszek) {
         this.felhasznaltAlkatreszek = felhasznaltAlkatreszek;
+    }
+
+    public Integer getCikkszam() {
+        return cikkszam;
+    }
+
+    public void setCikkszam(Integer cikkszam) {
+        this.cikkszam = cikkszam;
     }
 }

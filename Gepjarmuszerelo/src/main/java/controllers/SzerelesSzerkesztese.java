@@ -200,7 +200,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
     public FelhasznaltAlkatresz felhasznaltAlkatresztHozzaad(Alkatresz alkatresz, Javitas javitas){
 
-        FelhasznaltAlkatresz felhasznaltAlkatresz = new FelhasznaltAlkatresz(Integer.parseInt(this.cikkszamTF.getText()),alkatresz,javitas);
+        FelhasznaltAlkatresz felhasznaltAlkatresz = new FelhasznaltAlkatresz(alkatresz,javitas);
 
         return felhasznaltAlkatresz;
     }
@@ -381,7 +381,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         String garanciaIdotartama = this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText();
         String ar = this.arTF.getText();
 
-        return new AlkatreszFilter(nev,ar,garanciaIdotartama);
+        return new AlkatreszFilter(nev,ar,garanciaIdotartama,this.cikkszamTF.getText());
 
     }
 
@@ -397,7 +397,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
     private Alkatresz alkatresztLetrehoz() {
         return new Alkatresz(this.nevTF.getText(),Integer.parseInt(this.arTF.getText()),
-                Integer.parseInt(this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText()));
+                Integer.parseInt(this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText()),Integer.parseInt(this.cikkszamTF.getText()));
     }
 
     public void alkatresztKivalasztPushed(){

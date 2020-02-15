@@ -10,24 +10,31 @@ public class FelhasznaltAlkatresz implements Serializable  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //merge volt
-    @ManyToOne(/*cascade = CascadeType.MERGE,*/fetch = FetchType.EAGER)
+    //nem volt semmijen cascade
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "alkatresz_id")
     private Alkatresz alkatresz;
 
-    @Column(name = "cikkszam")
+  /*  @Column(name = "cikkszam")
     private Integer cikkszam;
-
+*/
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "javitas_id")
     private Javitas javitas;
 
     public FelhasznaltAlkatresz(){}
 
-    public FelhasznaltAlkatresz(Integer cikkszam, Alkatresz alkatresz, Javitas javitas) {
-        this.cikkszam = cikkszam;
+  /*  public FelhasznaltAlkatresz(Integer cikkszam, Alkatresz alkatresz, Javitas javitas) {
+       // this.cikkszam = cikkszam;
         this.alkatresz = alkatresz;
         this.javitas = javitas;
+    }
+*/
+    public FelhasznaltAlkatresz(Alkatresz alkatresz, Javitas javitas){
+
+        this.alkatresz = alkatresz;
+        this.javitas = javitas;
+
     }
 
     public Integer getId() {
@@ -47,11 +54,11 @@ public class FelhasznaltAlkatresz implements Serializable  {
     }
 
     public Integer getCikkszam() {
-        return cikkszam;
+        return this.alkatresz.getCikkszam();
     }
 
     public void setCikkszam(Integer cikkszam) {
-        this.cikkszam = cikkszam;
+        this.alkatresz.setCikkszam(cikkszam);
     }
 
     public Javitas getJavitas() {
@@ -64,5 +71,14 @@ public class FelhasznaltAlkatresz implements Serializable  {
 
     public Integer getAr() {
         return this.alkatresz.getAr();
+    }
+
+    @Override
+    public String toString() {
+        return "FelhasznaltAlkatresz{" +
+                "id=" + id +
+                ", alkatresz=" + alkatresz.getNev() +
+                ", javitas=" + javitas.getId() +
+                '}';
     }
 }

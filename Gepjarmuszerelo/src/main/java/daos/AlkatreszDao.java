@@ -26,6 +26,11 @@ public  class AlkatreszDao extends BasicDao<Alkatresz> {
 
         JPAQuery<Alkatresz> query = queryFactory.selectFrom(qAlkatresz);
 
+        if(filter.getCikkszam()!=null){
+
+            query.where(qAlkatresz.cikkszam.eq(filter.getCikkszam()));
+
+        }
         if(filter.getAr()!=null){
             query.where(qAlkatresz.ar.eq(filter.getAr()));
         }

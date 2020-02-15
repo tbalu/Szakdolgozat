@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.criteria.CriteriaBuilder;
 
 public class AlkatreszFilter {
 
@@ -14,15 +15,20 @@ public class AlkatreszFilter {
 
     private Integer garanciaIdotartama;
 
-    public AlkatreszFilter(Integer id, String nev, Integer ar, Integer garanciaIdotartama) {
+    private Integer cikkszam;
+    public AlkatreszFilter(Integer id, String nev, Integer ar, Integer garanciaIdotartama, Integer cikkszam) {
         this.id = id;
         this.nev = nev;
         this.ar = ar;
         this.garanciaIdotartama = garanciaIdotartama;
+        this.cikkszam = cikkszam;
     }
 
-    public AlkatreszFilter(String nev, String ar, String garanciaIdotartama){
+    public AlkatreszFilter(String nev, String ar, String garanciaIdotartama,String cikkszam){
 
+        if(!cikkszam.equals("")){
+            this.cikkszam = Integer.parseInt(cikkszam);
+        }
         this.id = null;
         //if(!nev.equals("")){
             this.nev = nev;
@@ -67,5 +73,13 @@ public class AlkatreszFilter {
 
     public void setGaranciaIdotartama(Integer garanciaIdotartama) {
         this.garanciaIdotartama = garanciaIdotartama;
+    }
+
+    public Integer getCikkszam() {
+        return cikkszam;
+    }
+
+    public void setCikkszam(Integer cikkszam) {
+        this.cikkszam = cikkszam;
     }
 }
