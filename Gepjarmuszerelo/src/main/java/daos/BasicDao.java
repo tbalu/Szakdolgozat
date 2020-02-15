@@ -1,5 +1,6 @@
 package daos;
 
+import org.hibernate.Session;
 import org.pmw.tinylog.Logger;
 
 import javax.persistence.EntityManager;
@@ -85,6 +86,16 @@ public abstract class BasicDao<T> {
             Logger.info(this.getById(id));
             this.remove(this.getById(id));
         }
+
+    }
+
+    public void saveOrUpdate(T entity){
+        //em.getTransaction().begin();
+        Session session = em.unwrap(Session.class);
+        session.beginTransaction();
+        session.saveOrUpdate(entity);
+        session.getTransaction().commit();
+        //em.getTransaction().commit();
 
     }
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @org.hibernate.annotations.DiscriminatorFormula(
         "case when garancia_idotartama is not null then 'GA' else 'A' end"
 )
-public abstract class OsAlkatresz {
+public abstract class OsAlkatresz  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

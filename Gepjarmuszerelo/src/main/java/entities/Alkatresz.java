@@ -31,9 +31,11 @@ public class Alkatresz {
         this.garanciaIdotartama = garanciaIdotartama;
     }
 
+
     public Integer getId() {
         return id;
     }
+
 
     public void setId(Integer id) {
         this.id = id;

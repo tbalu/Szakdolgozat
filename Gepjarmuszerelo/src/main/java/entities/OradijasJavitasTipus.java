@@ -10,7 +10,7 @@ import java.util.List;
         "case when fix_ar is null then 'ODJT' else 'FAJT' end"
 )
 @DiscriminatorValue("ODJT")
-public class OradijasJavitasTipus {
+public class OradijasJavitasTipus  {
 
 
     @Id

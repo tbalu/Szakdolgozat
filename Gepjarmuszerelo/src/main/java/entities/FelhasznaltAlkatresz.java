@@ -1,11 +1,10 @@
 package entities;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 
 @Entity(name = "felhasznalt_alkatresz")
-public class FelhasznaltAlkatresz implements Serializable {
+public class FelhasznaltAlkatresz implements Serializable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

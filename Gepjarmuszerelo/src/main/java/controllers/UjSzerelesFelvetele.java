@@ -1,9 +1,6 @@
 package controllers;
 
-import daos.EntityManagerCreator;
-import daos.GepjarmuDao;
-import daos.SzerelesDao;
-import daos.UgyfelDao;
+import daos.*;
 import entities.Gepjarmu;
 import entities.Gepjarmuparameter;
 import entities.Szereles;
@@ -17,9 +14,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import nezetek.TeljesGepjarmuNezet;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.spi.SessionFactoryDelegatingImpl;
 import org.pmw.tinylog.Logger;
+import utils.TableInjector;
+import utils.TableManager;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
@@ -31,6 +35,7 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
     private UgyfelDao ugyfelDao = new UgyfelDao(EntityManagerCreator.getEntityManager());
     private GepjarmuDao gepjarmuDao= new GepjarmuDao(EntityManagerCreator.getEntityManager());
     private SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
+    private GepjarmuparameterDao gepjarmuparameterDao = new GepjarmuparameterDao(EntityManagerCreator.getEntityManager());
 
     //@FXML private TextField nevTextField;
     @FXML private TextField telefonszamTF;
@@ -45,6 +50,14 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
     @FXML private DatePicker vizsgaLejartaDP;
     @FXML private TextField alvazszamTF;
 
+    @FXML private TableView<Ugyfel> ugyfelTV;
+    @FXML private TableView<Gepjarmuparameter> gepjarmuparameterTV;
+    @FXML private TableView<TeljesGepjarmuNezet> teljesGepjarmuTV;
+
+
+    private TableManager<Ugyfel> ugyfelTM;
+    private TableManager<Gepjarmuparameter> gepjarmuparameterTM;
+    private TableManager<TeljesGepjarmuNezet> teljesGepjarmuNezetTM;
 
 
     //öröklött
@@ -59,8 +72,9 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-
+        this.ugyfelTM = new TableInjector<>(this.ugyfelTV);
+        this.gepjarmuparameterTM = new TableInjector<>(this.gepjarmuparameterTV);
+        this.teljesGepjarmuNezetTM = new TableInjector<>(this.teljesGepjarmuTV);
 
 
     }
@@ -120,6 +134,8 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
 
     public void szerelesInditasaPushed(){
 
+        Logger.info(this.gepjarmu.toString());
+
         if(this.gepjarmu!=null && this.ugyfel != null){
 
             Logger.info("elinditom a szerelest");
@@ -127,19 +143,78 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
 
         }
 
+        this.ujSzereleshezElokeszul();
+
+    }
+
+    private void ujSzereleshezElokeszul() {
+
+        this.regiSzerelesAdataitTorol();
+        this.textFieldekTartalmatTorol();
+        this.tablakTartalmatTorol();
+    }
+
+    private void tablakTartalmatTorol() {
+        this.gepjarmuparameterTM.removeAll();
+        this.teljesGepjarmuNezetTM.removeAll();
+        this.ugyfelTM.removeAll();
+    }
+
+    private void textFieldekTartalmatTorol() {
+
+        this.motorTerfogataTF.setText("");
+        this.teljesitmenyTF.setText("");
+        this.tipusTF.setText("");
+        this.alvazszamTF.setText("");
+        this.evjaratTF.setText("");
+        this.vizsgaLejartaDP.setChronology(null);
+
+        this.lakcimTF.setText("");
+        this.nevTF.setText("");
+        this.telefonszamTF.setText("");
+
+    }
+
+    private void regiSzerelesAdataitTorol() {
+
+        this.gepjarmuparameter = null;
+        this.gepjarmu = null;
+        this.ugyfel = null;
+
     }
 
     private void szerelesLetrehozasa(){
 
+        //SessionFactory sessionFactory;
+        //session.saveOrUpdate(new Object());
+
+        //this.gepjarmuparameterDao.saveOrUpdate(this.gepjarmu.getGepjarmuparameter());
+        //this.gepjarmuDao.saveOrUpdate(this.gepjarmu);
+        //this.ugyfelDao.saveOrUpdate(this.ugyfel);
+        this.gepjarmuparameterDao.saveOrUpdate(this.gepjarmuparameter);
+        this.gepjarmuDao.saveOrUpdate(this.gepjarmu);
+        this.ugyfelDao.saveOrUpdate(this.ugyfel);
+
         Szereles szereles = new Szereles(this.gepjarmu,this.ugyfel);
         this.szerelesDao.persist(szereles);
-        this.szereles = szereles;
+        //this.szereles = szereles;
 
     }
 
     public void ugyfeltKeresPushed(){
 
 
+        Logger.info(this.ugyfeletLetrehoz());
+        this.ugyfelTM.setEntitasok(this.ugyfelDao.find(this.ugyfeletLetrehoz()));
+
+
+    }
+
+
+
+    private Ugyfel ugyfeletLetrehoz() {
+
+        return new Ugyfel(this.nevTF.getText(),this.telefonszamTF.getText(),this.lakcimTF.getText());
 
     }
 
@@ -148,13 +223,46 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
         this.gepjarmuparameter = new Gepjarmuparameter(this.tipusTF.getText(),
                 Integer.parseInt(this.motorTerfogataTF.getText()),Integer.parseInt(this.teljesitmenyTF.getText()));
 
-        //this.gepjarmu = new Gepjarmu(this.gepjarmuparameter,Integer.parseInt(this.alvazszamTF.getText()),this.vizsgaLejartaDP.getValue(), Integer.parseInt(this.evjaratTF.getText()));
-
     }
 
 
+    public void gepjarmuParameterreKeresPushed(){
+        Logger.info(this.gepjarmuvetLetrehoz());
+        this.gepjarmuparameterTM.setEntitasok(this.gepjarmuparameterDao.find(this.gepjarmuparametertLetrehoz()));
 
-    // ököklődest kell megoldani rá:
+    }
+
+    private Gepjarmuparameter gepjarmuparametertLetrehoz() {
+        return new Gepjarmuparameter(this.tipusTF.getText(),this.motorTerfogataTF.getText().equals("")?null:Integer.parseInt(this.motorTerfogataTF.getText()),
+                this.teljesitmenyTF.getText().equals("")?null:Integer.parseInt(this.telefonszamTF.getText()));
+    }
+
+    public void gepjarmureKeresPushed(){
+
+
+        this.teljesGepjarmuNezetTM.setEntitasok(TeljesGepjarmuNezet.of(this.gepjarmuDao.find(this.gepjarmuvetLetrehoz())));
+
+    }
+
+    private Gepjarmu gepjarmuvetLetrehoz() {
+
+        return new Gepjarmu(null,!this.alvazszamTF.getText().equals("")?Integer.parseInt(this.alvazszamTF.getText()):null,this.vizsgaLejartaDP.getValue(),
+                this.evjaratTF.getText().equals("")?null:Integer.parseInt(this.evjaratTF.getText()));
+
+    }
+
+    public void gepjarmuParametertKivalasztPushed(){
+        this.gepjarmuparameter = this.gepjarmuparameterTM.getSelectedEntity();
+    }
+
+    public void ugyfeletKivalasztPushed(){
+        this.ugyfel = this.ugyfelTM.getSelectedEntity();
+    }
+
+    public void gepjarmuvetKivalasztPushed(){
+        this.gepjarmuparameter = this.teljesGepjarmuNezetTM.getSelectedEntity().getGepjarmu().getGepjarmuparameter();
+        this.gepjarmu = this.teljesGepjarmuNezetTM.getSelectedEntity().getGepjarmu();
+    }
 
 
 }

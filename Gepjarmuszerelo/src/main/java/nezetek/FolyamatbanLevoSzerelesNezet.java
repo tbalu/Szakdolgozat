@@ -37,6 +37,7 @@ public class FolyamatbanLevoSzerelesNezet {
 
     public FolyamatbanLevoSzerelesNezet(Ugyfel ugyfel, Gepjarmu gepjarmu, Szereles szereles){
 
+
         this.id = szereles.getId();
         this.nev = ugyfel.getNev();
         this.telefonszam = ugyfel.getTelefonszam();
@@ -51,6 +52,7 @@ public class FolyamatbanLevoSzerelesNezet {
         this.nev = szereles.getUgyfel().getNev();
         this.telefonszam = szereles.getUgyfel().getTelefonszam();
         this.szerelesKezdete = szereles.getSzerelesKezdete();
+        //demeter torvenye
         this.tipus = szereles.getGepjarmu().getTipus();
 
     }

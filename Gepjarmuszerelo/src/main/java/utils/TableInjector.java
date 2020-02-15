@@ -26,7 +26,7 @@ public class TableInjector<E> implements TableManager<E> {
     @Override
     public void setEntitasok(List entities) {
 
-            System.out.println("Íme a tábla: " + this.tabla);
+            Logger.info("Íme a tábla: " + this.tabla.getItems());
             this.tabla.setItems(FXCollections.observableArrayList(entities));
 
     }
@@ -101,6 +101,9 @@ public class TableInjector<E> implements TableManager<E> {
 
         Logger.info(this.tabla.getColumns());
         for(Object tc: this.tabla.getColumns()){
+
+            Logger.info(((TableColumn) tc).getId()
+                    .replace("Oszlop",""));
 
             ((TableColumn) tc).setCellValueFactory(
                     new PropertyValueFactory<>(((TableColumn) tc).getId()

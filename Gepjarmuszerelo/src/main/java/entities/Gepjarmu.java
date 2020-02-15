@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Gepjarmu {
+public class Gepjarmu  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,4 +90,32 @@ public class Gepjarmu {
     public void setAlvazszam(Integer alvazszam) {
         this.alvazszam = alvazszam;
     }
+
+    public String getTipus() {
+        return this.gepjarmuparameter.getTipus();
+    }
+
+    @Override
+    public String toString() {
+        return "Gepjarmu{" +
+                "id=" + id +
+                ", gepjarmuparameter=" + gepjarmuparameter +
+                ", alvazszam=" + alvazszam +
+                ", vizsgaLejarta=" + vizsgaLejarta +
+                ", evjarat=" + evjarat +
+                '}';
+    }
+
+    public Integer getMotorterfogat() {
+
+        return this.gepjarmuparameter.getMotorterfogat();
+
+    }
+
+
+    public Integer getTeljesitmeny() {
+
+        return this.gepjarmuparameter.getTeljesitmeny();
+    }
 }
+

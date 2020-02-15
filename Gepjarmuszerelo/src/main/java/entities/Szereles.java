@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Szereles implements Szolgaltatas {
+public class Szereles  implements Szolgaltatas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

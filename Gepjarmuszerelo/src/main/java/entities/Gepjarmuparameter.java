@@ -20,9 +20,10 @@ public class Gepjarmuparameter {
     @Column(name = "teljesitmeny")
     private Integer teljesitmeny;
 
+/*
     @OneToMany(mappedBy = "gepjarmuparameter", fetch = FetchType.LAZY)
     private List<Gepjarmu> gepjarmuvek = new ArrayList<>();
-
+*/
     public Gepjarmuparameter(){}
 
     public Gepjarmuparameter(String tipus, Integer motorterfogat, Integer teljesitmeny) {
@@ -61,5 +62,23 @@ public class Gepjarmuparameter {
 
     public void setTeljesitmeny(Integer teljesitmeny) {
         this.teljesitmeny = teljesitmeny;
+    }
+/*
+    public List<Gepjarmu> getGepjarmuvek() {
+        return gepjarmuvek;
+    }
+
+    public void setGepjarmuvek(List<Gepjarmu> gepjarmuvek) {
+        this.gepjarmuvek = gepjarmuvek;
+    }
+*/
+    @Override
+    public String toString() {
+        return "Gepjarmuparameter{" +
+                "id=" + id +
+                ", tipus='" + tipus + '\'' +
+                ", motorterfogat=" + motorterfogat +
+                ", teljesitmeny=" + teljesitmeny +
+                '}';
     }
 }

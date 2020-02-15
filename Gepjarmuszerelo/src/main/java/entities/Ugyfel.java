@@ -19,7 +19,7 @@ public class Ugyfel {
     @Column(name = "lakcim")
     private String lakcim;
 
-    public Ugyfel(String telefonszam, String nev, String lakcim) {
+    public Ugyfel( String nev, String telefonszam, String lakcim) {
         this.telefonszam = telefonszam;
         this.nev = nev;
         this.lakcim = lakcim;
@@ -57,5 +57,15 @@ public class Ugyfel {
 
     public void setLakcim(String lakcim) {
         this.lakcim = lakcim;
+    }
+
+    @Override
+    public String toString() {
+        return "Ugyfel{" +
+                "id=" + id +
+                ", telefonszam='" + telefonszam + '\'' +
+                ", nev='" + nev + '\'' +
+                ", lakcim='" + lakcim + '\'' +
+                '}';
     }
 }
