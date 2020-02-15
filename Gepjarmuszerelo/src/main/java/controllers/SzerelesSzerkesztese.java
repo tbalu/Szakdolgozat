@@ -185,6 +185,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
         this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
         javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
 
+
     }
 
     public Alkatresz ujAlkatreszMentese(){
@@ -326,6 +327,7 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
     public void modositasokMentesePushed(){
 
+        Logger.info(szereles.getJavitasok());
         this.szerelesDao.update(szereles);
 
         this.javitasDao.removeAll(this.kitorlendoJavitasok.stream().map(j->j.getId()).collect(Collectors.toList()));
@@ -385,6 +387,17 @@ public class SzerelesSzerkesztese extends BasicControllerWithInitData implements
 
     public void ujAlkatreszPushed(){
 
+        Alkatresz alkatresz = this.alkatresztLetrehoz();
+        Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
+        FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
+        this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
+        javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
+
+    }
+
+    private Alkatresz alkatresztLetrehoz() {
+        return new Alkatresz(this.nevTF.getText(),Integer.parseInt(this.arTF.getText()),
+                Integer.parseInt(this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText()));
     }
 
     public void alkatresztKivalasztPushed(){

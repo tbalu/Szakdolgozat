@@ -20,7 +20,8 @@ public class Alkatresz {
     @Column(name = "garancia_idotartama")
     private Integer garanciaIdotartama;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "alkatresz", fetch = FetchType.LAZY)
+    //persistbol merge
+    @OneToMany(/*cascade = CascadeType.MERGE, */mappedBy = "alkatresz", fetch = FetchType.LAZY)
     private List<FelhasznaltAlkatresz> felhasznaltAlkatreszek = new ArrayList<>();
 
     public Alkatresz() {}
