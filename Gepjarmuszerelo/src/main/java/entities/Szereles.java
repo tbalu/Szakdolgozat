@@ -1,5 +1,6 @@
 package entities;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.pmw.tinylog.Logger;
 
 import java.sql.Timestamp;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Szereles  implements Szolgaltatas {
+public class Szereles  implements araVan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -175,5 +176,21 @@ public class Szereles  implements Szolgaltatas {
         }
         this.ar = ar;
         return ar;
+    }
+
+    public String getUgyfelNev() {
+        return this.ugyfel.getNev();
+    }
+
+    public String getUgyfelTelefonszam() {
+    return  this.ugyfel.getTelefonszam();
+    }
+
+    public Integer getGepjarmuAlvazszam() {
+        return this.gepjarmu.getAlvazszam();
+    }
+
+    public String getGepjarmuTipus() {
+        return this.gepjarmu.getTipus();
     }
 }

@@ -1,6 +1,6 @@
 package entities;
 
-public interface Szolgaltatas {
+public interface araVan {
 
     Integer aratSzamol();
 

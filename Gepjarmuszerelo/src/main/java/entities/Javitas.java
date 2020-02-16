@@ -9,7 +9,7 @@ import java.util.List;
 @org.hibernate.annotations.DiscriminatorFormula(
         "case when munkaorak_szama is not null then 'ODJ' else 'FAJ' end"
 )
-public abstract class Javitas  implements Szolgaltatas {
+public abstract class Javitas  implements araVan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

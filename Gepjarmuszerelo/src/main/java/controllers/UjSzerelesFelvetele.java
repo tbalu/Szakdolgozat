@@ -23,6 +23,7 @@ import utils.TableInjector;
 import utils.TableManager;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -120,8 +121,6 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
 
     public void ujGepjarmuPushed(){
 
-//        Gepjarmu gepjarmu = new Gepjarmu(this.tipusTF.getText(),Integer.parseInt(this.motorTerfogataTF.getText()),Integer.parseInt(this.teljesitmenyTF.getText()),this.vizsgaLejartaDP.getValue(),Integer.parseInt(this.evjaratTF.getText()));
-
         if(this.gepjarmuparameter!=null) {
             this.gepjarmu = new Gepjarmu(this.gepjarmuparameter, Integer.parseInt(this.alvazszamTF.getText()),
                     this.vizsgaLejartaDP.getValue(), Integer.parseInt(this.evjaratTF.getText()));
@@ -133,11 +132,6 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
         }
 
 
-
-        //      this.gepjarmuDao.persist(gepjarmu);
-    //    this.gepjarmu = gepjarmu;
-
-
     }
 
     private void nincsKivalasztottGepjarmuparameter() {
@@ -147,8 +141,9 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
 
     public void szerelesInditasaPushed(){
 
-        Logger.info(this.gepjarmu.toString());
+//        Logger.info(this.gepjarmu.toString());
 
+        Logger.info(System.currentTimeMillis());
         if(this.gepjarmu!=null && this.ugyfel != null){
 
             Logger.info("elinditom a szerelest");
@@ -198,12 +193,7 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
 
     private void szerelesLetrehozasa(){
 
-        //SessionFactory sessionFactory;
-        //session.saveOrUpdate(new Object());
 
-        //this.gepjarmuparameterDao.saveOrUpdate(this.gepjarmu.getGepjarmuparameter());
-        //this.gepjarmuDao.saveOrUpdate(this.gepjarmu);
-        //this.ugyfelDao.saveOrUpdate(this.ugyfel);
         this.gepjarmuparameterDao.saveOrUpdate(this.gepjarmuparameter);
         this.gepjarmuDao.saveOrUpdate(this.gepjarmu);
         this.ugyfelDao.saveOrUpdate(this.ugyfel);

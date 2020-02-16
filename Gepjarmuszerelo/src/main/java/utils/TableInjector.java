@@ -33,7 +33,12 @@ public class TableInjector<E> implements TableManager<E> {
 
     @Override
     public List<E> getJelenlegiEntitasok() {
-        return new ArrayList(this.tabla.getItems());
+        List<E> res = new ArrayList<E>();
+        for(Object o: this.tabla.getItems()){
+            E e = (E) o;
+            res.add(e);
+        }
+        return (List<E>)res;
     }
 
     @Override
