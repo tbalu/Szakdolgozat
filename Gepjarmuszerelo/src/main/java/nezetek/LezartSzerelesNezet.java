@@ -26,6 +26,7 @@ public class LezartSzerelesNezet<T> {
     private String tipus;
     private Timestamp szerelesVege;
     private Integer ar;
+    private Szereles szereles;
 
     public LezartSzerelesNezet(Szereles szereles) {
         this.nev = szereles.getUgyfelNev();
@@ -35,7 +36,7 @@ public class LezartSzerelesNezet<T> {
         this.tipus = szereles.getGepjarmuTipus();
         this.szerelesVege = szereles.getSzerelesVege();
         this.ar = szereles.getAr();
-        //this.szereles = szereles;
+        this.szereles = szereles;
     }
 
     public String getNev() {
@@ -84,5 +85,13 @@ public class LezartSzerelesNezet<T> {
 
     public void setAr(Integer ar) {
         this.ar = ar;
+    }
+
+    public Szereles getSzereles() {
+        return szereles;
+    }
+
+    public void setSzereles(Szereles szereles) {
+        this.szereles = szereles;
     }
 }

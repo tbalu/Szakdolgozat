@@ -86,4 +86,16 @@ public class FelhasznaltAlkatreszekNezet {
     public void setFelhasznaltAlkatresz(FelhasznaltAlkatresz felhasznaltAlkatresz) {
         this.felhasznaltAlkatresz = felhasznaltAlkatresz;
     }
+
+    @Override
+    public String toString() {
+        return "FelhasznaltAlkatreszekNezet{" +
+                "id=" + id +
+                ", nev='" + nev + '\'' +
+                ", ar=" + ar +
+                ", garanciaIdotartama=" + garanciaIdotartama +
+                ", cikkszam=" + cikkszam +
+                ", felhasznaltAlkatresz=" + felhasznaltAlkatresz +
+                '}';
+    }
 }

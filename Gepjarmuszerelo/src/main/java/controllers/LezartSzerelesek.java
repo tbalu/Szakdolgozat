@@ -13,7 +13,7 @@ import utils.TableInjector;
 import utils.TableManager;
 
 
-
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -35,7 +35,7 @@ public class LezartSzerelesek extends GepjarmuszereloBasicController implements 
         Logger.info("Lezárt szerelések.");
 
         lezartSzerelesekTM = new TableInjector<>(this.lezartSzerelesekTV);
-        Timestamp tol = Timestamp.valueOf( LocalDate.of( LocalDate.now().getYear(),1,1 )  .atStartOfDay());
+        Timestamp tol = Timestamp.valueOf(LocalDate.of(LocalDate.now().getYear(),1,1 ).atStartOfDay());
         Timestamp ig = new Timestamp(System.currentTimeMillis());
 
         this.lezartSzerelesekTM.setEntitasok(LezartSzerelesNezet.of(this.szerelesDao.getLezartSzerelesek(tol, ig)));
@@ -68,4 +68,10 @@ public class LezartSzerelesek extends GepjarmuszereloBasicController implements 
         }
     }
 
+
+    public void megtekintesPushed()throws IOException {
+
+        this.scenetValt("SzerelesMegtekintese",this.lezartSzerelesekTM.getSelectedEntity().getSzereles());
+
+    }
 }
