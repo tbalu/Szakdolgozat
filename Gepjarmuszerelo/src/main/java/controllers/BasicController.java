@@ -21,17 +21,6 @@ public class BasicController implements Initializable {
 
     @FXML protected MenuBar menuBar;
 
-    public void folyamatbanLevoSzerelesek(ActionEvent event) throws IOException {
-
-        this.scenetValt("FolyamatbanLevoSzerelesek");
-
-    }
-
-    public void ujSzereles() throws IOException {
-
-        this.scenetValt("UjSzerelesFelvetele");
-
-    }
 
 
 
@@ -96,13 +85,7 @@ public class BasicController implements Initializable {
 
 
 
-    public void ujJavitasTipus()throws IOException{
 
-
-        ujAblak("UjJavitasTipus", "Új javítástipus");
-
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

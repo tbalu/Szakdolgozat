@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UjSzerelesFelvetele extends BasicController implements Initializable {
+public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implements Initializable {
 
     private UgyfelDao ugyfelDao = new UgyfelDao(EntityManagerCreator.getEntityManager());
     private GepjarmuDao gepjarmuDao= new GepjarmuDao(EntityManagerCreator.getEntityManager());

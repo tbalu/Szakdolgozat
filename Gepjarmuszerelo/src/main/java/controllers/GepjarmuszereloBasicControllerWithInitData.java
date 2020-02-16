@@ -6,8 +6,7 @@ import javafx.scene.control.MenuBar;
 
 import java.io.IOException;
 
-public class GepjarmuszereloBasicController extends BasicController {
-
+public class GepjarmuszereloBasicControllerWithInitData extends BasicControllerWithInitData {
     @FXML
     protected MenuBar menuBar;
 
@@ -36,4 +35,5 @@ public class GepjarmuszereloBasicController extends BasicController {
         this.scenetValt("LezartSzerelesek");
 
     }
+
 }

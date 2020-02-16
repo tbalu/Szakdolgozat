@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class SzerelesSzerkesztese extends BasicControllerWithInitData implements Initializable {
+public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInitData implements Initializable {
 
 
     private Szereles szereles;

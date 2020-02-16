@@ -20,7 +20,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Szereles">
           <items>
-            <MenuItem mnemonicParsing="false" text="Lezárt szerlések" />
+            <MenuItem mnemonicParsing="false" onAction="#lezartSzerelesekPushed" text="Lezárt szerlések" />
             <MenuItem fx:id="folyamatbanLevoSzerelesekMI" mnemonicParsing="false" onAction="#folyamatbanLevoSzerelesek" text="Folyamatban lévő szerelések" />
           </items>
         </Menu>
