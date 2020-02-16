@@ -21,34 +21,16 @@ import java.util.ResourceBundle;
 public class SzerelesMegtekintese extends GepjarmuszereloBasicControllerWithInitData{
 
 
-    private Szereles szereles;
+    protected Szereles szereles;
 
-
-    private UgyfelDao ugyfelDao = new UgyfelDao(EntityManagerCreator.getEntityManager());
-    private GepjarmuDao gepjarmuDao= new GepjarmuDao(EntityManagerCreator.getEntityManager());
-    private SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
-
-    private OradijasJavitasTipusDao oradijasJavitasTipusDao = new OradijasJavitasTipusDao(EntityManagerCreator.getEntityManager());
-    private JavitasDao javitasDao = new JavitasDao(EntityManagerCreator.getEntityManager());
-    private JavitasTipusDao javitasTipusDao = new JavitasTipusDao(EntityManagerCreator.getEntityManager());
-
-    private AlkatreszDao alkatreszDao = new AlkatreszDao(EntityManagerCreator.getEntityManager());
-    private FelhasznaltAlkatreszDao felhasznaltAlkatreszDao = new FelhasznaltAlkatreszDao(EntityManagerCreator.getEntityManager());
-
-
-    private List<FelhasznaltAlkatresz> kitorlendoFelhasznaltAlkatreszek = new ArrayList<>();
-    private List<Javitas> kitorlendoJavitasok = new ArrayList<>();
-
-    @FXML private TableView javitasokTV;
+    @FXML protected TableView javitasokTV;
 
     //@FXML private TableView felhasznaltAlkatreszekTV;
 
+    @FXML protected TableView felhasznaltAlkatreszekTV;
 
-
-    @FXML private TableView felhasznaltAlkatreszekTV;
-
-    private TableManager<FelhasznaltAlkatreszekNezet> felahasznaltAlkatreszekTM;
-    private TableManager<JavitasokNezet> javitasokTM ;
+    protected TableManager<FelhasznaltAlkatreszekNezet> felahasznaltAlkatreszekTM;
+    protected TableManager<JavitasokNezet> javitasokTM ;
 
     
 

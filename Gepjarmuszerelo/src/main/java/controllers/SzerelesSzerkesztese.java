@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import nezetek.FelhasznaltAlkatreszekNezet;
 import nezetek.JavitasTipusNezet;
 import nezetek.JavitasokNezet;
-import org.hibernate.Hibernate;
 import org.pmw.tinylog.Logger;
 import utils.TableInjector;
 import utils.TableManager;
@@ -25,13 +24,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInitData implements Initializable {
+public class SzerelesSzerkesztese extends SzerelesMegtekintese implements Initializable {
 
 
-    private Szereles szereles;
 
-    private UgyfelDao ugyfelDao = new UgyfelDao(EntityManagerCreator.getEntityManager());
-    private GepjarmuDao gepjarmuDao= new GepjarmuDao(EntityManagerCreator.getEntityManager());
     private SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
 
     private OradijasJavitasTipusDao oradijasJavitasTipusDao = new OradijasJavitasTipusDao(EntityManagerCreator.getEntityManager());
@@ -50,7 +46,7 @@ public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInit
     @FXML private TextField javitasGaranciaIdotartamaTF;
     @FXML private TextField fixArTF;
 
-    @FXML private TableView felhasznaltAlkatreszekTV;
+//    @FXML private TableView felhasznaltAlkatreszekTV;
     @FXML private TextField nevTF;
     @FXML private TextField arTF;
     @FXML private TextField felhasznaltAlkatreszgaranciaIdotartamaTF;
@@ -61,8 +57,8 @@ public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInit
 
     @FXML private TableView<JavitasTipusNezet> javitasTipusokTV;
 
-    private TableManager<FelhasznaltAlkatreszekNezet> felahasznaltAlkatreszekTM;
-    private TableManager<JavitasokNezet> javitasokTM ;
+    //private TableManager<FelhasznaltAlkatreszekNezet> felahasznaltAlkatreszekTM;
+    //private TableManager<JavitasokNezet> javitasokTM ;
     private TableManager<JavitasTipusNezet> javitasTipusTM;
     private TableManager<AlkatreszNezet> alkatreszNezetTM;
 
@@ -80,7 +76,7 @@ public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInit
 
     }
 
-
+/*
     @Override
     public void initData(Object o) {
         Szereles szereles = (Szereles)o;
@@ -93,14 +89,14 @@ public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInit
 
     }
 
-
-    private OradijasJavitasTipus ujOradijasJavitasTipusMentese(){
+*/
+    /*private OradijasJavitasTipus ujOradijasJavitasTipusMentese(){
         OradijasJavitasTipus oradijasJavitasTipus =
                 new OradijasJavitasTipus(this.leirasTA.getText(),Integer.parseInt(this.javitasGaranciaIdotartamaTF.getText()));
         oradijasJavitasTipusDao.persist(oradijasJavitasTipus);
         return oradijasJavitasTipus;
 
-    }
+    }*/
 
 
 
@@ -207,7 +203,7 @@ public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInit
 
 // A kiválasztott javítás felhasznált alkatrészeinek megjelenítése.
 
-    public void felhasznaltAlkatreszeinekMegjelenitesePushed(){
+  /*  public void felhasznaltAlkatreszeinekMegjelenitesePushed(){
 
         //Javitas javitas = this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
         Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
@@ -216,7 +212,7 @@ public class SzerelesSzerkesztese extends GepjarmuszereloBasicControllerWithInit
         this.felahasznaltAlkatreszekTM.setEntitasok(FelhasznaltAlkatreszekNezet.of(javitas.getFelhasznaltAlkatreszek()));
 
     }
-
+*/
 
     // A kiválaszott javítás törlése
     public void  javitasTorlesePushed(){
