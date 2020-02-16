@@ -18,7 +18,7 @@ public abstract class Javitas  implements Szolgaltatas {
     @OneToMany(cascade = CascadeType.MERGE,mappedBy = "javitas", fetch = FetchType.EAGER)
     protected List<FelhasznaltAlkatresz> felhasznaltAlkatreszek = new ArrayList<>();
 
-    @ManyToMany()
+  /*  @ManyToMany()
     @JoinTable(
             name = "dolgozott_rajta",
             joinColumns = @JoinColumn(name = "javitas_id"),
@@ -26,7 +26,7 @@ public abstract class Javitas  implements Szolgaltatas {
 
     )
     protected List<Szerelo> szerelok = new ArrayList<>();
-
+*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "szereles_id")
     protected Szereles szereles;
@@ -58,7 +58,7 @@ public abstract class Javitas  implements Szolgaltatas {
     public void setId(Integer id) {
         this.id = id;
     }
-
+/*
     public List<Szerelo> getSzerelok() {
         return szerelok;
     }
@@ -66,7 +66,7 @@ public abstract class Javitas  implements Szolgaltatas {
     public void setSzerelok(List<Szerelo> szerelok) {
         this.szerelok = szerelok;
     }
-
+*/
     public List<FelhasznaltAlkatresz> getFelhasznaltAlkatreszek() {
         return felhasznaltAlkatreszek;
     }

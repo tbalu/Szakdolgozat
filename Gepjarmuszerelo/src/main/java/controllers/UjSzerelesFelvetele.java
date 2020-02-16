@@ -12,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import nezetek.TeljesGepjarmuNezet;
 import org.hibernate.Session;
@@ -100,8 +97,24 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
 
     public void ujUgyfeletFelveszPushed(){
 
-        ujUgyfelMentese();
+        Logger.info("asdf");
+        if(this.ugyfelTFekKitolteseHelyes()){
+         Alert alert = new Alert(Alert.AlertType.ERROR);
+         alert.setTitle("Hiba történt");
+         alert.setHeaderText("Az ügyfél mezők hibásan vannak kitöltve!");
+         alert.setContentText("Tanács...");
 
+         Logger.info("error");
+         alert.showAndWait();
+        }
+        else {
+            Logger.info("elseben");
+            ujUgyfelMentese();
+        }
+    }
+
+    private boolean ugyfelTFekKitolteseHelyes() {
+            return this.nevTF.getText()!=null && this.lakcimTF.getText()!=null && this.telefonszamTF.getText()!=null;
     }
 
 
@@ -253,15 +266,45 @@ public class UjSzerelesFelvetele extends BasicController implements Initializabl
 
     public void gepjarmuParametertKivalasztPushed(){
         this.gepjarmuparameter = this.gepjarmuparameterTM.getSelectedEntity();
+        this.gepjarmuparameterTFekKitoltese();
+    }
+
+    private void gepjarmuparameterTFekKitoltese() {
+        if(this.gepjarmuparameter!=null){
+            this.tipusTF.setText(this.gepjarmuparameter.getTipus());
+            this.motorTerfogataTF.setText(this.gepjarmuparameter.getMotorterfogat().toString());
+            this.teljesitmenyTF.setText(this.gepjarmuparameter.getTeljesitmeny().toString());
+        }
     }
 
     public void ugyfeletKivalasztPushed(){
         this.ugyfel = this.ugyfelTM.getSelectedEntity();
+        this.ugyfelTFekKitoltese();
     }
 
+    private void ugyfelTFekKitoltese() {
+        if(this.ugyfel!= null){
+            this.nevTF.setText(this.ugyfel.getNev());
+            this.telefonszamTF.setText(this.ugyfel.getTelefonszam());
+            this.lakcimTF.setText(this.ugyfel.getLakcim());
+        }
+    }
+
+
     public void gepjarmuvetKivalasztPushed(){
+        //demeter törvényének megsértése
         this.gepjarmuparameter = this.teljesGepjarmuNezetTM.getSelectedEntity().getGepjarmu().getGepjarmuparameter();
         this.gepjarmu = this.teljesGepjarmuNezetTM.getSelectedEntity().getGepjarmu();
+        this.gepjarmuparameterTFekKitoltese();
+        this.gepjarmuTFekKitoltese();
+    }
+
+    private void gepjarmuTFekKitoltese() {
+        if(this.gepjarmu!=null) {
+            this.alvazszamTF.setText(this.gepjarmu.getAlvazszam().toString());
+            this.evjaratTF.setText(this.gepjarmu.getEvjarat().toString());
+            this.vizsgaLejartaDP.setValue(this.gepjarmu.getVizsgaLejarta());
+        }
     }
 
 

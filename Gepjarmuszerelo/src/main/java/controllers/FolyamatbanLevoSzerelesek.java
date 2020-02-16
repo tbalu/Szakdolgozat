@@ -27,9 +27,6 @@ public class FolyamatbanLevoSzerelesek extends BasicController implements Initia
 
     @FXML private TableView<FolyamatbanLevoSzerelesNezet> folyamatbanLevoSzerelesekTV;
 
-
-    private UgyfelDao ugyfelDao = new UgyfelDao(EntityManagerCreator.getEntityManager());
-    private GepjarmuDao gepjarmuDao= new GepjarmuDao(EntityManagerCreator.getEntityManager());
     private SzerelesDao szerelesDao = new SzerelesDao(EntityManagerCreator.getEntityManager());
 
 
@@ -46,42 +43,13 @@ public class FolyamatbanLevoSzerelesek extends BasicController implements Initia
         List<FolyamatbanLevoSzerelesNezet> folyamatbanLevoSzerelesNezetek =
                 FolyamatbanLevoSzerelesNezet.listaLetrehozas(folyamatbanLevoSzerelesek);
 
-        //folyamatbanLevoSzerelesekManager.addEntity(folyamatbanLevoSzerelesNezetek);
         Logger.info(folyamatbanLevoSzerelesek.size());
 
         this.folyamatbanLevoSzerelesekManager.addEntity(folyamatbanLevoSzerelesNezetek);
-        //folyamatbanLevoSzerelesekManager.setEntitasok(folyamatbanLevoSzerelesNezetek);
 
-       // Logger.info(folyamatbanLevoSzerelesek);
     }
 
     public void szerelesSzerkesztesereNavigal() throws IOException {
-/*
-        FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("SzerelesSzerkesztese.fxml"));
-        loader.setLocation(FXMLLoader.getDefaultClassLoader()
-                .getResource("SzerelesSzerkesztese.fxml"));
-
-        Parent root = loader.load();
-
-        SzerelesSzerkesztese controller = loader.getController();
-
-        //controller.intiData(this.szerelesDao.getById(this.folyamatbanLevoSzerelesekManager.getSelectedItem().getId()));
-
-        controller.initData(this.szerelesDao.getById(this.folyamatbanLevoSzerelesekManager.getSelectedItem().getId()));
-        Scene ujScene = new Scene(root);
-
-
-
-        //Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        Stage window = (Stage)menuBar.getScene().getWindow();
-
-        window.setScene(ujScene);
-        window.show();
-        Logger.info("meghivtak");
-*/
-
         Logger.info( "kivalasztott szereles id-ja");
     Logger.info( this.getKivalasztottSzerelesEntity().getId());
     szerelesSzerkesztesereNavigal("SzerelesSzerkesztese", this.getKivalasztottSzerelesEntity() );

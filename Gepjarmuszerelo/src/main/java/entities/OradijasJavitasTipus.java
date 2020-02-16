@@ -24,7 +24,7 @@ public class OradijasJavitasTipus  {
     private Integer garanciaIdotartama;
 
     @OneToMany(mappedBy = "oradijasJavitasTipus", fetch = FetchType.LAZY)
-    private List<OradijasJavitas> javitasok = new ArrayList<OradijasJavitas>();
+    private List<OradijasJavitas> javitasok = new ArrayList<>();
 
     public OradijasJavitasTipus(){}
 
