@@ -19,6 +19,7 @@ public class FixAruJavitas extends Javitas {
         this.fixAruJavitasTipus = fixAruJavitasTipus;
     }
 
+    /* TODO Demeter törvénye*/
     @Override
     public Integer aratSzamol() {
          return this.alkatreszekAra() + this.getFixAruJavitasTipus().getAr();

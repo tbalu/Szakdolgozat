@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FolyamatbanLevoSzerelesek extends GepjarmuszereloBasicController implements Initializable {
+public class FolyamatbanLevoSzerelesek extends GepjarmuszereloBasicController {
 
     @FXML private TableView<FolyamatbanLevoSzerelesNezet> folyamatbanLevoSzerelesekTV;
 

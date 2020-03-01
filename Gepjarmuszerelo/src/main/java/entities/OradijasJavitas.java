@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 @DiscriminatorValue("ODJ")
 public class OradijasJavitas extends Javitas {
 
-    public static Integer oradij = 2000;
+    private static Integer oradij = 2000;
 
 
     @ManyToOne(fetch = FetchType.EAGER)

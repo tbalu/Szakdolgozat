@@ -5,10 +5,11 @@ import org.pmw.tinylog.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BasicDao<T> {
+public abstract class BasicDao<T> implements Serializable {
 
     protected Class<T> entityClass;
     protected EntityManager em;

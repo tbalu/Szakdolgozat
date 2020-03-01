@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class SzerelesSzerkesztese extends SzerelesMegtekintese implements Initializable {
+public class SzerelesSzerkesztese extends SzerelesMegtekintese {
 
 
 

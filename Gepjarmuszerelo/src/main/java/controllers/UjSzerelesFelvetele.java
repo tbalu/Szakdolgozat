@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implements Initializable {
+public class UjSzerelesFelvetele extends GepjarmuszereloBasicController {
 
     private UgyfelDao ugyfelDao = new UgyfelDao(EntityManagerCreator.getEntityManager());
     private GepjarmuDao gepjarmuDao= new GepjarmuDao(EntityManagerCreator.getEntityManager());
@@ -99,7 +99,7 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
     public void ujUgyfeletFelveszPushed(){
 
         Logger.info("asdf");
-        if(this.ugyfelTFekKitolteseHelyes()){
+        if(!this.ugyfelTFekKitolteseHelyes()){
          Alert alert = new Alert(Alert.AlertType.ERROR);
          alert.setTitle("Hiba történt");
          alert.setHeaderText("Az ügyfél mezők hibásan vannak kitöltve!");
@@ -113,7 +113,7 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
             ujUgyfelMentese();
         }
     }
-
+/* TODO string null  "" helyett */
     private boolean ugyfelTFekKitolteseHelyes() {
             return this.nevTF.getText()!=null && this.lakcimTF.getText()!=null && this.telefonszamTF.getText()!=null;
     }
@@ -139,19 +139,33 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
 
     }
 
+    /*TODO beletenni ezt a kódrészletet a dolgozatomba*/
     public void szerelesInditasaPushed(){
 
 //        Logger.info(this.gepjarmu.toString());
 
         Logger.info(System.currentTimeMillis());
-        if(this.gepjarmu!=null && this.ugyfel != null){
+        if(this.vanRogzitettAdatSzerelesInditasahoz()){
 
             Logger.info("elinditom a szerelest");
             this.szerelesLetrehozasa();
 
         }
+        else{
+            this.nincsElegAdatASzerelesInditasahozHiba();
+        }
 
         this.ujSzereleshezElokeszul();
+
+    }
+
+    private void nincsElegAdatASzerelesInditasahozHiba() {
+        Logger.info("valami hiányzik");
+    }
+
+    private boolean vanRogzitettAdatSzerelesInditasahoz(){
+
+        return this.gepjarmu!=null && this.ugyfel != null;
 
     }
 
@@ -193,10 +207,11 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController implemen
 
     private void szerelesLetrehozasa(){
 
-
+        this.ugyfelDao.saveOrUpdate(this.ugyfel);
         this.gepjarmuparameterDao.saveOrUpdate(this.gepjarmuparameter);
         this.gepjarmuDao.saveOrUpdate(this.gepjarmu);
-        this.ugyfelDao.saveOrUpdate(this.ugyfel);
+
+
 
         Szereles szereles = new Szereles(this.gepjarmu,this.ugyfel);
         this.szerelesDao.persist(szereles);

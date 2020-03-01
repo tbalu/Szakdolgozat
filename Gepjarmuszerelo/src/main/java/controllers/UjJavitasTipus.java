@@ -68,6 +68,7 @@ public class UjJavitasTipus extends BasicController{
 
     }
 
+    /* TODO Átnézni a javítástípus törlését. */
     public void javitasTipusTorlese(){
 
         OradijasJavitasTipus oradijasJavitasTipus = this.javitasTipusDao.getById(this.javitasTipusokTM.getSelectedEntity().getId());

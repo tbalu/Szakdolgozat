@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class BasicController implements Initializable {
+public abstract class BasicController implements Initializable {
 
 
     @FXML protected MenuBar menuBar;

@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class LezartSzerelesek extends GepjarmuszereloBasicController implements Initializable {
+public class LezartSzerelesek extends GepjarmuszereloBasicController{
 
     @FXML private TableView<LezartSzerelesNezet> lezartSzerelesekTV;
     @FXML private DatePicker tolDP;

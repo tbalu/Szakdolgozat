@@ -4,7 +4,7 @@ import org.pmw.tinylog.Logger;
 
 import java.util.List;
 
-public class BasicControllerWithInitData extends BasicController {
+public abstract class BasicControllerWithInitData extends BasicController {
 
     public void initData(Object o){
 
