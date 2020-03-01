@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TableInjector<E> implements TableManager<E> {
+public class TableManagerImpl<E> implements TableManager<E> {
 
     protected TableView tabla;
 
-    public TableInjector(TableView tabla)  {
+    public TableManagerImpl(TableView tabla)  {
 
 
         this.tabla = tabla;

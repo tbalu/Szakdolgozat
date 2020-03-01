@@ -1,20 +1,15 @@
 package controllers;
 
-import daos.*;
 import entities.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import nezetek.FelhasznaltAlkatreszekNezet;
-import nezetek.JavitasTipusNezet;
 import nezetek.JavitasokNezet;
 import org.pmw.tinylog.Logger;
-import utils.TableInjector;
+import utils.TableManagerImpl;
 import utils.TableManager;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,6 +39,8 @@ public class SzerelesMegtekintese extends GepjarmuszereloBasicControllerWithInit
         Logger.info(this.szereles.getJavitasok());
 
         //this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
+        //Logger.info(JavitasokNezet.of(this.szereles.getJavitasok()));
+        List<JavitasokNezet> javitasokNezetek = JavitasokNezet.of(this.szereles.getJavitasok());
         this.javitasokTM.setEntitasok(JavitasokNezet.of(this.szereles.getJavitasok()));
 
     }
@@ -52,8 +49,8 @@ public class SzerelesMegtekintese extends GepjarmuszereloBasicControllerWithInit
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        this.felahasznaltAlkatreszekTM = new TableInjector<>(this.felhasznaltAlkatreszekTV);
-        this.javitasokTM = new TableInjector<>(this.javitasokTV);
+        this.felahasznaltAlkatreszekTM = new TableManagerImpl<>(this.felhasznaltAlkatreszekTV);
+        this.javitasokTM = new TableManagerImpl<>(this.javitasokTV);
 
     }
 

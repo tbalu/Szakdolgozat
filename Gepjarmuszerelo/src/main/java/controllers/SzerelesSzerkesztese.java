@@ -5,7 +5,6 @@ import entities.*;
 import filters.AlkatreszFilter;
 import filters.JavitasTipusFilter;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -13,7 +12,7 @@ import nezetek.FelhasznaltAlkatreszekNezet;
 import nezetek.JavitasTipusNezet;
 import nezetek.JavitasokNezet;
 import org.pmw.tinylog.Logger;
-import utils.TableInjector;
+import utils.TableManagerImpl;
 import utils.TableManager;
 
 
@@ -69,10 +68,10 @@ public class SzerelesSzerkesztese extends SzerelesMegtekintese {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        this.felahasznaltAlkatreszekTM = new TableInjector<>(this.felhasznaltAlkatreszekTV);
-        this.javitasokTM = new TableInjector<>(this.javitasokTV);
-        this.javitasTipusTM = new TableInjector<>(this.javitasTipusokTV);
-        this.alkatreszNezetTM = new TableInjector<>(this.alkatreszekTV);
+        this.felahasznaltAlkatreszekTM = new TableManagerImpl<>(this.felhasznaltAlkatreszekTV);
+        this.javitasokTM = new TableManagerImpl<>(this.javitasokTV);
+        this.javitasTipusTM = new TableManagerImpl<>(this.javitasTipusokTV);
+        this.alkatreszNezetTM = new TableManagerImpl<>(this.alkatreszekTV);
 
     }
 
@@ -284,7 +283,8 @@ public class SzerelesSzerkesztese extends SzerelesMegtekintese {
 
         }
 
-        javitasTipusok.addAll(javitasTipusok);
+        //javitasTipusok.addAll(javitasTipusok);
+        Logger.info(JavitasTipusNezet.of(javitasTipusok));
         this.javitasTipusTM.setEntitasok(JavitasTipusNezet.of(javitasTipusok));
 
     }

@@ -8,11 +8,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nezetek.JavitasTipusNezet;
-import org.pmw.tinylog.Logger;
-import utils.TableInjector;
+import utils.TableManagerImpl;
 import utils.TableManager;
 
-import javax.xml.soap.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -34,7 +32,7 @@ public class UjJavitasTipus extends BasicController{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        javitasTipusokTM = new TableInjector<JavitasTipusNezet>(this.javitasTipusokTV);
+        javitasTipusokTM = new TableManagerImpl<JavitasTipusNezet>(this.javitasTipusokTV);
         javitasTipusokTM.setEntitasok(JavitasTipusNezet.of(this.javitasTipusDao.findAll()));
 
     }

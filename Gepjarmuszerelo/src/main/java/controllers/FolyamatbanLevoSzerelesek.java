@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import nezetek.FolyamatbanLevoSzerelesNezet;
 import org.pmw.tinylog.Logger;
-import utils.TableInjector;
+import utils.TableManagerImpl;
 import utils.TableManager;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class FolyamatbanLevoSzerelesek extends GepjarmuszereloBasicController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-       folyamatbanLevoSzerelesekManager = new TableInjector<>(this.folyamatbanLevoSzerelesekTV);
+       folyamatbanLevoSzerelesekManager = new TableManagerImpl<>(this.folyamatbanLevoSzerelesekTV);
 
         List<Szereles> folyamatbanLevoSzerelesek = this.szerelesDao.folyamatbanLevoSzerelesek();
 

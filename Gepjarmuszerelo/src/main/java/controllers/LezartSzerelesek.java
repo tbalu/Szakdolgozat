@@ -3,13 +3,12 @@ package controllers;
 import daos.EntityManagerCreator;
 import daos.SzerelesDao;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import nezetek.LezartSzerelesNezet;
 import org.pmw.tinylog.Logger;
-import utils.TableInjector;
+import utils.TableManagerImpl;
 import utils.TableManager;
 
 
@@ -34,7 +33,7 @@ public class LezartSzerelesek extends GepjarmuszereloBasicController{
         super.initialize(location, resources);
         Logger.info("Lezárt szerelések.");
 
-        lezartSzerelesekTM = new TableInjector<>(this.lezartSzerelesekTV);
+        lezartSzerelesekTM = new TableManagerImpl<>(this.lezartSzerelesekTV);
         Timestamp tol = Timestamp.valueOf(LocalDate.of(LocalDate.now().getYear(),1,1 ).atStartOfDay());
         Timestamp ig = new Timestamp(System.currentTimeMillis());
 

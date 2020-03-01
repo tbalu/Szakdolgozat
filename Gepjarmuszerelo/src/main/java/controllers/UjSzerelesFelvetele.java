@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import nezetek.TeljesGepjarmuNezet;
 import org.pmw.tinylog.Logger;
-import utils.TableInjector;
+import utils.TableManagerImpl;
 import utils.TableManager;
 
 import java.net.URL;
@@ -60,9 +60,9 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        this.ugyfelTM = new TableInjector<>(this.ugyfelTV);
-        this.gepjarmuparameterTM = new TableInjector<>(this.gepjarmuparameterTV);
-        this.teljesGepjarmuNezetTM = new TableInjector<>(this.teljesGepjarmuTV);
+        this.ugyfelTM = new TableManagerImpl<>(this.ugyfelTV);
+        this.gepjarmuparameterTM = new TableManagerImpl<>(this.gepjarmuparameterTV);
+        this.teljesGepjarmuNezetTM = new TableManagerImpl<>(this.teljesGepjarmuTV);
 
 
     }
