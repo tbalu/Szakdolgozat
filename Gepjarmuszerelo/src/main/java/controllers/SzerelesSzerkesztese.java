@@ -330,7 +330,8 @@ public class SzerelesSzerkesztese extends SzerelesMegtekintese {
 
         this.felhasznaltAlkatreszDao.removeAll(this.kitorlendoFelhasznaltAlkatreszek.stream().map(j->j.getId()).collect(Collectors.toList()));
 
-
+        Logger.info("javitas excetion");
+        this.javitasDao.remove(new OradijasJavitas());
 
 
     }

@@ -5,26 +5,13 @@ import entities.Gepjarmu;
 import entities.Gepjarmuparameter;
 import entities.Szereles;
 import entities.Ugyfel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import nezetek.TeljesGepjarmuNezet;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.engine.spi.SessionFactoryDelegatingImpl;
 import org.pmw.tinylog.Logger;
 import utils.TableInjector;
 import utils.TableManager;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.sound.midi.SysexMessage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -66,6 +53,9 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController {
     private Gepjarmu gepjarmu;
     private Szereles szereles;
     private Gepjarmuparameter gepjarmuparameter;
+    private String nincsElegAdatHibaTitle = "";
+    private String nincsElegAdatHibaHeader = "";
+    private String nincsElegAdatContentText = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -98,15 +88,17 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController {
 
     public void ujUgyfeletFelveszPushed(){
 
-        Logger.info("asdf");
+        Logger.info(this.ugyfelTFekKitolteseHelyes());
         if(!this.ugyfelTFekKitolteseHelyes()){
-         Alert alert = new Alert(Alert.AlertType.ERROR);
+            Logger.info("hiba");
+            this.hibauzenetetHozLetreesMutat("Hiba történt","Az ügyfél mezők hibásan vannak kitöltve", "Tanács...");
+            /*Alert alert = new Alert(Alert.AlertType.ERROR);
          alert.setTitle("Hiba történt");
          alert.setHeaderText("Az ügyfél mezők hibásan vannak kitöltve!");
          alert.setContentText("Tanács...");
 
          Logger.info("error");
-         alert.showAndWait();
+         alert.showAndWait();*/
         }
         else {
             Logger.info("elseben");
@@ -115,7 +107,8 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController {
     }
 /* TODO string null  "" helyett */
     private boolean ugyfelTFekKitolteseHelyes() {
-            return this.nevTF.getText()!=null && this.lakcimTF.getText()!=null && this.telefonszamTF.getText()!=null;
+        Logger.info("+"+this.nevTF.getText()+"+");
+            return !this.nevTF.getText().equals("") && !this.lakcimTF.getText().equals("") && !this.telefonszamTF.getText().equals("");
     }
 
 
@@ -142,24 +135,27 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController {
     /*TODO beletenni ezt a kódrészletet a dolgozatomba*/
     public void szerelesInditasaPushed(){
 
-//        Logger.info(this.gepjarmu.toString());
 
-        Logger.info(System.currentTimeMillis());
+        this.feltetelesenSzerelestMent();
+        this.ujSzereleshezElokeszul();
+
+    }
+
+    private void feltetelesenSzerelestMent() {
         if(this.vanRogzitettAdatSzerelesInditasahoz()){
 
-            Logger.info("elinditom a szerelest");
-            this.szerelesLetrehozasa();
+            this.szerelesEsEntitasinakMentese();
 
         }
         else{
             this.nincsElegAdatASzerelesInditasahozHiba();
         }
 
-        this.ujSzereleshezElokeszul();
-
     }
 
+
     private void nincsElegAdatASzerelesInditasahozHiba() {
+        this.hibauzenetetHozLetreesMutat(this.nincsElegAdatHibaTitle, this.nincsElegAdatHibaHeader, this.nincsElegAdatContentText);
         Logger.info("valami hiányzik");
     }
 
@@ -205,19 +201,28 @@ public class UjSzerelesFelvetele extends GepjarmuszereloBasicController {
 
     }
 
-    private void szerelesLetrehozasa(){
+    private void szerelesEsEntitasinakMentese(){
+
+        this.szereleshezTartozoEntitasokMentese();
+        this.szerelesMentese();
+    }
+
+    /* TODO ellenőrizni mert új függvény*/
+    private void szereleshezTartozoEntitasokMentese() {
 
         this.ugyfelDao.saveOrUpdate(this.ugyfel);
         this.gepjarmuparameterDao.saveOrUpdate(this.gepjarmuparameter);
         this.gepjarmuDao.saveOrUpdate(this.gepjarmu);
 
+    }
 
-
+    private void szerelesMentese() {
         Szereles szereles = new Szereles(this.gepjarmu,this.ugyfel);
         this.szerelesDao.persist(szereles);
-        //this.szereles = szereles;
 
     }
+
+
 
     public void ugyfeltKeresPushed(){
 

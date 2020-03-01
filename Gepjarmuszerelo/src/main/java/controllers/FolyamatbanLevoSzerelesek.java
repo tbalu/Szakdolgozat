@@ -1,18 +1,10 @@
 package controllers;
 
 import daos.EntityManagerCreator;
-import daos.GepjarmuDao;
 import daos.SzerelesDao;
-import daos.UgyfelDao;
 import entities.Szereles;
-import entities.Ugyfel;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
 import nezetek.FolyamatbanLevoSzerelesNezet;
 import org.pmw.tinylog.Logger;
 import utils.TableInjector;
@@ -41,7 +33,7 @@ public class FolyamatbanLevoSzerelesek extends GepjarmuszereloBasicController {
         List<Szereles> folyamatbanLevoSzerelesek = this.szerelesDao.folyamatbanLevoSzerelesek();
 
         List<FolyamatbanLevoSzerelesNezet> folyamatbanLevoSzerelesNezetek =
-                FolyamatbanLevoSzerelesNezet.listaLetrehozas(folyamatbanLevoSzerelesek);
+                FolyamatbanLevoSzerelesNezet.of(folyamatbanLevoSzerelesek);
 
         Logger.info(folyamatbanLevoSzerelesek.size());
 

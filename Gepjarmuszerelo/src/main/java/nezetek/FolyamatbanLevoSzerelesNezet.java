@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FolyamatbanLevoSzerelesNezet {
 
-    public static List<FolyamatbanLevoSzerelesNezet> listaLetrehozas(List<Szereles> szerelesek){
+    public static List<FolyamatbanLevoSzerelesNezet> of(List<Szereles> szerelesek){
 
         List<FolyamatbanLevoSzerelesNezet> folyamatbanLevoSzerelesNezetek = new ArrayList<>();
         for(Szereles szereles: szerelesek){

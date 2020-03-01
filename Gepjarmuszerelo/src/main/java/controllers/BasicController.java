@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.stage.Stage;
 import org.pmw.tinylog.Logger;
@@ -156,4 +157,17 @@ public abstract class BasicController implements Initializable {
         showUjStage(root1,title);
 
     }
-}
+
+    public void hibauzenetetHozLetreesMutat(String title, String header, String tanacs){
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(tanacs);
+
+        Logger.info("error");
+        alert.showAndWait();
+    }
+
+    }
+
